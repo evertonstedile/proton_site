@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { necmato, montserrat } from "./fonts";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -29,7 +31,11 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-bg-base text-text-body antialiased">
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <Navbar />
+          {children}
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

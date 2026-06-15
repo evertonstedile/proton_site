@@ -16,6 +16,7 @@
 | B4 | **Supabase (obras)** | Reusar tabela `obras` existente — schema real NÃO confirmado. Risco das "8 divergências". PARAR antes de ler em produção e validar schema. | Obras (Fase 4) |
 | B5 | **Supabase (leads)** | Escrita de leads fica STUBBED (mock local) até liberação humana explícita. | Form contato (Fase 6) |
 | B6 | **Domínio definitivo** | `metadataBase` usa `https://proton.eng.br` como placeholder. Confirmar domínio real. | `app/layout.tsx`, SEO (Fase 6) |
+| B7 | **Linework da deusa** | Vetor oficial da assinatura de marca não está na pasta. Em uso um linework abstrato placeholder. | `components/brand/GoddessLinework.tsx` |
 
 ---
 
@@ -29,6 +30,9 @@
 | D4 | Lenis dirigido pelo ticker do GSAP (`autoRaf:false`) e parado sob `prefers-reduced-motion`. | 1 loop só, 60fps, A11y. |
 | D5 | Travessões (– —) ausentes na Necmato → usar hífen em títulos display; corpo (Montserrat) tem travessão normal. | Brief §12 / design-system. |
 | D6 | `@/*` aponta para a raiz do projeto (app root = raiz da pasta). | Sem `src/`, simplicidade. |
+| D7 | Travessão (—) confirmado OK no corpo (Montserrat). Em títulos display (Necmato) usar hífen. | Verificado no preview da Fase 2. |
+| D8 | Órbita atômica construída como SVG genérico (3 órbitas elípticas + núcleo). Linework da deusa = placeholder até asset real (B7). | Motivo de marca verificável; deusa depende de vetor oficial. |
+| D9 | Menu mobile renderizado FORA do `<header>` — o `backdrop-blur` da navbar criava containing block que prendia o overlay `fixed` à altura da barra (bug corrigido). | Lição: `backdrop-filter` ancora `position:fixed` descendente. |
 
 ---
 
@@ -37,9 +41,14 @@
 - `app/page.tsx` — home inteira é placeholder da Fase 1 (será refeita na Fase 3).
 - `app/layout.tsx` — `metadataBase` com domínio placeholder.
 - Copy de posicionamento/manifesto na home placeholder — texto temporário.
+- `components/brand/GoddessLinework.tsx` — linework abstrato placeholder (ver B7).
+- `components/Footer.tsx` — copy institucional + cidade (Blumenau/SC) placeholder.
+- **Rotas internas linkadas mas ainda NÃO criadas** (`/obras`, `/sobre`, `/servicos`, `/processo`, `/contato`) → 404 até as Fases 4–5. Navbar/Footer já apontam para elas.
+- `app/styleguide/page.tsx` — cards de obra e dados são placeholders de demonstração (noindex).
 
 ---
 
 ## Histórico por fase
 
 - **Fase 1 (setup):** scaffolding Next+Tailwind+tokens+fontes+Lenis/GSAP. Sem conteúdo real.
+- **Fase 2 (design system):** rota `/styleguide` com todos os tokens + componentes base (Navbar c/ transição e menu mobile, Footer, Button primário/ghost, Tag, Input, WorkCard) + primitivos de motion (Reveal, SplitReveal, Parallax) + motivos de marca (AtomicOrbit, GoddessLinework). Validado em preview desktop+mobile, zero erros de console, build+lint limpos. Bug do overlay mobile (backdrop-blur) corrigido. **CHECKPOINT 1 — aguardando "continuar".**
