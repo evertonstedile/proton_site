@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/brand/BrandMark";
+import { SITE, whatsappUrl } from "@/lib/site";
 
 const NAV = [
   { label: "Obras", href: "/obras" },
@@ -25,9 +26,23 @@ export function Footer() {
               Engenharia residencial de alto padrão. Precisão técnica e
               sofisticação. {/* PLACEHOLDER copy institucional */}
             </p>
-            <p className="mt-2 font-sans text-small text-text-muted">
-              Blumenau/SC {/* PLACEHOLDER endereço/contato */}
-            </p>
+            <div className="mt-4 flex flex-col gap-1.5 font-sans text-small text-text-muted">
+              <a
+                href={whatsappUrl("Olá! Vim pelo site da Proton.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-fit transition-colors duration-short hover:text-gold-light"
+              >
+                WhatsApp →
+              </a>
+              <a
+                href={`mailto:${SITE.email}`}
+                className="w-fit transition-colors duration-short hover:text-gold-light"
+              >
+                {SITE.email}
+              </a>
+              <span>Blumenau/SC</span>
+            </div>
           </div>
 
           <nav className="grid grid-cols-2 gap-x-12 gap-y-3">

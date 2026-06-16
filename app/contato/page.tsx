@@ -3,6 +3,7 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { SITE, whatsappUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contato",
@@ -29,14 +30,30 @@ export default function ContatoPage() {
                 <h2 className="font-sans text-small uppercase tracking-[0.18em] text-text-muted">
                   Contato direto
                 </h2>
-                {/* PLACEHOLDER — dados reais de contato (B2) */}
-                <ul className="mt-4 flex flex-col gap-2 font-sans text-body text-text-body">
-                  <li>contato@proton.eng.br</li>
-                  <li>(00) 00000-0000 · WhatsApp</li>
-                  <li>Blumenau/SC</li>
+                {/* Links reais; número/e-mail vêm de env (placeholder até confirmar) */}
+                <ul className="mt-4 flex flex-col gap-3 font-sans text-body text-text-body">
+                  <li>
+                    <a
+                      href={whatsappUrl("Olá! Vim pelo site da Proton.")}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors duration-short hover:text-gold-light"
+                    >
+                      WhatsApp →
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={`mailto:${SITE.email}`}
+                      className="transition-colors duration-short hover:text-gold-light"
+                    >
+                      {SITE.email}
+                    </a>
+                  </li>
+                  <li className="text-text-muted">Blumenau/SC</li>
                 </ul>
                 <p className="mt-3 font-sans text-small text-text-muted/70">
-                  * Dados de contato placeholder — confirmar.
+                  * Número de WhatsApp e e-mail placeholder — confirmar (B5).
                 </p>
               </div>
 

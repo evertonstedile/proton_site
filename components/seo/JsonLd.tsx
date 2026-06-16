@@ -12,7 +12,7 @@ export function JsonLd() {
     description: SITE.description,
     url: SITE.url,
     email: SITE.email,
-    telephone: SITE.phone,
+    telephone: `+${SITE.whatsapp}`,
     areaServed: "Blumenau/SC e região",
     address: {
       "@type": "PostalAddress",

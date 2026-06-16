@@ -3,25 +3,29 @@
 import { useId, useState } from "react";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/cn";
+import { whatsappUrl } from "@/lib/site";
 
 type Errors = Partial<Record<"nome" | "email" | "mensagem", string>>;
+type Status = "idle" | "sending" | "ok" | "error";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+const WA_MSG = "Olá! Vim pelo site da Proton e gostaria de um orçamento.";
 
 /**
- * Form de orçamento — UI + validação completas.
- * ⚠️ ESCRITA STUBBED (B5): NÃO grava no Supabase. Simula sucesso localmente até
- * liberação humana. Ligar ao pipeline de leads do Proton OS na Fase 6.
+ * Form de orçamento — envia por e-mail via Web3Forms (sem backend) quando há
+ * chave configurada; senão, fica em modo demonstração e direciona ao WhatsApp.
+ * Honeypot anti-spam. Site desacoplado do Proton OS (não grava no banco deles).
  */
 export function ContactForm() {
   const tipoId = useId();
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<"idle" | "sending" | "ok">("idle");
+  const [status, setStatus] = useState<Status>("idle");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const nome = String(fd.get("nome") ?? "").trim();
     const email = String(fd.get("email") ?? "").trim();
     const mensagem = String(fd.get("mensagem") ?? "").trim();
@@ -31,13 +35,30 @@ export function ContactForm() {
     if (!email) next.email = "Informe seu e-mail.";
     else if (!EMAIL_RE.test(email)) next.email = "E-mail inválido.";
     if (!mensagem) next.mensagem = "Conte um pouco sobre o projeto.";
-
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
-    // STUB: simula envio sem nenhuma escrita em rede/Supabase (B5).
     setStatus("sending");
-    window.setTimeout(() => setStatus("ok"), 700);
+
+    // Sem chave Web3Forms ainda → modo demonstração (não envia).
+    if (!WEB3FORMS_KEY) {
+      window.setTimeout(() => setStatus("ok"), 600);
+      return;
+    }
+
+    fd.append("access_key", WEB3FORMS_KEY);
+    fd.append("subject", "Novo pedido de orçamento — site Proton");
+    fd.append("from_name", "Site Proton Engenharia");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: fd,
+      });
+      const data = await res.json();
+      setStatus(data.success ? "ok" : "error");
+    } catch {
+      setStatus("error");
+    }
   }
 
   if (status === "ok") {
@@ -47,28 +68,44 @@ export function ContactForm() {
           Recebido. Em breve retornamos.
         </p>
         <p className="mt-3 font-sans text-body text-text-muted">
-          (Demonstração — o envio ainda não está conectado ao pipeline de leads.)
+          {WEB3FORMS_KEY
+            ? "Seu pedido foi enviado. Se preferir, fale agora no WhatsApp."
+            : "(Demonstração — configure a chave de e-mail. Você já pode falar no WhatsApp.)"}
         </p>
-        <button
-          type="button"
-          onClick={() => setStatus("idle")}
-          className="mt-6 font-sans text-small uppercase tracking-[0.12em] text-gold-light underline-offset-4 hover:underline"
-        >
-          Enviar outra mensagem
-        </button>
+        <div className="mt-6 flex flex-wrap gap-4">
+          <Button
+            href={whatsappUrl(WA_MSG)}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="primary"
+          >
+            Falar no WhatsApp
+          </Button>
+          <button
+            type="button"
+            onClick={() => setStatus("idle")}
+            className="font-sans text-small uppercase tracking-[0.12em] text-gold-light underline-offset-4 hover:underline"
+          >
+            Enviar outra mensagem
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
-      <Input
-        label="Nome"
-        name="nome"
-        placeholder="Seu nome"
-        autoComplete="name"
-        error={errors.nome}
+      {/* honeypot anti-spam (Web3Forms) — escondido de humanos */}
+      <input
+        type="checkbox"
+        name="botcheck"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
       />
+
+      <Input label="Nome" name="nome" placeholder="Seu nome" autoComplete="name" error={errors.nome} />
       <Input
         label="E-mail"
         name="email"
@@ -87,20 +124,14 @@ export function ContactForm() {
       />
 
       <div className="flex flex-col gap-2">
-        <label
-          htmlFor={tipoId}
-          className="font-sans text-small font-medium text-text-muted"
-        >
+        <label htmlFor={tipoId} className="font-sans text-small font-medium text-text-muted">
           Tipo de projeto
         </label>
         <select
           id={tipoId}
           name="tipo"
-          defaultValue="Construção"
-          className={cn(
-            "w-full rounded-lg border border-line bg-bg-raised px-4 py-3 font-sans text-body text-text-body",
-            "transition-colors duration-short ease-cinematic focus:border-gold-base focus:outline-none",
-          )}
+          defaultValue="Construção residencial"
+          className="w-full rounded-lg border border-line bg-bg-raised px-4 py-3 font-sans text-body text-text-body transition-colors duration-short ease-cinematic focus:border-gold-base focus:outline-none"
         >
           <option>Construção residencial</option>
           <option>Reforma de alto padrão</option>
@@ -117,13 +148,25 @@ export function ContactForm() {
         error={errors.mensagem}
       />
 
+      {status === "error" ? (
+        <p className="font-sans text-small text-[#E5736B]">
+          Não foi possível enviar agora. Tente novamente ou fale no WhatsApp.
+        </p>
+      ) : null}
+
       <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center">
         <Button type="submit" variant="primary" size="lg" disabled={status === "sending"}>
           {status === "sending" ? "Enviando…" : "Enviar pedido"}
         </Button>
-        <p className="font-sans text-small text-text-muted/70">
-          * Envio em modo de demonstração — escrita de leads desligada (B5).
-        </p>
+        <Button
+          href={whatsappUrl(WA_MSG)}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="ghost"
+          size="lg"
+        >
+          Falar no WhatsApp
+        </Button>
       </div>
     </form>
   );
