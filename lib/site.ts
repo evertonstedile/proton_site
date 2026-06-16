@@ -5,7 +5,8 @@
 export const SITE = {
   name: "Proton Engenharia & Consultoria",
   shortName: "Proton Engenharia",
-  url: "https://proton.eng.br", // PLACEHOLDER domínio definitivo (B6)
+  // domínio definitivo via env (NEXT_PUBLIC_SITE_URL); placeholder até confirmar (B6)
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://proton.eng.br",
   description:
     "Engenharia residencial de alto padrão — precisão técnica e sofisticação. Blumenau/SC.",
   locality: "Blumenau",
