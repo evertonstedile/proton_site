@@ -27,7 +27,7 @@ export default function OpengraphImage() {
             fontSize: 26,
             letterSpacing: 10,
             textTransform: "uppercase",
-            color: "#C8A24C",
+            color: "#D2AC62",
           }}
         >
           Proton · Blumenau/SC
@@ -52,7 +52,7 @@ export default function OpengraphImage() {
             gap: 18,
           }}
         >
-          <div style={{ width: 64, height: 3, background: "#C8A24C" }} />
+          <div style={{ width: 64, height: 3, background: "#D2AC62" }} />
           <div style={{ fontSize: 30, color: "rgba(255,255,255,0.6)" }}>
             Precisão técnica e sofisticação
           </div>

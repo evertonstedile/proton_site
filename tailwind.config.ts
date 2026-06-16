@@ -17,7 +17,7 @@ const config: Config = {
         },
         line: {
           DEFAULT: "rgba(255,255,255,0.10)", // bordas/divisores
-          gold: "rgba(200,162,76,0.30)", // bordas de destaque
+          gold: "rgba(210,172,98,0.30)", // bordas de destaque
         },
         text: {
           primary: "#FFFFFF", // títulos
@@ -25,9 +25,9 @@ const config: Config = {
           muted: "rgba(255,255,255,0.60)", // secundário
         },
         gold: {
-          light: "#E7CE8C", // realce metálico
-          base: "#C8A24C", // acento principal, CTA, linework
-          deep: "#9C7A2E", // sombra do metálico, hover
+          light: "#E7BF66", // realce metálico
+          base: "#D2AC62", // acento principal, CTA, linework
+          deep: "#AB8959", // sombra do metálico, hover
         },
         "on-gold": "#2A1D05", // texto sobre dourado
       },
@@ -64,7 +64,7 @@ const config: Config = {
       backgroundImage: {
         // dourado metálico para momentos grandes (hero, display, divisores)
         "gold-metallic":
-          "linear-gradient(135deg, #E7CE8C, #C8A24C 45%, #9C7A2E)",
+          "linear-gradient(135deg, #E7BF66, #D2AC62 45%, #AB8959)",
       },
       transitionTimingFunction: {
         cinematic: "cubic-bezier(0.22, 1, 0.36, 1)", // ease-out longo

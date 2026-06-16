@@ -46,9 +46,9 @@ const colorGroups: {
   {
     group: "Dourado",
     tokens: [
-      { name: "gold/light", value: "#E7CE8C", className: "bg-gold-light" },
-      { name: "gold/base", value: "#C8A24C", className: "bg-gold-base" },
-      { name: "gold/deep", value: "#9C7A2E", className: "bg-gold-deep" },
+      { name: "gold/light", value: "#E7BF66", className: "bg-gold-light" },
+      { name: "gold/base", value: "#D2AC62", className: "bg-gold-base" },
+      { name: "gold/deep", value: "#AB8959", className: "bg-gold-deep" },
       { name: "on-gold", value: "#2A1D05", className: "bg-on-gold", border: true },
     ],
   },
@@ -63,7 +63,7 @@ const colorGroups: {
       },
       {
         name: "line/gold",
-        value: "rgba(200,162,76,.30)",
+        value: "rgba(210,172,98,.30)",
         className: "bg-line-gold",
         border: true,
       },
@@ -171,7 +171,7 @@ export default function StyleguidePage() {
             corpo de texto.
             <span className="text-gold-light">
               {" "}
-              ⚠ Dourado é aproximação até amostrar o hex do logo (ver PENDENCIAS).
+              Dourado oficial da marca, amostrado do logo (#D2AC62).
             </span>
           </p>
 
@@ -208,7 +208,7 @@ export default function StyleguidePage() {
               </h3>
               <div className="h-24 w-full rounded-lg bg-gold-metallic" />
               <p className="mt-2 font-sans text-[0.7rem] text-text-muted">
-                linear-gradient(135deg, #E7CE8C, #C8A24C 45%, #9C7A2E)
+                linear-gradient(135deg, #E7BF66, #D2AC62 45%, #AB8959)
               </p>
               <p className="mt-4 font-display text-display-lg text-gold-metallic">
                 Texto em dourado metálico

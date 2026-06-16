@@ -3,11 +3,10 @@
 @tailwind utilities;
 
 /* ---------------------------------------------------------------------------
-   ⚠️ INTERINO (ver PENDENCIAS B8) — a Necmato fornecida (woff2 subsetado, 8KB)
-   NÃO possui glifos acentuados do PT-BR nem travessões; descarta os diacríticos.
-   Este @font-face redireciona SÓ os codepoints acentuados + travessões/aspas
-   para um serif do sistema, via unicode-range, mantendo a Necmato no resto.
-   Correção definitiva: obter o arquivo Necmato completo (não subsetado).
+   B8 (resolvido) — a Necmato fornecida (woff2 subsetado) não tem glifos
+   acentuados do PT-BR nem travessões. Solução adotada (decisão do cliente):
+   fallback Didone via Playfair Display, redirecionando SÓ os codepoints
+   acentuados + travessões/aspas por unicode-range, mantendo a Necmato no resto.
 --------------------------------------------------------------------------- */
 @font-face {
   font-family: "DisplayAccentFallback";
@@ -34,18 +33,18 @@
   --bg-elevated: #1c1c1f;
 
   --line: rgba(255, 255, 255, 0.1);
-  --line-gold: rgba(200, 162, 76, 0.3);
+  --line-gold: rgba(210,172,98, 0.3);
 
   --text-primary: #ffffff;
   --text-body: #f4f3f1;
   --text-muted: rgba(255, 255, 255, 0.6);
 
-  --gold-light: #e7ce8c;
-  --gold-base: #c8a24c;
-  --gold-deep: #9c7a2e;
+  --gold-light: #e7bf66;
+  --gold-base: #d2ac62;
+  --gold-deep: #ab8959;
   --on-gold: #2a1d05;
 
-  --gold-metallic: linear-gradient(135deg, #e7ce8c, #c8a24c 45%, #9c7a2e);
+  --gold-metallic: linear-gradient(135deg, #e7bf66, #d2ac62 45%, #ab8959);
 
   /* motion */
   --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
@@ -80,7 +79,7 @@
   }
 
   ::selection {
-    background: rgba(200, 162, 76, 0.3);
+    background: rgba(210,172,98, 0.3);
     color: #fff;
   }
 

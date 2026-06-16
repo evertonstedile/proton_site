@@ -10,7 +10,7 @@
 
 | # | Item | Detalhe | Onde impacta |
 |---|------|---------|--------------|
-| B1 | **Dourado exato** | O hex do dourado NÃO veio no manual da marca. Tokens atuais (`#E7CE8C` / `#C8A24C` / `#9C7A2E`) são aproximação. Precisa amostrar do arquivo-fonte do logo. | `tailwind.config.ts`, `app/globals.css` (tokens `gold/*`) |
+| ~~B1~~ ✅ | **Dourado exato** | RESOLVIDO pelo cliente: `gold/light #E7BF66` · `gold/base #D2AC62` · `gold/deep #AB8959`. Aplicado em todos os tokens, gradiente metálico, OG image e favicon. | `tailwind.config.ts`, `globals.css`, `opengraph-image`, `icon.svg` |
 | B2 | **Copy real** | Posicionamento, manifesto, serviços, processo, depoimentos — tudo placeholder marcado. Não inventar números/depoimentos reais. | Home (Fase 3), internas (Fase 5) |
 | B3 | **Fotos/vídeo das obras** | Hero e portfólio dependem de footage profissional. Brief diz "confirmado disponível" mas ainda não estão na pasta. | Hero (Fase 3), Obras (Fase 4) |
 | B4 | **Supabase (obras)** | Reusar tabela `obras` existente — schema real NÃO confirmado. Risco das "8 divergências". UI de Obras já construída sobre STUB (`lib/obras.ts`, shape genérico). PARAR no Checkpoint 3 antes de ler em produção: validar schema, então trocar `getObras()/getObraBySlug()` + enriquecer a página de detalhe. | Obras (Fase 4 stub → Checkpoint 3) |
