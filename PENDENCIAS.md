@@ -11,7 +11,8 @@
 | # | Item | Detalhe | Onde impacta |
 |---|------|---------|--------------|
 | ~~B1~~ ✅ | **Dourado exato** | RESOLVIDO pelo cliente: `gold/light #E7BF66` · `gold/base #D2AC62` · `gold/deep #AB8959`. Aplicado em todos os tokens, gradiente metálico, OG image e favicon. | `tailwind.config.ts`, `globals.css`, `opengraph-image`, `icon.svg` |
-| B2 | **Copy real** | Posicionamento, manifesto, serviços, processo, depoimentos — tudo placeholder marcado. Não inventar números/depoimentos reais. | Home (Fase 3), internas (Fase 5) |
+| B2 | **Copy real** | **Serviços = REAIS** (33 em 7 frentes, do sistema). Ainda placeholder: manifesto, posicionamento (hero), about, processo, depoimentos, números. Não inventar números/depoimentos reais. | Home, internas |
+| ⚠️ Posicionamento | **Escopo mais amplo que "residencial"** | Os 33 serviços revelam firma **full-service** (projetos, regularização imobiliária, topografia, infraestrutura urbana, licenciamento, laudos) — bem além de "engenharia residencial de alto padrão" do hero/about. Decidir se a copy de posicionamento amplia. Hoje hero ainda diz "residencial". | Hero, About (copy B2) |
 | B3 | **Fotos/vídeo das obras** | Hero e portfólio dependem de footage profissional. Brief diz "confirmado disponível" mas ainda não estão na pasta. | Hero (Fase 3), Obras (Fase 4) |
 | ~~B4~~ ✅ | **Supabase (obras)** | RESOLVIDO por decisão do cliente: **site desacoplado do Proton OS** (ver D14). O schema real da `obras` é OPERACIONAL e contém dados sigilosos (valor_contrato, matrícula, endereço) — impróprio para exposição pública. Portfólio fica **curado no site** (`lib/obras.ts`), sem Supabase de obras. Falta apenas popular com obras/fotos/textos reais (B2/B3). | `lib/obras.ts` |
 | ~~B5~~ ✅ | **Canal de contato (leads)** | RESOLVIDO e no ar: WhatsApp (`5548996031782`) + e-mail (`proton.engcivil@gmail.com`) via Web3Forms (chave configurada na Vercel → form envia e-mail real). | `ContactForm.tsx`, `lib/site.ts` |

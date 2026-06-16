@@ -40,29 +40,82 @@ export const processSteps = [
   },
 ];
 
-// --- Serviços -------------------------------------------------------------
-export const services = [
+// --- Serviços (dados reais — 33 serviços em 7 frentes) --------------------
+export const serviceGroups = [
   {
-    n: "01",
-    title: "Construção residencial",
-    desc: "Casas de alto padrão do projeto à entrega, com gestão integral da obra.",
+    area: "Projetos de Engenharia e Arquitetura",
+    items: [
+      "Projeto Arquitetônico",
+      "Projeto de Fundação",
+      "Projeto Estrutural",
+      "Projeto Elétrico",
+      "Projeto Hidrossanitário",
+      "Projeto de Prevenção e Combate a Incêndio (PPCI)",
+      "Compatibilização de Projetos",
+      "Renderização 3D e Maquete Eletrônica",
+    ],
   },
   {
-    n: "02",
-    title: "Reformas de alto padrão",
-    desc: "Requalificação de ambientes com precisão técnica e acabamento refinado.",
+    area: "Regularização e Documentação Imobiliária",
+    items: [
+      "Regularização de Imóveis",
+      "Regularização de Obras",
+      "Instituição e Especificação de Condomínio",
+      "Incorporações Imobiliárias",
+      "Loteamentos e Condomínios",
+      "REURB – Regularização Fundiária Urbana",
+      "Desmembramento, Unificação e Retificação de Matrículas",
+      "Apoio Técnico junto ao Registro de Imóveis",
+      "Memorial Descritivo e Documentação Técnica",
+    ],
   },
   {
-    n: "03",
-    title: "Gerenciamento de obra",
-    desc: "Controle de prazo, custo e qualidade com transparência total ao cliente.",
+    area: "Topografia e Georreferenciamento",
+    items: [
+      "Levantamento Topográfico Planialtimétrico",
+      "Georreferenciamento de Imóveis",
+    ],
   },
   {
-    n: "04",
-    title: "Consultoria & projetos",
-    desc: "Compatibilização, viabilidade e soluções de engenharia sob medida.",
+    area: "Execução e Fiscalização de Obras",
+    items: [
+      "Administração e Execução de Obras",
+      "Gerenciamento e Fiscalização de Obras",
+      "Acompanhamento Técnico de Execução",
+    ],
+  },
+  {
+    area: "Infraestrutura Urbana",
+    items: [
+      "Projetos de Infraestrutura Urbana",
+      "Projetos de Drenagem Pluvial",
+      "Projetos de Rede de Água e Esgoto",
+      "Projetos de Pavimentação",
+    ],
+  },
+  {
+    area: "Aprovações e Licenciamento",
+    items: [
+      "Aprovação de Projetos e Emissão de Alvarás",
+      "Acompanhamento junto a Órgãos Públicos",
+      "Regularização Ambiental e Licenciamento",
+    ],
+  },
+  {
+    area: "Consultoria, Laudos e Viabilidade",
+    items: [
+      "Assessoria Técnica em Engenharia e Urbanismo",
+      "Laudos Técnicos e Pareceres de Engenharia",
+      "Estudos de Viabilidade Técnica e Urbanística",
+      "Consultoria para Empreendimentos Imobiliários",
+    ],
   },
 ];
+
+export const servicesCount = serviceGroups.reduce(
+  (n, g) => n + g.items.length,
+  0,
+); // 33
 
 // --- Sobre (copy PLACEHOLDER) ---------------------------------------------
 export const about = {
