@@ -9,11 +9,12 @@
 export const manifesto =
   "Cada obra é uma afirmação de precisão — onde a engenharia encontra a permanência.";
 
-// --- Números / prova (VALORES ILUSTRATIVOS — a confirmar) -----------------
+// --- Números / prova (DADOS REAIS) ----------------------------------------
 export const stats = [
-  { value: 120, suffix: "+", label: "Obras entregues" },
-  { value: 85000, suffix: " m²", label: "Área construída" },
-  { value: 15, suffix: "+", label: "Anos de experiência" },
+  { value: 371, suffix: "", label: "Projetos aprovados" },
+  { value: 119, suffix: "", label: "Laudos emitidos" },
+  { value: 70400, suffix: " m²", label: "Área construída" },
+  { value: 11, suffix: "", label: "Anos de experiência" },
 ];
 
 // --- Processo -------------------------------------------------------------
@@ -223,10 +224,10 @@ export const servicesCount = serviceGroups.reduce(
 // --- Sobre (copy PLACEHOLDER) ---------------------------------------------
 export const about = {
   intro:
-    "Engenharia residencial de alto padrão em Garopaba/SC — onde precisão técnica e sofisticação caminham juntas.",
+    "Soluções completas em engenharia, arquitetura e regularização em Garopaba/SC — precisão técnica e sofisticação em cada etapa.",
   story: [
-    "A Proton nasce do encontro entre rigor de engenharia e sensibilidade de projeto. Cada obra é conduzida como uma peça única, do diagnóstico do terreno à entrega das chaves.",
-    "Atuamos para o cliente de alto padrão que valoriza prazo cumprido, transparência e um acabamento que resiste ao tempo. O site é parte do ecossistema Proton OS — uma única fonte de verdade do projeto à obra.",
+    "A Proton nasce do encontro entre rigor de engenharia e sensibilidade de projeto. Do estudo de viabilidade e do projeto à regularização, à execução e à entrega, cada trabalho é conduzido com método e cuidado.",
+    "Atuamos de ponta a ponta — projetos, regularização imobiliária, topografia, infraestrutura, licenciamento, execução e consultoria — para que cada empreendimento avance com segurança técnica e tranquilidade.",
   ],
   values: [
     {

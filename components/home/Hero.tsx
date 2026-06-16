@@ -78,23 +78,23 @@ export function Hero() {
           data-hero="kicker"
           className="mb-6 font-sans text-small uppercase tracking-kicker text-gold-base"
         >
-          Proton Engenharia &middot; Garopaba/SC
+          Proton Engenharia &amp; Consultoria &middot; Garopaba/SC
         </p>
 
-        {/* PLACEHOLDER copy de posicionamento (B2) */}
         <h1
           data-hero="headline"
           className="max-w-4xl font-display text-display-xl leading-[1.04] text-text-primary"
         >
-          Engenharia residencial de alto padrão, do primeiro traço à entrega.
+          Engenharia, arquitetura e regularização — soluções completas, do
+          projeto à obra entregue.
         </h1>
 
         <p
           data-hero="sub"
           className="mt-7 max-w-xl font-sans text-body-lg text-text-muted"
         >
-          Precisão técnica e sofisticação em cada obra. Projetamos e construímos
-          o que nasce para durar. {/* PLACEHOLDER */}
+          Precisão técnica e sofisticação em cada etapa, do estudo de
+          viabilidade à entrega.
         </p>
 
         <div data-hero="cta" className="mt-10 flex flex-wrap items-center gap-4">

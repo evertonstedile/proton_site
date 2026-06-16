@@ -4,14 +4,14 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Counter } from "@/components/ui/Counter";
 import { stats } from "@/lib/content";
 
-/** Números / prova — counters animados. VALORES ILUSTRATIVOS (aviso visível). */
+/** Números / prova — counters animados (dados reais da Proton). */
 export function Stats() {
   return (
     <Section surface="base" className="border-y border-line">
       <Container>
         <Reveal
           stagger
-          className="grid grid-cols-1 gap-12 text-center sm:grid-cols-3"
+          className="grid grid-cols-1 gap-12 text-center sm:grid-cols-2 lg:grid-cols-4"
         >
           {stats.map((s) => (
             <div key={s.label}>
@@ -26,9 +26,6 @@ export function Stats() {
             </div>
           ))}
         </Reveal>
-        <p className="mt-10 text-center font-sans text-small text-text-muted/70">
-          * Valores ilustrativos — a confirmar com os dados reais da Proton.
-        </p>
       </Container>
     </Section>
   );

@@ -42,7 +42,7 @@ export default function OpengraphImage() {
             maxWidth: 900,
           }}
         >
-          Engenharia residencial de alto padrão
+          Engenharia, arquitetura e regularização
         </div>
         <div
           style={{
@@ -54,7 +54,7 @@ export default function OpengraphImage() {
         >
           <div style={{ width: 64, height: 3, background: "#D2AC62" }} />
           <div style={{ fontSize: 30, color: "rgba(255,255,255,0.6)" }}>
-            Precisão técnica e sofisticação
+            Soluções completas — do projeto à obra entregue
           </div>
         </div>
       </div>

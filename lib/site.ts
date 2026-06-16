@@ -12,7 +12,7 @@ export const SITE = {
     .trim()
     .replace(/\/+$/, ""),
   description:
-    "Engenharia residencial de alto padrão — precisão técnica e sofisticação. Garopaba/SC.",
+    "Soluções completas em engenharia, arquitetura e regularização — precisão técnica e sofisticação. Garopaba/SC.",
   locality: "Garopaba",
   region: "SC",
   country: "BR",
