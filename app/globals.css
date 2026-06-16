@@ -91,6 +91,25 @@
     border-radius: 2px;
   }
 
+  /* skip-link — pular para o conteúdo (A11y), visível só no foco */
+  .skip-link {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    transform: translateY(-130%);
+    background: var(--gold-base);
+    color: var(--on-gold);
+    padding: 0.75rem 1.25rem;
+    font-family: var(--font-sans), sans-serif;
+    font-size: 0.875rem;
+    border-radius: 0 0 0.5rem 0;
+    transition: transform 0.2s var(--ease-cinematic);
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -147,13 +166,63 @@ html.lenis body {
    rodar a timeline de entrada. GSAP sobrescreve com estilo inline ao animar.
    Reduced-motion e no-JS reexibem tudo (fallback de acessibilidade).
 --------------------------------------------------------------------------- */
+/* Entrada do hero 100% em CSS (roda no parse do CSS, ~FCP) — NÃO depende do
+   bundle JS, protegendo o LCP no mobile. O parallax de scroll fica no GSAP. */
 .hero-init [data-hero] {
   opacity: 0;
+  animation-duration: 0.9s;
+  animation-timing-function: var(--ease-cinematic);
+  animation-fill-mode: forwards;
 }
+.hero-init [data-hero="media"] {
+  animation-name: heroFade;
+  animation-duration: 1.6s;
+}
+.hero-init [data-hero="kicker"] {
+  animation-name: heroUp;
+  animation-delay: 0.15s;
+}
+.hero-init [data-hero="headline"] {
+  animation-name: heroUp;
+  animation-delay: 0.25s;
+}
+.hero-init [data-hero="sub"] {
+  animation-name: heroUp;
+  animation-delay: 0.5s;
+}
+.hero-init [data-hero="cta"] {
+  animation-name: heroUp;
+  animation-delay: 0.65s;
+}
+.hero-init [data-hero="cue"] {
+  animation-name: heroFade;
+  animation-delay: 0.95s;
+}
+
+@keyframes heroUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes heroFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-init [data-hero] {
     opacity: 1 !important;
     transform: none !important;
+    animation: none !important;
   }
 }
 

@@ -1,81 +1,28 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, SplitText, useGSAP, EASE_CINEMATIC } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { Button } from "@/components/ui/Button";
 import { AtomicOrbit } from "@/components/brand/AtomicOrbit";
 import { GoddessLinework } from "@/components/brand/GoddessLinework";
 
 /**
  * HERO da Home — momento cinematográfico nº1.
- * Timeline de entrada (GSAP + SplitText) + parallax de saída no scroll.
- * Mídia e copy são PLACEHOLDER (ver PENDENCIAS B2/B3): substituir por
- * vídeo/foto real da obra e copy de posicionamento aprovada.
+ * Entrada em CSS (ver globals .hero-init) → pinta no FCP, protege o LCP mobile.
+ * Aqui só o parallax de saída no scroll (GSAP). Respeita prefers-reduced-motion.
+ * Mídia e copy são PLACEHOLDER (B2/B3).
  */
 export function Hero() {
   const root = useRef<HTMLDivElement>(null);
   const media = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
-  const headline = useRef<HTMLHeadingElement>(null);
 
   useGSAP(
     () => {
       const el = root.current;
       if (!el) return;
-      // reduced-motion: CSS já reexibe tudo; não animamos.
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      let split: SplitText | null = null;
-
-      const enter = () => {
-        const tl = gsap.timeline({ defaults: { ease: EASE_CINEMATIC } });
-
-        tl.fromTo(
-          media.current,
-          { scale: 1.12, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 1.8 },
-          0,
-        );
-        tl.fromTo(
-          "[data-hero='kicker']",
-          { y: 18, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8 },
-          0.5,
-        );
-
-        gsap.set(headline.current, { opacity: 1 });
-        split = new SplitText(headline.current, { type: "lines", mask: "lines" });
-        tl.fromTo(
-          split.lines,
-          { yPercent: 115 },
-          { yPercent: 0, duration: 1.1, stagger: 0.12 },
-          0.6,
-        );
-
-        tl.fromTo(
-          "[data-hero='sub']",
-          { y: 24, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8 },
-          1.1,
-        );
-        tl.fromTo(
-          "[data-hero='cta']",
-          { y: 24, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8 },
-          1.25,
-        );
-        tl.fromTo(
-          "[data-hero='cue']",
-          { opacity: 0 },
-          { opacity: 1, duration: 0.9 },
-          1.5,
-        );
-      };
-
-      if (document.fonts?.status === "loaded") enter();
-      else document.fonts?.ready.then(enter);
-
-      // Parallax de saída — conteúdo sobe/desvanece, mídia tem profundidade.
       gsap.to(content.current, {
         yPercent: -14,
         opacity: 0.2,
@@ -98,8 +45,6 @@ export function Hero() {
           scrub: true,
         },
       });
-
-      return () => split?.revert();
     },
     { scope: root },
   );
@@ -109,21 +54,15 @@ export function Hero() {
       ref={root}
       className="hero-init relative flex h-[100svh] min-h-[600px] w-full items-end overflow-hidden bg-bg-base"
     >
-      {/* fallback no-JS: reexibe os elementos do hero */}
-      <noscript>
-        <style>{`.hero-init [data-hero]{opacity:1 !important;}`}</style>
-      </noscript>
-
       {/* MÍDIA (PLACEHOLDER) — trocar por <video>/<Image> de obra real (B3) */}
       <div ref={media} data-hero="media" className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_72%_18%,#1c1c20_0%,#0b0b0d_46%,#000_100%)]" />
         <GoddessLinework className="absolute right-[-8%] top-1/2 h-[150%] -translate-y-1/2 opacity-[0.05]" />
         <div className="absolute inset-0 bg-grain opacity-[0.04] mix-blend-overlay" />
-        {/* overlay gradual para contraste do texto */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25" />
       </div>
 
-      {/* órbita atômica — assinatura de marca (microdetalhe orbitando) */}
+      {/* órbita atômica — assinatura de marca */}
       <AtomicOrbit
         animated
         title="Proton"
@@ -144,7 +83,6 @@ export function Hero() {
 
         {/* PLACEHOLDER copy de posicionamento (B2) */}
         <h1
-          ref={headline}
           data-hero="headline"
           className="max-w-4xl font-display text-display-xl leading-[1.04] text-text-primary"
         >

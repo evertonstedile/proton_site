@@ -14,7 +14,15 @@ export type Work = {
  * Card de obra — imagem (ratio 4:5) + título + meta, hover cinematográfico.
  * Sem foto real, renderiza placeholder CLARAMENTE marcado (ver PENDENCIAS.md).
  */
-export function WorkCard({ work, className }: { work: Work; className?: string }) {
+export function WorkCard({
+  work,
+  className,
+  titleAs: TitleTag = "h3",
+}: {
+  work: Work;
+  className?: string;
+  titleAs?: "h2" | "h3";
+}) {
   const inner = (
     <article
       className={cn(
@@ -44,7 +52,9 @@ export function WorkCard({ work, className }: { work: Work; className?: string }
       </div>
 
       <div className="absolute inset-x-0 bottom-0 p-5">
-        <h3 className="font-display text-h2 text-text-primary">{work.title}</h3>
+        <TitleTag className="font-display text-h2 text-text-primary">
+          {work.title}
+        </TitleTag>
         <p className="mt-1 font-sans text-small text-text-muted">{work.meta}</p>
       </div>
     </article>

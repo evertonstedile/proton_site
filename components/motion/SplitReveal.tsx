@@ -31,7 +31,9 @@ export function SplitReveal({
 
       let split: SplitText | null = null;
       const run = () => {
-        split = new SplitText(el, { type: "lines", mask: "lines" });
+        // aria:"none" — não injeta aria-label (proibido em <p>); split por linha
+        // preserva palavras, então o leitor de tela lê o texto normalmente.
+        split = new SplitText(el, { type: "lines", mask: "lines", aria: "none" });
         gsap.from(split.lines, {
           yPercent: 110,
           duration: 1,

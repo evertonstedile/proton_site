@@ -53,14 +53,28 @@ export default function RootLayout({
       className={`${necmato.variable} ${montserrat.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        {/* preload do Playfair (fallback de acentos) — melhora o LCP do hero */}
+        <link
+          rel="preload"
+          href="/fonts/PlayfairDisplay-latin.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="bg-bg-base text-text-body antialiased">
+        <a href="#conteudo" className="skip-link">
+          Pular para o conteúdo
+        </a>
         <JsonLd />
         <SmoothScroll>
           <Navbar />
-          {children}
+          <div id="conteudo">{children}</div>
           <Footer />
         </SmoothScroll>
-        <Analytics />
+        {/* Analytics só na Vercel (evita 404 do script fora da plataforma) */}
+        {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
   );

@@ -41,7 +41,7 @@ export default function ObrasPage() {
         <Container>
           <Reveal stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {obras.map((o) => (
-              <WorkCard key={o.slug} work={obraToWork(o)} />
+              <WorkCard key={o.slug} work={obraToWork(o)} titleAs="h2" />
             ))}
           </Reveal>
         </Container>
