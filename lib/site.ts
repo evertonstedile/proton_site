@@ -16,6 +16,9 @@ export const SITE = {
   locality: "Garopaba",
   region: "SC",
   country: "BR",
+  // PLACEHOLDER (extraído do pin do Maps) — confirmar nº/complemento
+  street: "Rua Santa Rita, 571",
+  district: "Centro",
   postalCode: "88495-000",
   geo: { lat: -28.0323346, lng: -48.6198405 },
   mapsUrl: "https://maps.app.goo.gl/mYVenbPswDejSXq58",

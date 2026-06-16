@@ -35,12 +35,12 @@ export function Footer() {
               >
                 WhatsApp →
               </a>
-              <a
-                href={`mailto:${SITE.email}`}
+              <Link
+                href="/contato#orcamento"
                 className="w-fit transition-colors duration-short hover:text-gold-light"
               >
-                {SITE.email}
-              </a>
+                E-mail →
+              </Link>
               <a
                 href={SITE.mapsUrl}
                 target="_blank"
@@ -49,6 +49,9 @@ export function Footer() {
               >
                 Garopaba/SC →
               </a>
+              <span>
+                {SITE.street} — {SITE.district} · {SITE.postalCode}
+              </span>
             </div>
           </div>
 

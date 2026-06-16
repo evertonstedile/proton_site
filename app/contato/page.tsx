@@ -23,7 +23,9 @@ export default function ContatoPage() {
       <Section surface="surface" className="pt-0">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
-            <ContactForm />
+            <div id="orcamento" className="scroll-mt-28">
+              <ContactForm />
+            </div>
 
             <aside className="flex flex-col gap-8">
               <div>
@@ -44,10 +46,10 @@ export default function ContatoPage() {
                   </li>
                   <li>
                     <a
-                      href={`mailto:${SITE.email}`}
+                      href="#orcamento"
                       className="transition-colors duration-short hover:text-gold-light"
                     >
-                      {SITE.email}
+                      E-mail →
                     </a>
                   </li>
                   <li>
@@ -59,6 +61,9 @@ export default function ContatoPage() {
                     >
                       Garopaba/SC — ver no mapa →
                     </a>
+                  </li>
+                  <li className="text-text-muted">
+                    {SITE.street} — {SITE.district} · {SITE.postalCode}
                   </li>
                 </ul>
               </div>

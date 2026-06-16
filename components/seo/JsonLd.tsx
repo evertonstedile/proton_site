@@ -16,6 +16,7 @@ export function JsonLd() {
     areaServed: "Garopaba/SC e região",
     address: {
       "@type": "PostalAddress",
+      streetAddress: `${SITE.street} — ${SITE.district}`,
       addressLocality: SITE.locality,
       addressRegion: SITE.region,
       postalCode: SITE.postalCode,
