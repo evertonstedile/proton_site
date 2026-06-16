@@ -4,10 +4,11 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SplitReveal } from "@/components/motion/SplitReveal";
 import { Button } from "@/components/ui/Button";
 import { WorkCard } from "@/components/ui/WorkCard";
-import { featuredWorks } from "@/lib/content";
+import { getObras, obraToWork } from "@/lib/obras";
 
-/** Obras em destaque — revelação cinematográfica (placeholder; Fase 4: Supabase). */
+/** Obras em destaque — revelação cinematográfica (stub; Supabase no Checkpoint 3). */
 export function FeaturedWorks() {
+  const featured = getObras().slice(0, 3).map(obraToWork);
   return (
     <Section surface="surface" id="obras">
       <Container>
@@ -31,7 +32,7 @@ export function FeaturedWorks() {
         </div>
 
         <Reveal stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredWorks.map((w) => (
+          {featured.map((w) => (
             <WorkCard key={w.title} work={w} />
           ))}
         </Reveal>

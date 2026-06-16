@@ -1,34 +1,13 @@
-import type { Work } from "@/components/ui/WorkCard";
-
 /**
  * ⚠️ CONTEÚDO PLACEHOLDER (ver PENDENCIAS B2/B3).
- * Copy, obras, números e depoimentos são provisórios até virem os dados reais
- * da Proton. Obras virão do Supabase na Fase 4. Números e depoimentos exibem
- * aviso visível de "ilustrativos" — nada apresentado como real.
+ * Copy, números e depoimentos são provisórios até virem os dados reais da
+ * Proton. As obras vivem em `lib/obras.ts` (stub → Supabase no Checkpoint 3).
+ * Números e depoimentos exibem aviso visível de "ilustrativos".
  */
 
 // --- Manifesto ------------------------------------------------------------
 export const manifesto =
   "Cada obra é uma afirmação de precisão — onde a engenharia encontra a permanência.";
-
-// --- Obras em destaque (placeholder; Fase 4 puxa do Supabase) -------------
-export const featuredWorks: Work[] = [
-  {
-    title: "Residência Vale",
-    meta: "Residencial · 000 m² · Blumenau/SC",
-    href: "/obras",
-  },
-  {
-    title: "Casa Ladeira",
-    meta: "Residencial · 000 m² · Gaspar/SC",
-    href: "/obras",
-  },
-  {
-    title: "Reforma Mirante",
-    meta: "Reforma · 000 m² · Blumenau/SC",
-    href: "/obras",
-  },
-];
 
 // --- Números / prova (VALORES ILUSTRATIVOS — a confirmar) -----------------
 export const stats = [
