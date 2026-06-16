@@ -50,11 +50,17 @@ export default function ContatoPage() {
                       {SITE.email}
                     </a>
                   </li>
-                  <li className="text-text-muted">Blumenau/SC</li>
+                  <li>
+                    <a
+                      href={SITE.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors duration-short hover:text-gold-light"
+                    >
+                      Garopaba/SC — ver no mapa →
+                    </a>
+                  </li>
                 </ul>
-                <p className="mt-3 font-sans text-small text-text-muted/70">
-                  * Número de WhatsApp e e-mail placeholder — confirmar (B5).
-                </p>
               </div>
 
               <div className="rounded-xl border border-line bg-bg-raised p-6">

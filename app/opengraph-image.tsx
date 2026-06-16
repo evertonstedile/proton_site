@@ -30,7 +30,7 @@ export default function OpengraphImage() {
             color: "#D2AC62",
           }}
         >
-          Proton · Blumenau/SC
+          Proton · Garopaba/SC
         </div>
         <div
           style={{

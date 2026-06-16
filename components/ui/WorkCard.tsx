@@ -5,7 +5,7 @@ import { AtomicOrbit } from "@/components/brand/AtomicOrbit";
 
 export type Work = {
   title: string;
-  meta: string; // ex.: "Residencial · 420 m² · Blumenau/SC"
+  meta: string; // ex.: "Residencial · 420 m² · Garopaba/SC"
   image?: string; // URL da foto da obra (ausente = placeholder)
   href?: string;
 };

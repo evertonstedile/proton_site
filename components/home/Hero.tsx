@@ -78,7 +78,7 @@ export function Hero() {
           data-hero="kicker"
           className="mb-6 font-sans text-small uppercase tracking-kicker text-gold-base"
         >
-          Proton Engenharia &middot; Blumenau/SC
+          Proton Engenharia &middot; Garopaba/SC
         </p>
 
         {/* PLACEHOLDER copy de posicionamento (B2) */}

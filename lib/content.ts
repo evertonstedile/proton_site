@@ -67,7 +67,7 @@ export const services = [
 // --- Sobre (copy PLACEHOLDER) ---------------------------------------------
 export const about = {
   intro:
-    "Engenharia residencial de alto padrão em Blumenau/SC — onde precisão técnica e sofisticação caminham juntas.",
+    "Engenharia residencial de alto padrão em Garopaba/SC — onde precisão técnica e sofisticação caminham juntas.",
   story: [
     "A Proton nasce do encontro entre rigor de engenharia e sensibilidade de projeto. Cada obra é conduzida como uma peça única, do diagnóstico do terreno à entrega das chaves.",
     "Atuamos para o cliente de alto padrão que valoriza prazo cumprido, transparência e um acabamento que resiste ao tempo. O site é parte do ecossistema Proton OS — uma única fonte de verdade do projeto à obra.",

@@ -41,7 +41,14 @@ export function Footer() {
               >
                 {SITE.email}
               </a>
-              <span>Blumenau/SC</span>
+              <a
+                href={SITE.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-fit transition-colors duration-short hover:text-gold-light"
+              >
+                Garopaba/SC →
+              </a>
             </div>
           </div>
 

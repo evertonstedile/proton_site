@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "engenharia residencial",
     "construção alto padrão",
     "reforma alto padrão",
-    "Blumenau",
+    "Garopaba",
     "Santa Catarina",
     "Proton Engenharia",
   ],

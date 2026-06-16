@@ -11,7 +11,7 @@ export type Obra = {
   slug: string;
   title: string;
   category: string; // ex.: "Residencial" | "Reforma"
-  location: string; // ex.: "Blumenau/SC"
+  location: string; // ex.: "Garopaba/SC"
   year?: string;
   areaM2?: number;
   summary: string;
@@ -25,7 +25,7 @@ const OBRAS: Obra[] = [
     slug: "residencia-vale",
     title: "Residência Vale",
     category: "Residencial",
-    location: "Blumenau/SC",
+    location: "Garopaba/SC",
     year: "2024",
     summary:
       "Casa de alto padrão integrada ao relevo, com volumetria limpa e materialidade nobre.",
@@ -34,7 +34,7 @@ const OBRAS: Obra[] = [
     slug: "casa-ladeira",
     title: "Casa Ladeira",
     category: "Residencial",
-    location: "Gaspar/SC",
+    location: "Praia do Rosa/SC",
     year: "2023",
     summary:
       "Implantação em terreno de declive acentuado, resolvida com precisão estrutural.",
@@ -43,7 +43,7 @@ const OBRAS: Obra[] = [
     slug: "reforma-mirante",
     title: "Reforma Mirante",
     category: "Reforma",
-    location: "Blumenau/SC",
+    location: "Garopaba/SC",
     year: "2023",
     summary:
       "Requalificação completa de ambientes, com novo partido de luz e acabamento refinado.",
@@ -52,7 +52,7 @@ const OBRAS: Obra[] = [
     slug: "residencia-horizonte",
     title: "Residência Horizonte",
     category: "Residencial",
-    location: "Indaial/SC",
+    location: "Florianópolis/SC",
     year: "2022",
     summary:
       "Programa amplo distribuído em pavimentos com transição suave entre interior e jardim.",
@@ -61,7 +61,7 @@ const OBRAS: Obra[] = [
     slug: "casa-atrio",
     title: "Casa Átrio",
     category: "Residencial",
-    location: "Blumenau/SC",
+    location: "Garopaba/SC",
     year: "2022",
     summary:
       "Pátio central como coração da casa, organizando luz e ventilação natural.",
@@ -70,7 +70,7 @@ const OBRAS: Obra[] = [
     slug: "reforma-cobertura",
     title: "Reforma Cobertura",
     category: "Reforma",
-    location: "Balneário Camboriú/SC",
+    location: "Florianópolis/SC",
     year: "2021",
     summary:
       "Cobertura reposicionada para vista e estar amplo, com engenharia de prazo apertado.",

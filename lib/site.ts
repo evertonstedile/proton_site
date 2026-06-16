@@ -12,10 +12,13 @@ export const SITE = {
     .trim()
     .replace(/\/+$/, ""),
   description:
-    "Engenharia residencial de alto padrão — precisão técnica e sofisticação. Blumenau/SC.",
-  locality: "Blumenau",
+    "Engenharia residencial de alto padrão — precisão técnica e sofisticação. Garopaba/SC.",
+  locality: "Garopaba",
   region: "SC",
   country: "BR",
+  postalCode: "88495-000",
+  geo: { lat: -28.0323346, lng: -48.6198405 },
+  mapsUrl: "https://maps.app.goo.gl/mYVenbPswDejSXq58",
   // PLACEHOLDER (B2) — trocar pelo e-mail real
   email: (process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "contato@protonsc.com.br").trim(),
   // PLACEHOLDER (B5) — só dígitos com DDI/DDD; remove qualquer não-dígito.

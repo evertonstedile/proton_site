@@ -13,13 +13,20 @@ export function JsonLd() {
     url: SITE.url,
     email: SITE.email,
     telephone: `+${SITE.whatsapp}`,
-    areaServed: "Blumenau/SC e região",
+    areaServed: "Garopaba/SC e região",
     address: {
       "@type": "PostalAddress",
       addressLocality: SITE.locality,
       addressRegion: SITE.region,
+      postalCode: SITE.postalCode,
       addressCountry: SITE.country,
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: SITE.geo.lat,
+      longitude: SITE.geo.lng,
+    },
+    hasMap: SITE.mapsUrl,
   };
 
   return (
