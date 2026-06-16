@@ -21,23 +21,23 @@ export const stats = [
 export const processSteps = [
   {
     n: "01",
-    title: "Diagnóstico",
-    desc: "Entendemos o terreno, o programa e o sonho do cliente antes de qualquer traço.",
+    title: "Viabilidade",
+    desc: "Análise do terreno, zoneamento e potencial construtivo — viabilidade técnica e legal antes de investir.",
   },
   {
     n: "02",
     title: "Projeto",
-    desc: "Engenharia e arquitetura alinhadas — precisão técnica desde a primeira prancha.",
+    desc: "Arquitetura e engenharia compatibilizadas, do estudo preliminar ao projeto executivo.",
   },
   {
     n: "03",
-    title: "Execução",
-    desc: "Obra conduzida com controle de prazo, custo e qualidade em cada etapa.",
+    title: "Aprovação & Regularização",
+    desc: "Alvarás e aprovações na Prefeitura e no Corpo de Bombeiros, e regularização junto ao Registro de Imóveis.",
   },
   {
     n: "04",
-    title: "Entrega",
-    desc: "Acabamento de alto padrão e acompanhamento até o pós-obra.",
+    title: "Execução & Entrega",
+    desc: "Execução com fiscalização técnica e controle de prazo, custo e qualidade, até a entrega.",
   },
 ];
 
