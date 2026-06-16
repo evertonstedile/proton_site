@@ -3,17 +3,40 @@ import { necmato, montserrat } from "./fonts";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Analytics } from "@vercel/analytics/next";
+import { SITE } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Proton Engenharia & Consultoria",
-    template: "%s · Proton Engenharia",
+    default: SITE.name,
+    template: `%s · ${SITE.shortName}`,
   },
-  description:
-    "Engenharia residencial de alto padrão — precisão técnica e sofisticação. Blumenau/SC.",
-  metadataBase: new URL("https://proton.eng.br"),
-  // PLACEHOLDER: domínio definitivo a confirmar (ver PENDENCIAS.md).
+  description: SITE.description,
+  metadataBase: new URL(SITE.url), // PLACEHOLDER domínio definitivo (B6)
+  alternates: { canonical: "/" },
+  keywords: [
+    "engenharia residencial",
+    "construção alto padrão",
+    "reforma alto padrão",
+    "Blumenau",
+    "Santa Catarina",
+    "Proton Engenharia",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: SITE.shortName,
+    title: SITE.name,
+    description: SITE.description,
+    url: SITE.url,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE.name,
+    description: SITE.description,
+  },
 };
 
 export const viewport: Viewport = {
@@ -31,11 +54,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-bg-base text-text-body antialiased">
+        <JsonLd />
         <SmoothScroll>
           <Navbar />
           {children}
           <Footer />
         </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
