@@ -17,6 +17,7 @@
 | B5 | **Supabase (leads)** | Escrita de leads fica STUBBED (mock local) até liberação humana explícita. | Form contato (Fase 6) |
 | B6 | **Domínio definitivo** | `metadataBase` usa `https://proton.eng.br` como placeholder. Confirmar domínio real. | `app/layout.tsx`, SEO (Fase 6) |
 | B7 | **Linework da deusa** | Vetor oficial da assinatura de marca não está na pasta. Em uso um linework abstrato placeholder. | `components/brand/GoddessLinework.tsx` |
+| **B8** 🔥 | **Necmato sem acentos PT-BR** | **DIVERGÊNCIA da fonte de verdade:** `design-system.md` diz "acentos OK", mas o woff2 fornecido (8KB = subset ASCII) **descarta TODOS os diacríticos** (ã, ç, é, à, õ…) e travessões. Provado por teste de pixel (a==ã, A==Ã, c==ç…). Fix interino aplicado (fallback serif via unicode-range), mas mistura fontes nos acentos = não-premium. **Correção real: arquivo Necmato completo (não subsetado).** DECISÃO ESTRUTURAL — aguardando escolha humana. | TODOS os títulos display em PT-BR |
 
 ---
 
@@ -33,6 +34,8 @@
 | D7 | Travessão (—) confirmado OK no corpo (Montserrat). Em títulos display (Necmato) usar hífen. | Verificado no preview da Fase 2. |
 | D8 | Órbita atômica construída como SVG genérico (3 órbitas elípticas + núcleo). Linework da deusa = placeholder até asset real (B7). | Motivo de marca verificável; deusa depende de vetor oficial. |
 | D9 | Menu mobile renderizado FORA do `<header>` — o `backdrop-blur` da navbar criava containing block que prendia o overlay `fixed` à altura da barra (bug corrigido). | Lição: `backdrop-filter` ancora `position:fixed` descendente. |
+| D10 | **Fallback interino para acentos** (B8): `@font-face DisplayAccentFallback` (Georgia/Times via `local()`, `unicode-range` só nos acentos+travessões, `size-adjust:82%`) à frente da Necmato no `font-display`. Reversível; sai quando vier a fonte completa. Escolhi serif (não Montserrat sans, que o brief citou) porque sans dentro de título serifado destoa mais. | Mantém o site legível/correto em PT-BR até a decisão de B8. |
+| D11 | Hero usa copy e mídia PLACEHOLDER (B2/B3). Mídia = gradiente radial + grão + watermark; trocar por vídeo/foto real. | Sem assets reais ainda. |
 
 ---
 
@@ -51,4 +54,5 @@
 ## Histórico por fase
 
 - **Fase 1 (setup):** scaffolding Next+Tailwind+tokens+fontes+Lenis/GSAP. Sem conteúdo real.
-- **Fase 2 (design system):** rota `/styleguide` com todos os tokens + componentes base (Navbar c/ transição e menu mobile, Footer, Button primário/ghost, Tag, Input, WorkCard) + primitivos de motion (Reveal, SplitReveal, Parallax) + motivos de marca (AtomicOrbit, GoddessLinework). Validado em preview desktop+mobile, zero erros de console, build+lint limpos. Bug do overlay mobile (backdrop-blur) corrigido. **CHECKPOINT 1 — aguardando "continuar".**
+- **Fase 2 (design system):** rota `/styleguide` com todos os tokens + componentes base (Navbar c/ transição e menu mobile, Footer, Button primário/ghost, Tag, Input, WorkCard) + primitivos de motion (Reveal, SplitReveal, Parallax) + motivos de marca (AtomicOrbit, GoddessLinework). Validado em preview desktop+mobile, zero erros de console, build+lint limpos. Bug do overlay mobile (backdrop-blur) corrigido. CHECKPOINT 1 aprovado ("continuar").
+- **Fase 3 — Hero (parcial):** HERO cinematográfico da Home — timeline de entrada (GSAP + SplitText por linha, anti-flash), parallax de saída no scroll, grão, watermark, assinatura da órbita atômica animada, indicador de scroll, CTAs. Mídia/copy placeholder. **Descoberto B8 (Necmato sem acentos)** durante validação → fix interino. Build+lint limpos. **CHECKPOINT 2 — aguardando "continuar" + decisão de B8 (fonte).**

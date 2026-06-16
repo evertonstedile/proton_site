@@ -3,6 +3,22 @@
 @tailwind utilities;
 
 /* ---------------------------------------------------------------------------
+   ⚠️ INTERINO (ver PENDENCIAS B8) — a Necmato fornecida (woff2 subsetado, 8KB)
+   NÃO possui glifos acentuados do PT-BR nem travessões; descarta os diacríticos.
+   Este @font-face redireciona SÓ os codepoints acentuados + travessões/aspas
+   para um serif do sistema, via unicode-range, mantendo a Necmato no resto.
+   Correção definitiva: obter o arquivo Necmato completo (não subsetado).
+--------------------------------------------------------------------------- */
+@font-face {
+  font-family: "DisplayAccentFallback";
+  src: local("Georgia"), local("Times New Roman"), local("Times");
+  font-display: swap;
+  size-adjust: 82%; /* aproxima a altura do Georgia à da Necmato (paliativo) */
+  unicode-range: U+00C0-00FF, U+0100-017F, U+0192, U+2013-2014, U+2018-2019,
+    U+201C-201D, U+2026;
+}
+
+/* ---------------------------------------------------------------------------
    Tokens em CSS vars (espelham design-system.md) — para uso em CSS/GSAP cru,
    além dos utilitários do Tailwind. Fonte de verdade: design-system.md.
 --------------------------------------------------------------------------- */
@@ -109,6 +125,41 @@ html.lenis body {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
+  }
+
+  /* grão sutil para coesão cinematográfica (design-system: tratamento de imagem) */
+  .bg-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Hero — estado inicial anti-flash: esconde os elementos animados antes do JS
+   rodar a timeline de entrada. GSAP sobrescreve com estilo inline ao animar.
+   Reduced-motion e no-JS reexibem tudo (fallback de acessibilidade).
+--------------------------------------------------------------------------- */
+.hero-init [data-hero] {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-init [data-hero] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* indicador de scroll do hero (dot dourado percorrendo a linha) */
+@keyframes heroScroll {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(320%);
+    opacity: 0;
   }
 }
 

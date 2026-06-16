@@ -32,7 +32,9 @@ const config: Config = {
         "on-gold": "#2A1D05", // texto sobre dourado
       },
       fontFamily: {
-        display: ["var(--font-display)", "serif"], // Necmato → títulos
+        // INTERINO: DisplayAccentFallback (unicode-range) cobre acentos/travessões
+        // que faltam na Necmato subsetada. Remover quando vier a Necmato completa.
+        display: ['"DisplayAccentFallback"', "var(--font-display)", "serif"], // Necmato → títulos
         sans: ["var(--font-sans)", "system-ui", "sans-serif"], // Montserrat → UI/corpo
       },
       fontSize: {
