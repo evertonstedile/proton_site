@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AtomicOrbit } from "@/components/brand/AtomicOrbit";
+import { BrandMark } from "@/components/brand/BrandMark";
 
 const NAV = [
   { label: "Obras", href: "/obras" },
@@ -16,7 +16,7 @@ export function Footer() {
         <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
             <Link href="/" className="flex items-center gap-2.5">
-              <AtomicOrbit className="h-7 w-7" />
+              <BrandMark className="h-9 w-9" />
               <span className="font-display text-xl uppercase tracking-[0.2em] text-text-primary">
                 Proton
               </span>

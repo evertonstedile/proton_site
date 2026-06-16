@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLenis } from "lenis/react";
 import { cn } from "@/lib/cn";
-import { AtomicOrbit } from "@/components/brand/AtomicOrbit";
+import { BrandMark } from "@/components/brand/BrandMark";
 
 const LINKS = [
   { label: "Obras", href: "/obras" },
@@ -44,7 +44,7 @@ export function Navbar() {
           className="flex items-center gap-2.5"
           onClick={() => setOpen(false)}
         >
-          <AtomicOrbit className="h-6 w-6" />
+          <BrandMark className="h-8 w-8" />
           <span className="font-display text-lg uppercase tracking-[0.2em] text-text-primary">
             Proton
           </span>
