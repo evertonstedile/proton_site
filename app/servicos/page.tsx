@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/motion/Reveal";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { FinalCta } from "@/components/home/FinalCta";
-import { serviceGroups, servicesCount } from "@/lib/content";
+import { serviceGroups, servicesCount, servicesTagline } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Serviços",
@@ -18,7 +18,7 @@ export default function ServicosPage() {
       <PageHeader
         kicker="O que fazemos"
         title="Serviços"
-        intro={`${servicesCount} serviços em ${serviceGroups.length} frentes — da concepção e regularização à execução, fiscalização e consultoria.`}
+        intro={`${servicesTagline} ${servicesCount} serviços em ${serviceGroups.length} frentes.`}
       />
 
       <Section surface="surface" className="pt-0">
@@ -35,16 +35,20 @@ export default function ServicosPage() {
                       {g.area}
                     </h2>
                   </div>
-                  <ul className="grid gap-x-10 gap-y-3 sm:grid-cols-2">
+                  <ul className="grid gap-x-10 gap-y-6 sm:grid-cols-2">
                     {g.items.map((item) => (
-                      <li
-                        key={item}
-                        className="flex gap-3 font-sans text-body text-text-body"
-                      >
-                        <span aria-hidden className="text-gold-base">
+                      <li key={item.name} className="flex gap-3">
+                        <span aria-hidden className="mt-1 text-gold-base">
                           —
                         </span>
-                        <span>{item}</span>
+                        <div>
+                          <p className="font-sans text-body text-text-primary">
+                            {item.name}
+                          </p>
+                          <p className="mt-1 font-sans text-small text-text-muted">
+                            {item.desc}
+                          </p>
+                        </div>
                       </li>
                     ))}
                   </ul>

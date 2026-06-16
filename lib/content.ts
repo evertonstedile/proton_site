@@ -40,74 +40,177 @@ export const processSteps = [
   },
 ];
 
-// --- Serviços (dados reais — 33 serviços em 7 frentes) --------------------
+// --- Serviços (dados reais — 33 serviços em 7 frentes; escopo do catálogo) -
+// Linha oficial de posicionamento (capa do catálogo).
+export const servicesTagline =
+  "Soluções completas em engenharia, arquitetura e regularização.";
+
 export const serviceGroups = [
   {
     area: "Projetos de Engenharia e Arquitetura",
     items: [
-      "Projeto Arquitetônico",
-      "Projeto de Fundação",
-      "Projeto Estrutural",
-      "Projeto Elétrico",
-      "Projeto Hidrossanitário",
-      "Projeto de Prevenção e Combate a Incêndio (PPCI)",
-      "Compatibilização de Projetos",
-      "Renderização 3D e Maquete Eletrônica",
+      {
+        name: "Projeto Arquitetônico",
+        desc: "Do estudo preliminar ao executivo: plantas, cortes, fachadas e projeto legal.",
+      },
+      {
+        name: "Projeto de Fundação",
+        desc: "Fundações rasas e profundas dimensionadas conforme o solo e as cargas, com ART/RRT.",
+      },
+      {
+        name: "Projeto Estrutural",
+        desc: "Dimensionamento de fundações, vigas, pilares e lajes, com memorial de cálculo e ART/RRT.",
+      },
+      {
+        name: "Projeto Elétrico",
+        desc: "Cargas, circuitos, iluminação, quadro e aterramento conforme a concessionária.",
+      },
+      {
+        name: "Projeto Hidrossanitário",
+        desc: "Água fria e quente, esgoto e drenagem pluvial, com isométricos e compatibilização.",
+      },
+      {
+        name: "Projeto de Prevenção e Combate a Incêndio (PPCI)",
+        desc: "Preventivo com hidrantes, sinalização e rotas de fuga, aprovado no Corpo de Bombeiros.",
+      },
+      {
+        name: "Compatibilização de Projetos",
+        desc: "Integração entre disciplinas para eliminar interferências e otimizar a obra.",
+      },
+      {
+        name: "Renderização 3D e Maquete Eletrônica",
+        desc: "Modelagem 3D e imagens fotorrealistas para visualizar e apresentar o projeto.",
+      },
     ],
   },
   {
     area: "Regularização e Documentação Imobiliária",
     items: [
-      "Regularização de Imóveis",
-      "Regularização de Obras",
-      "Instituição e Especificação de Condomínio",
-      "Incorporações Imobiliárias",
-      "Loteamentos e Condomínios",
-      "REURB – Regularização Fundiária Urbana",
-      "Desmembramento, Unificação e Retificação de Matrículas",
-      "Apoio Técnico junto ao Registro de Imóveis",
-      "Memorial Descritivo e Documentação Técnica",
+      {
+        name: "Regularização de Imóveis",
+        desc: "As built, Habite-se e averbação no Registro de Imóveis, com acompanhamento processual.",
+      },
+      {
+        name: "Regularização de Obras",
+        desc: "Adequação de edificações existentes à legislação, com projetos corretivos e documentação.",
+      },
+      {
+        name: "Instituição e Especificação de Condomínio",
+        desc: "Quadro de áreas (NBR 12.721), frações ideais e assessoria até o registro.",
+      },
+      {
+        name: "Incorporações Imobiliárias",
+        desc: "Memorial de incorporação e documentação técnica para o Registro de Imóveis.",
+      },
+      {
+        name: "Loteamentos e Condomínios",
+        desc: "Projeto urbanístico, infraestrutura e viabilidade, com aprovação municipal e ambiental.",
+      },
+      {
+        name: "REURB – Regularização Fundiária Urbana",
+        desc: "Da diagnose da área irregular à titulação, com projeto urbanístico e topografia.",
+      },
+      {
+        name: "Desmembramento, Unificação e Retificação de Matrículas",
+        desc: "Levantamento, plantas e retificação junto ao Registro de Imóveis.",
+      },
+      {
+        name: "Apoio Técnico junto ao Registro de Imóveis",
+        desc: "Plantas, memoriais e atendimento de exigências para averbações e registros.",
+      },
+      {
+        name: "Memorial Descritivo e Documentação Técnica",
+        desc: "Memoriais de obra, acabamento e infraestrutura conforme as normas técnicas.",
+      },
     ],
   },
   {
     area: "Topografia e Georreferenciamento",
     items: [
-      "Levantamento Topográfico Planialtimétrico",
-      "Georreferenciamento de Imóveis",
+      {
+        name: "Levantamento Topográfico Planialtimétrico",
+        desc: "GPS RTK/estação total, curvas de nível e planta topográfica georreferenciada.",
+      },
+      {
+        name: "Georreferenciamento de Imóveis",
+        desc: "Rural e urbano conforme o INCRA, com certificação SIGEF quando aplicável.",
+      },
     ],
   },
   {
     area: "Execução e Fiscalização de Obras",
     items: [
-      "Administração e Execução de Obras",
-      "Gerenciamento e Fiscalização de Obras",
-      "Acompanhamento Técnico de Execução",
+      {
+        name: "Administração e Execução de Obras",
+        desc: "Planejamento físico-financeiro, coordenação de equipes e controle de custo e qualidade.",
+      },
+      {
+        name: "Gerenciamento e Fiscalização de Obras",
+        desc: "Fiscalização técnica e controle de conformidade com projetos e cronograma.",
+      },
+      {
+        name: "Acompanhamento Técnico de Execução",
+        desc: "Visitas periódicas, orientação técnica e conferência das etapas construtivas.",
+      },
     ],
   },
   {
     area: "Infraestrutura Urbana",
     items: [
-      "Projetos de Infraestrutura Urbana",
-      "Projetos de Drenagem Pluvial",
-      "Projetos de Rede de Água e Esgoto",
-      "Projetos de Pavimentação",
+      {
+        name: "Projetos de Infraestrutura Urbana",
+        desc: "Viário, drenagem, água e esgoto, com detalhamento executivo e aprovações.",
+      },
+      {
+        name: "Projetos de Drenagem Pluvial",
+        desc: "Dimensionamento hidráulico, galerias e dispositivos de captação pluvial.",
+      },
+      {
+        name: "Projetos de Rede de Água e Esgoto",
+        desc: "Redes de abastecimento e coleta dimensionadas, com aprovação na concessionária.",
+      },
+      {
+        name: "Projetos de Pavimentação",
+        desc: "Projeto geométrico, dimensionamento e perfis, compatibilizados com a drenagem.",
+      },
     ],
   },
   {
     area: "Aprovações e Licenciamento",
     items: [
-      "Aprovação de Projetos e Emissão de Alvarás",
-      "Acompanhamento junto a Órgãos Públicos",
-      "Regularização Ambiental e Licenciamento",
+      {
+        name: "Aprovação de Projetos e Emissão de Alvarás",
+        desc: "Protocolo na Prefeitura e no Corpo de Bombeiros e emissão de alvarás e licenças.",
+      },
+      {
+        name: "Acompanhamento junto a Órgãos Públicos",
+        desc: "Protocolos, diligências e representação técnica em processos administrativos.",
+      },
+      {
+        name: "Regularização Ambiental e Licenciamento",
+        desc: "Assessoria e apoio em licenciamentos ambientais e exigências dos órgãos.",
+      },
     ],
   },
   {
     area: "Consultoria, Laudos e Viabilidade",
     items: [
-      "Assessoria Técnica em Engenharia e Urbanismo",
-      "Laudos Técnicos e Pareceres de Engenharia",
-      "Estudos de Viabilidade Técnica e Urbanística",
-      "Consultoria para Empreendimentos Imobiliários",
+      {
+        name: "Assessoria Técnica em Engenharia e Urbanismo",
+        desc: "Consultoria, pareceres e orientação normativa para decisões técnicas seguras.",
+      },
+      {
+        name: "Laudos Técnicos e Pareceres de Engenharia",
+        desc: "Inspeção in loco, avaliação de patologias e laudos de vistoria e estabilidade, com ART.",
+      },
+      {
+        name: "Estudos de Viabilidade Técnica e Urbanística",
+        desc: "Zoneamento, índices e potencial construtivo do terreno, com diretrizes de aprovação.",
+      },
+      {
+        name: "Consultoria para Empreendimentos Imobiliários",
+        desc: "Análise de terrenos, viabilidade e estratégias de aprovação para investidores.",
+      },
     ],
   },
 ];
