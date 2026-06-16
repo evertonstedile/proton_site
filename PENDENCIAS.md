@@ -14,7 +14,7 @@
 | B2 | **Copy real** | Posicionamento, manifesto, serviços, processo, depoimentos — tudo placeholder marcado. Não inventar números/depoimentos reais. | Home (Fase 3), internas (Fase 5) |
 | B3 | **Fotos/vídeo das obras** | Hero e portfólio dependem de footage profissional. Brief diz "confirmado disponível" mas ainda não estão na pasta. | Hero (Fase 3), Obras (Fase 4) |
 | B4 | **Supabase (obras)** | Reusar tabela `obras` existente — schema real NÃO confirmado. Risco das "8 divergências". UI de Obras já construída sobre STUB (`lib/obras.ts`, shape genérico). PARAR no Checkpoint 3 antes de ler em produção: validar schema, então trocar `getObras()/getObraBySlug()` + enriquecer a página de detalhe. | Obras (Fase 4 stub → Checkpoint 3) |
-| B5 | **Supabase (leads)** | Escrita de leads fica STUBBED (mock local) até liberação humana explícita. | Form contato (Fase 6) |
+| B5 | **Supabase (leads)** | Form de contato construído (UI + validação completas). **Escrita STUBBED** (`ContactForm.tsx` simula sucesso, zero rede). Ligar ao pipeline de leads do Proton OS só após liberação humana (Fase 6). | Form contato |
 | B6 | **Domínio definitivo** | `metadataBase` usa `https://proton.eng.br` como placeholder. Confirmar domínio real. | `app/layout.tsx`, SEO (Fase 6) |
 | B7 | **Linework da deusa** | Vetor oficial da assinatura de marca não está na pasta. Em uso um linework abstrato placeholder. | `components/brand/GoddessLinework.tsx` |
 | ~~B8~~ ✅ | **Necmato sem acentos PT-BR** | **DIVERGÊNCIA da fonte de verdade:** `design-system.md` diz "acentos OK", mas o woff2 fornecido (8KB = subset ASCII) **descarta TODOS os diacríticos** (ã, ç, é, à, õ…) e travessões. Provado por teste de pixel. **RESOLVIDO por decisão do cliente:** fallback Didone (Playfair Display auto-hospedado) via `unicode-range`, só nos acentos. Ver D10. *Opcional futuro:* arquivo Necmato completo elimina até o fallback. | títulos display PT-BR |
@@ -36,6 +36,7 @@
 | D9 | Menu mobile renderizado FORA do `<header>` — o `backdrop-blur` da navbar criava containing block que prendia o overlay `fixed` à altura da barra (bug corrigido). | Lição: `backdrop-filter` ancora `position:fixed` descendente. |
 | D10 | **Fallback Didone para acentos** (B8, escolha do cliente): `@font-face DisplayAccentFallback` = **Playfair Display** Regular auto-hospedado (`public/fonts/PlayfairDisplay-latin.woff2`, 22KB), à frente da Necmato no `font-display`, restrito por `unicode-range` aos codepoints acentuados + travessões/aspas. `size-adjust:42%` iguala a cap-height à da Necmato (medido). + `.font-display { text-transform: uppercase }` porque a Necmato é face caixa-alta → o fallback renderiza o acento MAIÚSCULO (Ã/Ç/À) casando a altura. | Acentos PT-BR corretos e coesos nos títulos. |
 | D11 | Hero usa copy e mídia PLACEHOLDER (B2/B3). Mídia = gradiente radial + grão + watermark; trocar por vídeo/foto real. | Sem assets reais ainda. |
+| D12 | Sem token de cor de erro no design-system → usei vermelho funcional discreto (`#E5736B`) no estado de erro do `Input`. Considerar tokenizar se surgir mais UI de formulário/feedback. | Validação acessível do form. |
 
 ---
 
@@ -49,7 +50,7 @@
 - **Rotas internas linkadas mas ainda NÃO criadas** (`/obras`, `/sobre`, `/servicos`, `/processo`, `/contato`) → 404 até as Fases 4–5. Navbar/Footer já apontam para elas.
 - `app/styleguide/page.tsx` — cards de obra e dados são placeholders de demonstração (noindex).
 - `lib/content.ts` — **todo o conteúdo da Home é placeholder**: manifesto, obras em destaque (Fase 4 puxa do Supabase), números (ILUSTRATIVOS, com aviso visível na página), processo, serviços, depoimentos (ILUSTRATIVOS, com aviso visível). Copy provisória aprovável em B2.
-- Home: CTAs/links para `/contato` ainda dão **404** (rota da Fase 5). `/obras` já existe.
+- Todas as rotas do menu existem (sem 404). Form de contato: dados de contato (e-mail/telefone/endereço) são placeholder (B2).
 - `lib/obras.ts` — obras MOCK (shape provisório, B4); página de detalhe simples; galeria e ficha técnica são placeholders até os dados reais.
 
 ---
@@ -61,3 +62,4 @@
 - **Fase 3 — Hero (parcial):** HERO cinematográfico da Home — timeline de entrada (GSAP + SplitText por linha, anti-flash), parallax de saída no scroll, grão, watermark, assinatura da órbita atômica animada, indicador de scroll, CTAs. Mídia/copy placeholder. **Descoberto B8 (Necmato sem acentos)** durante validação → fix interino. CHECKPOINT 2 aprovado; B8 resolvido com Playfair Didone (escolha do cliente).
 - **Fase 3 — Home completa:** demais seções (Manifesto, Obras em destaque, Números/contadores, Processo, Serviços, Depoimentos, CTA final) construídas reusando primitivos/componentes. Conteúdo placeholder em `lib/content.ts`; números e depoimentos com aviso visível de "ilustrativos". Contador animado (`Counter`) com formato pt-BR e reduced-motion. Validado desktop+mobile (1 coluna, sem scroll horizontal), acentos coesos via Playfair, console limpo, build+lint limpos.
 - **Fase 4 — Obras (stub):** `lib/obras.ts` (fonte única mock, shape esperado da tabela `obras`) + `/obras` (grid de 6 cards, SSG) + `/obras/[slug]` (detalhe SIMPLES, SSG via generateStaticParams, metadata por obra). Home passou a puxar destaques de `getObras()`. Decisão do cliente: stub agora, schema/Supabase no Checkpoint 3. Validado desktop+mobile, sem hscroll, build+lint limpos.
+- **Fase 5 — Internas:** `/sobre` (story + valores), `/servicos` (lista rica), `/processo` (timeline vertical), `/contato` (form com validação + **escrita STUBBED**, B5). `PageHeader` reutilizável; `Input` ganhou estado de erro acessível. Todas as rotas do menu existem (sem 404). Validado desktop+mobile (sem hscroll), form testado (validação + sucesso stub), console limpo, build+lint limpos. **Próxima parada: CHECKPOINT 3 (antes do Supabase de produção, Fase 6).**

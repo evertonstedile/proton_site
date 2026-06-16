@@ -8,15 +8,21 @@ type BaseProps = {
   label: string;
   className?: string;
   hint?: string;
+  error?: string;
 };
 
 const fieldClasses =
-  "w-full rounded-lg border border-line bg-bg-raised px-4 py-3 font-sans text-body text-text-body placeholder:text-text-muted/70 transition-colors duration-short ease-cinematic focus:border-gold-base focus:outline-none";
+  "w-full rounded-lg border bg-bg-raised px-4 py-3 font-sans text-body text-text-body placeholder:text-text-muted/70 transition-colors duration-short ease-cinematic focus:outline-none";
 
-/** Campo de texto (input ou textarea) com label e foco dourado. */
+// Sem token de erro no design-system (decisão D12): vermelho funcional discreto.
+const errorRing = "border-[#E5736B] focus:border-[#E5736B]";
+const normalRing = "border-line focus:border-gold-base";
+
+/** Campo de texto (input ou textarea) com label, foco dourado e estado de erro. */
 export function Input({
   label,
   hint,
+  error,
   className,
   multiline,
   rows = 4,
@@ -27,6 +33,7 @@ export function Input({
     rows?: number;
   }) {
   const id = useId();
+  const errId = `${id}-err`;
   return (
     <div className={cn("flex flex-col gap-2", className)}>
       <label
@@ -39,13 +46,25 @@ export function Input({
         <textarea
           id={id}
           rows={rows}
-          className={cn(fieldClasses, "resize-none")}
+          aria-invalid={!!error}
+          aria-describedby={error ? errId : undefined}
+          className={cn(fieldClasses, error ? errorRing : normalRing, "resize-none")}
           {...(props as ComponentPropsWithoutRef<"textarea">)}
         />
       ) : (
-        <input id={id} className={fieldClasses} {...props} />
+        <input
+          id={id}
+          aria-invalid={!!error}
+          aria-describedby={error ? errId : undefined}
+          className={cn(fieldClasses, error ? errorRing : normalRing)}
+          {...props}
+        />
       )}
-      {hint ? (
+      {error ? (
+        <span id={errId} className="font-sans text-small text-[#E5736B]">
+          {error}
+        </span>
+      ) : hint ? (
         <span className="font-sans text-small text-text-muted">{hint}</span>
       ) : null}
     </div>
