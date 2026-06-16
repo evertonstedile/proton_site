@@ -75,7 +75,7 @@ export function Footer() {
             © {new Date().getFullYear()} Proton Engenharia & Consultoria.
           </p>
           <p className="font-sans text-small text-text-muted">
-            Parte do ecossistema Proton OS.
+            Engenharia · Arquitetura · Regularização
           </p>
         </div>
       </div>
