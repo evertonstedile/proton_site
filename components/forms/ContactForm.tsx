@@ -9,7 +9,7 @@ type Errors = Partial<Record<"nome" | "email" | "mensagem", string>>;
 type Status = "idle" | "sending" | "ok" | "error";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY?.trim();
 const WA_MSG = "Olá! Vim pelo site da Proton e gostaria de um orçamento.";
 
 /**
