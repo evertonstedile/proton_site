@@ -17,7 +17,7 @@
 | B5 | **Supabase (leads)** | Escrita de leads fica STUBBED (mock local) até liberação humana explícita. | Form contato (Fase 6) |
 | B6 | **Domínio definitivo** | `metadataBase` usa `https://proton.eng.br` como placeholder. Confirmar domínio real. | `app/layout.tsx`, SEO (Fase 6) |
 | B7 | **Linework da deusa** | Vetor oficial da assinatura de marca não está na pasta. Em uso um linework abstrato placeholder. | `components/brand/GoddessLinework.tsx` |
-| **B8** 🔥 | **Necmato sem acentos PT-BR** | **DIVERGÊNCIA da fonte de verdade:** `design-system.md` diz "acentos OK", mas o woff2 fornecido (8KB = subset ASCII) **descarta TODOS os diacríticos** (ã, ç, é, à, õ…) e travessões. Provado por teste de pixel (a==ã, A==Ã, c==ç…). Fix interino aplicado (fallback serif via unicode-range), mas mistura fontes nos acentos = não-premium. **Correção real: arquivo Necmato completo (não subsetado).** DECISÃO ESTRUTURAL — aguardando escolha humana. | TODOS os títulos display em PT-BR |
+| ~~B8~~ ✅ | **Necmato sem acentos PT-BR** | **DIVERGÊNCIA da fonte de verdade:** `design-system.md` diz "acentos OK", mas o woff2 fornecido (8KB = subset ASCII) **descarta TODOS os diacríticos** (ã, ç, é, à, õ…) e travessões. Provado por teste de pixel. **RESOLVIDO por decisão do cliente:** fallback Didone (Playfair Display auto-hospedado) via `unicode-range`, só nos acentos. Ver D10. *Opcional futuro:* arquivo Necmato completo elimina até o fallback. | títulos display PT-BR |
 
 ---
 
@@ -34,7 +34,7 @@
 | D7 | Travessão (—) confirmado OK no corpo (Montserrat). Em títulos display (Necmato) usar hífen. | Verificado no preview da Fase 2. |
 | D8 | Órbita atômica construída como SVG genérico (3 órbitas elípticas + núcleo). Linework da deusa = placeholder até asset real (B7). | Motivo de marca verificável; deusa depende de vetor oficial. |
 | D9 | Menu mobile renderizado FORA do `<header>` — o `backdrop-blur` da navbar criava containing block que prendia o overlay `fixed` à altura da barra (bug corrigido). | Lição: `backdrop-filter` ancora `position:fixed` descendente. |
-| D10 | **Fallback interino para acentos** (B8): `@font-face DisplayAccentFallback` (Georgia/Times via `local()`, `unicode-range` só nos acentos+travessões, `size-adjust:82%`) à frente da Necmato no `font-display`. Reversível; sai quando vier a fonte completa. Escolhi serif (não Montserrat sans, que o brief citou) porque sans dentro de título serifado destoa mais. | Mantém o site legível/correto em PT-BR até a decisão de B8. |
+| D10 | **Fallback Didone para acentos** (B8, escolha do cliente): `@font-face DisplayAccentFallback` = **Playfair Display** Regular auto-hospedado (`public/fonts/PlayfairDisplay-latin.woff2`, 22KB), à frente da Necmato no `font-display`, restrito por `unicode-range` aos codepoints acentuados + travessões/aspas. `size-adjust:42%` iguala a cap-height à da Necmato (medido). + `.font-display { text-transform: uppercase }` porque a Necmato é face caixa-alta → o fallback renderiza o acento MAIÚSCULO (Ã/Ç/À) casando a altura. | Acentos PT-BR corretos e coesos nos títulos. |
 | D11 | Hero usa copy e mídia PLACEHOLDER (B2/B3). Mídia = gradiente radial + grão + watermark; trocar por vídeo/foto real. | Sem assets reais ainda. |
 
 ---

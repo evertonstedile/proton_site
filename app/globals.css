@@ -11,10 +11,15 @@
 --------------------------------------------------------------------------- */
 @font-face {
   font-family: "DisplayAccentFallback";
-  src: local("Georgia"), local("Times New Roman"), local("Times");
+  src: url("/fonts/PlayfairDisplay-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
   font-display: swap;
-  size-adjust: 82%; /* aproxima a altura do Georgia à da Necmato (paliativo) */
-  unicode-range: U+00C0-00FF, U+0100-017F, U+0192, U+2013-2014, U+2018-2019,
+  size-adjust: 42%; /* iguala a cap-height do Playfair à da Necmato (medido) */
+  /* Playfair Display (Didone, auto-hospedado) — só para acentos PT-BR +
+     travessões/aspas que faltam na Necmato (B8). unicode-range cobre os
+     codepoints acentuados (maiúsc. e minúsc.) e pontuação tipográfica. */
+  unicode-range: U+00C0-00FF, U+0152-0153, U+2013-2014, U+2018-2019,
     U+201C-201D, U+2026;
 }
 
@@ -65,9 +70,13 @@
   }
 
   /* Necmato tem peso único (Regular). Trava contra faux-bold no display. */
+  /* Necmato é uma face caixa-alta (minúsculas = maiúsculas). Forçar uppercase
+     mantém o visual idêntico na Necmato E faz o fallback de acentos (Playfair)
+     renderizar a forma MAIÚSCULA do acento (Ã/Ç/À), casando a altura. */
   .font-display {
     font-weight: 400 !important;
     font-synthesis-weight: none;
+    text-transform: uppercase;
   }
 
   ::selection {
