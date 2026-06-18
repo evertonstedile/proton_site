@@ -27,6 +27,9 @@ export const SITE = {
   // Confirmado pela Ficha Cadastral CREA-SC: (48) 9 9603-1782 → 5548996031782.
   // Env NEXT_PUBLIC_WHATSAPP sobrepõe; só dígitos com DDI/DDD (remove não-dígito).
   whatsapp: (process.env.NEXT_PUBLIC_WHATSAPP ?? "5548996031782").replace(/\D/g, ""),
+  // Perfis oficiais (Instagram, LinkedIn, Google Business...). Alimentam `sameAs`
+  // no JSON-LD (forte sinal de entidade p/ Google e IA). Vazio = não renderiza.
+  socials: [] as string[],
 } as const;
 
 /**

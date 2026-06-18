@@ -249,6 +249,40 @@ export const about = {
   ],
 };
 
+// --- FAQ (perguntas frequentes — visível + FAQPage JSON-LD p/ SEO/GEO) ----
+// Respostas factuais, alinhadas ao conteúdo do site. Evitam afirmar o título
+// profissional dos RTs (não confirmado) e preços específicos.
+export const faq = [
+  {
+    q: "Quais serviços a Proton oferece?",
+    a: "A Proton atua de ponta a ponta em engenharia, arquitetura, regularização imobiliária, topografia, infraestrutura, licenciamento, execução e consultoria — do estudo de viabilidade e do projeto à obra entregue.",
+  },
+  {
+    q: "A Proton atende em quais regiões?",
+    a: "Atendemos Garopaba/SC e região — incluindo Praia do Rosa, Imbituba, Florianópolis e o entorno do litoral catarinense.",
+  },
+  {
+    q: "O que é regularização de imóvel e quando preciso dela?",
+    a: "Regularização é adequar a construção à sua documentação legal — aprovação na prefeitura, habite-se e averbação em cartório. Costuma ser necessária para vender ou financiar o imóvel, obter o habite-se e evitar pendências quando a obra não corresponde ao que está registrado.",
+  },
+  {
+    q: "Como funciona o processo de um projeto na Proton?",
+    a: "Em quatro etapas: viabilidade (terreno, zoneamento e potencial construtivo), projeto (arquitetura e engenharia compatibilizadas), aprovação e regularização (prefeitura, cartório e órgãos competentes) e execução e entrega, com acompanhamento técnico até a conclusão.",
+  },
+  {
+    q: "A Proton é registrada no CREA?",
+    a: "Sim. A Proton é registrada no CREA-SC (registro 230125-6) e conta com responsáveis técnicos registrados no conselho — toda atividade técnica é conduzida com a devida responsabilidade profissional.",
+  },
+  {
+    q: "A Proton só faz o projeto ou também acompanha a obra?",
+    a: "Oferecemos serviço completo (full-service): do projeto à execução e entrega, com acompanhamento técnico da obra. É possível contratar etapas específicas ou o ciclo completo.",
+  },
+  {
+    q: "Como peço um orçamento?",
+    a: "Pelo WhatsApp ou pela página de contato do site. A partir da sua necessidade e do terreno, fazemos uma avaliação inicial e apresentamos a proposta.",
+  },
+];
+
 // --- Depoimentos (ILUSTRATIVOS — substituir por reais) --------------------
 export const testimonials = [
   {

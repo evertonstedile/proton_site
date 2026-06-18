@@ -9,6 +9,7 @@ import { Tag } from "@/components/ui/Tag";
 import { Button } from "@/components/ui/Button";
 import { AtomicOrbit } from "@/components/brand/AtomicOrbit";
 import { getObras, getObraBySlug } from "@/lib/obras";
+import { SITE } from "@/lib/site";
 
 type Params = { slug: string };
 
@@ -46,8 +47,27 @@ export default async function ObraDetailPage({
 
   const area = obra.areaM2 ? `${obra.areaM2} m²` : "000 m²";
 
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Início", item: SITE.url },
+      { "@type": "ListItem", position: 2, name: "Obras", item: `${SITE.url}/obras` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: obra.title,
+        item: `${SITE.url}/obras/${obra.slug}`,
+      },
+    ],
+  };
+
   return (
     <main className="pt-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
       {/* capa */}
       <section className="relative h-[56vh] min-h-[360px] w-full overflow-hidden bg-bg-base">
         {obra.cover ? (
