@@ -3,6 +3,7 @@ import { necmato, montserrat } from "./fonts";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { CookieConsent } from "@/components/CookieConsent";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
 import { SITE } from "@/lib/site";
@@ -73,6 +74,7 @@ export default function RootLayout({
           <div id="conteudo">{children}</div>
           <Footer />
         </SmoothScroll>
+        <CookieConsent />
         {/* Analytics só na Vercel (evita 404 do script fora da plataforma) */}
         {process.env.VERCEL ? <Analytics /> : null}
       </body>

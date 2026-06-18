@@ -79,6 +79,15 @@ export function Footer() {
           <p>
             Nome fantasia: {LEGAL.tradeName} · {LEGAL.legalNature}
           </p>
+          {LEGAL.crea ? <p>Registro CREA-SC: {LEGAL.crea}</p> : null}
+          {LEGAL.responsibleTechs.length > 0 ? (
+            <p>
+              {LEGAL.responsibleTechs.length > 1
+                ? "Responsáveis técnicos: "
+                : "Responsável técnico: "}
+              {LEGAL.responsibleTechs.join(" · ")}
+            </p>
+          ) : null}
           <p>Endereço fiscal (CNPJ): {LEGAL.address.full}</p>
           <a
             href={`mailto:${SITE.email}`}
@@ -93,6 +102,12 @@ export function Footer() {
             © {new Date().getFullYear()} {LEGAL.tradeName}.
           </p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <Link
+              href="/termos"
+              className="font-sans text-small text-text-muted transition-colors duration-short hover:text-gold-light"
+            >
+              Termos de Uso
+            </Link>
             <Link
               href="/privacidade"
               className="font-sans text-small text-text-muted transition-colors duration-short hover:text-gold-light"

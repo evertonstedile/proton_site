@@ -172,9 +172,12 @@ const SECTIONS: { title: string; body: ReactNode }[] = [
     title: "9. Cookies e estatísticas de acesso",
     body: (
       <p className={para}>
-        Este site pode utilizar cookies e ferramentas de medição de audiência
-        para fins estatísticos e de melhoria da experiência. Você pode gerenciar
-        os cookies nas configurações do seu navegador.
+        Cookies essenciais garantem o funcionamento do site e são sempre
+        ativos. Cookies e tecnologias de análise e marketing só são ativados
+        mediante o seu consentimento, coletado por meio de um aviso exibido no
+        primeiro acesso, no qual você pode aceitar ou recusar com a mesma
+        facilidade. Você pode rever sua escolha a qualquer momento limpando os
+        cookies e o armazenamento do navegador, sem prejuízo da navegação.
       </p>
     ),
   },

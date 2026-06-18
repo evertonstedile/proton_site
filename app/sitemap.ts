@@ -3,7 +3,7 @@ import { SITE } from "@/lib/site";
 import { getObras } from "@/lib/obras";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["", "/obras", "/sobre", "/servicos", "/processo", "/contato", "/privacidade"];
+  const staticPaths = ["", "/obras", "/sobre", "/servicos", "/processo", "/contato", "/privacidade", "/termos"];
 
   const staticRoutes: MetadataRoute.Sitemap = staticPaths.map((p) => ({
     url: `${SITE.url}${p}`,
