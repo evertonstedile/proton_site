@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/brand/BrandMark";
-import { SITE, whatsappUrl } from "@/lib/site";
+import { SITE, LEGAL, whatsappUrl } from "@/lib/site";
 
 const NAV = [
   { label: "Obras", href: "/obras" },
@@ -70,13 +70,39 @@ export function Footer() {
 
         <div className="mt-12 h-px w-full bg-line" />
 
-        <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-sans text-small text-text-muted">
-            © {new Date().getFullYear()} Proton Engenharia & Consultoria.
+        {/* Dados legais (entidade) — exigência da verificação de negócio Meta + LGPD */}
+        <div className="mt-8 flex flex-col gap-1.5 font-sans text-small text-text-muted">
+          <p>
+            <span className="text-text-body">{LEGAL.legalName}</span>
+            {" · "}CNPJ {LEGAL.cnpj}
           </p>
-          <p className="font-sans text-small text-text-muted">
-            Engenharia · Arquitetura · Regularização
+          <p>
+            Nome fantasia: {LEGAL.tradeName} · {LEGAL.legalNature}
           </p>
+          <p>Endereço fiscal (CNPJ): {LEGAL.address.full}</p>
+          <a
+            href={`mailto:${SITE.email}`}
+            className="w-fit transition-colors duration-short hover:text-gold-light"
+          >
+            {SITE.email}
+          </a>
+        </div>
+
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-sans text-small text-text-muted">
+            © {new Date().getFullYear()} {LEGAL.tradeName}.
+          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <Link
+              href="/privacidade"
+              className="font-sans text-small text-text-muted transition-colors duration-short hover:text-gold-light"
+            >
+              Política de Privacidade
+            </Link>
+            <span className="font-sans text-small text-text-muted">
+              Engenharia · Arquitetura · Regularização
+            </span>
+          </div>
         </div>
       </div>
     </footer>
