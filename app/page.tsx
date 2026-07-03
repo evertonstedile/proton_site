@@ -1,4 +1,5 @@
 import { HeroSotd } from "@/components/home/HeroSotd";
+import { ManifestoCamera } from "@/components/home/ManifestoCamera";
 import { Manifesto } from "@/components/home/Manifesto";
 import { FeaturedWorks } from "@/components/home/FeaturedWorks";
 import { Stats } from "@/components/home/Stats";
@@ -17,6 +18,7 @@ export default function Home() {
   return (
     <main>
       <HeroSotd />
+      <ManifestoCamera />
       <Manifesto />
       <FeaturedWorks />
       <Stats />
