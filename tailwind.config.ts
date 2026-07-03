@@ -1,8 +1,12 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Tokens espelham design-system.md (fonte de verdade).
+ * Tokens Cinematic Dark — espelham a spec 2026-07-02-redesign-sotd-design.md §3
+ * (fonte de verdade) e as CSS vars de globals.css.
  * Nada de hex hardcoded em componente — sempre via token semântico.
+ * Tokens canônicos: bg / bg-2 / fg / fg-muted / accent / line / ease-proton.
+ * Classes antigas (bg-base, text-primary, gold-*…) são ALIASES de transição —
+ * remover na Task 9.
  */
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
@@ -10,32 +14,40 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          base: "#000000", // seções cinematográficas full-bleed
-          surface: "#0C0C0D", // seções padrão
-          raised: "#141416", // cards
-          elevated: "#1C1C1F", // hover, painéis sobrepostos
+          DEFAULT: "#090909", // bg-bg — fundo padrão
+          "2": "#111112", // bg-bg-2 — superfície secundária
+          // aliases de transição ↓
+          base: "#090909",
+          surface: "#111112",
+          raised: "#141416",
+          elevated: "#1c1c1f",
         },
+        fg: {
+          DEFAULT: "#ececef", // text-fg — texto padrão (nunca #fff puro)
+          muted: "rgba(236,236,239,0.56)", // text-fg-muted — secundário
+        },
+        accent: "#d2ac62", // acento único ouro
         line: {
-          DEFAULT: "rgba(255,255,255,0.10)", // bordas/divisores
-          gold: "rgba(210,172,98,0.30)", // bordas de destaque
+          DEFAULT: "rgba(236,236,239,0.09)", // bordas/divisores
+          gold: "rgba(210,172,98,0.30)", // alias de transição
         },
+        // aliases de transição ↓
         text: {
-          primary: "#FFFFFF", // títulos
-          body: "#F4F3F1", // corpo (off-white)
-          muted: "rgba(255,255,255,0.60)", // secundário
+          primary: "#ececef",
+          body: "#ececef",
+          muted: "rgba(236,236,239,0.56)",
         },
         gold: {
-          light: "#E7BF66", // realce metálico
-          base: "#D2AC62", // acento principal, CTA, linework
-          deep: "#AB8959", // sombra do metálico, hover
+          light: "#e7bf66",
+          base: "#d2ac62",
+          deep: "#ab8959",
         },
-        "on-gold": "#2A1D05", // texto sobre dourado
+        "on-gold": "#090909", // texto sobre o acento
       },
       fontFamily: {
-        // INTERINO: DisplayAccentFallback (unicode-range) cobre acentos/travessões
-        // que faltam na Necmato subsetada. Remover quando vier a Necmato completa.
-        display: ['"DisplayAccentFallback"', "var(--font-display)", "serif"], // Necmato → títulos
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"], // Montserrat → UI/corpo
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"], // Archivo
+        serif: ["var(--font-serif)", "Georgia", "serif"], // Newsreader
+        display: ["var(--font-serif)", "Georgia", "serif"], // alias de transição
       },
       fontSize: {
         "display-xl": [
@@ -62,12 +74,17 @@ const config: Config = {
         content: "1280px",
       },
       backgroundImage: {
-        // dourado metálico para momentos grandes (hero, display, divisores)
+        // alias de transição (dourado metálico) — remover na Task 9
         "gold-metallic":
           "linear-gradient(135deg, #E7BF66, #D2AC62 45%, #AB8959)",
       },
+      borderRadius: {
+        // registro Cinematic Dark: radius ≤ 20px (cap do 3xl default de 24px)
+        "3xl": "20px",
+      },
       transitionTimingFunction: {
-        cinematic: "cubic-bezier(0.22, 1, 0.36, 1)", // ease-out longo
+        proton: "cubic-bezier(.2,.7,.2,1)", // easing único do registro
+        cinematic: "cubic-bezier(.2,.7,.2,1)", // alias de transição
       },
       transitionDuration: {
         reveal: "900ms",

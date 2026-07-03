@@ -23,44 +23,32 @@ const colorGroups: {
   tokens: { name: string; value: string; className: string; border?: boolean }[];
 }[] = [
   {
-    group: "Fundo",
+    group: "Tokens canônicos (Cinematic Dark)",
     tokens: [
-      { name: "bg/base", value: "#000000", className: "bg-bg-base", border: true },
-      { name: "bg/surface", value: "#0C0C0D", className: "bg-bg-surface" },
-      { name: "bg/raised", value: "#141416", className: "bg-bg-raised" },
-      { name: "bg/elevated", value: "#1C1C1F", className: "bg-bg-elevated" },
-    ],
-  },
-  {
-    group: "Texto",
-    tokens: [
-      { name: "text/primary", value: "#FFFFFF", className: "bg-text-primary" },
-      { name: "text/body", value: "#F4F3F1", className: "bg-text-body" },
+      { name: "bg", value: "#090909", className: "bg-bg", border: true },
+      { name: "bg-2", value: "#111112", className: "bg-bg-2", border: true },
+      { name: "fg", value: "#ECECEF", className: "bg-fg" },
       {
-        name: "text/muted",
-        value: "rgba(255,255,255,.60)",
-        className: "bg-text-muted",
+        name: "fg-muted",
+        value: "rgba(236,236,239,.56)",
+        className: "bg-fg-muted",
       },
-    ],
-  },
-  {
-    group: "Dourado",
-    tokens: [
-      { name: "gold/light", value: "#E7BF66", className: "bg-gold-light" },
-      { name: "gold/base", value: "#D2AC62", className: "bg-gold-base" },
-      { name: "gold/deep", value: "#AB8959", className: "bg-gold-deep" },
-      { name: "on-gold", value: "#2A1D05", className: "bg-on-gold", border: true },
-    ],
-  },
-  {
-    group: "Linhas",
-    tokens: [
+      { name: "accent", value: "#D2AC62", className: "bg-accent" },
       {
         name: "line",
-        value: "rgba(255,255,255,.10)",
+        value: "rgba(236,236,239,.09)",
         className: "bg-line",
         border: true,
       },
+    ],
+  },
+  {
+    group: "Aliases de transição (remover na Task 9)",
+    tokens: [
+      { name: "bg/raised", value: "#141416", className: "bg-bg-raised" },
+      { name: "bg/elevated", value: "#1C1C1F", className: "bg-bg-elevated" },
+      { name: "gold/light", value: "#E7BF66", className: "bg-gold-light" },
+      { name: "gold/deep", value: "#AB8959", className: "bg-gold-deep" },
       {
         name: "line/gold",
         value: "rgba(210,172,98,.30)",
@@ -79,38 +67,38 @@ const typeScale: {
 }[] = [
   {
     token: "display-xl",
-    className: "font-display text-display-xl text-text-primary",
-    family: "Necmato",
-    sample: "Proton Engenharia",
+    className: "font-serif text-display-xl text-fg",
+    family: "Newsreader",
+    sample: "Engenharia sem improviso",
   },
   {
     token: "display-lg",
-    className: "font-display text-display-lg text-text-primary",
-    family: "Necmato",
-    sample: "O meio é a mensagem",
+    className: "font-serif text-display-lg text-fg",
+    family: "Newsreader",
+    sample: "Cada obra começa muito antes do canteiro",
   },
   {
     token: "h2",
-    className: "font-display text-h2 text-text-primary",
-    family: "Necmato",
-    sample: "Precisão e sofisticação",
+    className: "font-serif text-h2 text-fg",
+    family: "Newsreader",
+    sample: "Precisão, aprovação, entrega — 371 projetos",
   },
   {
     token: "body-lg",
-    className: "font-sans text-body-lg text-text-body",
-    family: "Montserrat",
+    className: "font-sans text-body-lg text-fg",
+    family: "Archivo",
     sample: "Engenharia residencial de alto padrão, do projeto à entrega.",
   },
   {
     token: "body",
-    className: "font-sans text-body text-text-body",
-    family: "Montserrat",
-    sample: "Corpo de texto padrão em off-white para reduzir o glare.",
+    className: "font-sans text-body text-fg",
+    family: "Archivo",
+    sample: "Corpo de texto padrão em #ececef para reduzir o glare.",
   },
   {
     token: "small",
-    className: "font-sans text-small text-text-muted",
-    family: "Montserrat",
+    className: "font-sans text-small text-fg-muted",
+    family: "Archivo",
     sample: "Texto secundário / legendas / labels.",
   },
 ];
@@ -135,7 +123,7 @@ function H2({ children }: { children: React.ReactNode }) {
 
 function Kicker({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mb-4 font-sans text-small uppercase tracking-kicker text-gold-base">
+    <p className="mb-4 font-sans text-small uppercase tracking-kicker text-accent">
       {children}
     </p>
   );
@@ -154,9 +142,13 @@ export default function StyleguidePage() {
           <h1 className="font-display text-display-xl text-text-primary">
             Styleguide
           </h1>
-          <p className="mt-6 max-w-2xl font-sans text-body-lg text-text-muted">
+          <p className="mt-6 max-w-2xl font-sans text-body-lg text-fg-muted">
             Fundação de taste — todos os tokens e componentes base herdam daqui.
-            Fonte de verdade: <code className="text-gold-light">design-system.md</code>.
+            Fonte de verdade:{" "}
+            <code className="text-accent">
+              specs/2026-07-02-redesign-sotd-design.md §3
+            </code>
+            .
           </p>
         </Container>
       </Section>
@@ -166,13 +158,13 @@ export default function StyleguidePage() {
         <Container>
           <Kicker>01 · Cor</Kicker>
           <H2>Paleta &amp; tokens</H2>
-          <p className="mt-4 max-w-2xl font-sans text-body text-text-muted">
-            A marca dá 3 cores; o site usa uma escala. Dourado é acento, nunca
-            corpo de texto.
-            <span className="text-gold-light">
-              {" "}
-              Dourado oficial da marca, amostrado do logo (#D2AC62).
+          <p className="mt-4 max-w-2xl font-sans text-body text-fg-muted">
+            Cinematic Dark: fundo #090909, texto #ececef (nunca #000/#fff
+            puros) e{" "}
+            <span className="text-accent">
+              acento único ouro #D2AC62 (máx. 1–2 elementos por seção)
             </span>
+            . Seleção de texto no acento.
           </p>
 
           <div className="mt-10 space-y-10">
@@ -222,11 +214,12 @@ export default function StyleguidePage() {
       <Section surface="base">
         <Container>
           <Kicker>02 · Tipografia</Kicker>
-          <H2>Necmato &amp; Montserrat</H2>
-          <p className="mt-4 max-w-2xl font-sans text-body text-text-muted">
-            Necmato (display, peso único Regular) carrega o luxo nos títulos —
-            hierarquia por tamanho/tracking/cor, nunca por peso. Montserrat na
-            UI/corpo.
+          <H2>Archivo &amp; Newsreader</H2>
+          <p className="mt-4 max-w-2xl font-sans text-body text-fg-muted">
+            Newsreader (serif do pool do design-canon, peso único 400 —
+            hierarquia por tamanho/cor) carrega o registro editorial nos
+            títulos; Archivo (400/500/600) na UI/corpo. Ambas self-host, woff2
+            latin, font-display swap.
           </p>
 
           <div className="mt-10 divide-y divide-line">
@@ -246,12 +239,12 @@ export default function StyleguidePage() {
             ))}
             <div className="flex flex-col gap-2 py-6 md:flex-row md:items-baseline md:gap-8">
               <div className="w-40 shrink-0">
-                <p className="font-sans text-small text-gold-light">kicker</p>
-                <p className="font-sans text-[0.7rem] text-text-muted">
-                  Montserrat · caixa-alta
+                <p className="font-sans text-small text-accent">kicker</p>
+                <p className="font-sans text-[0.7rem] text-fg-muted">
+                  Archivo · caixa-alta
                 </p>
               </div>
-              <p className="font-sans text-small uppercase tracking-kicker text-gold-base">
+              <p className="font-sans text-small uppercase tracking-kicker text-accent">
                 Engenharia de alto padrão
               </p>
             </div>
@@ -285,12 +278,30 @@ export default function StyleguidePage() {
         <Container>
           <Kicker>04 · Motion</Kicker>
           <H2>Primitivos reutilizáveis</H2>
-          <p className="mt-4 max-w-2xl font-sans text-body text-text-muted">
-            ease/cinematic <code className="text-gold-light">cubic-bezier(0.22,1,0.36,1)</code> ·
-            dur/reveal 0.9s · stagger 0.08s. Tudo respeita prefers-reduced-motion.
+          <p className="mt-4 max-w-2xl font-sans text-body text-fg-muted">
+            Easing único{" "}
+            <code className="text-accent">
+              ease-proton · cubic-bezier(.2,.7,.2,1)
+            </code>{" "}
+            · dur/reveal 0.9s · stagger 0.08s · zero bounce/elastic. Tudo
+            respeita prefers-reduced-motion.
           </p>
 
           <div className="mt-12 grid gap-12">
+            <div>
+              <p className="mb-4 font-sans text-small text-accent">
+                ease-proton (hover na barra)
+              </p>
+              <div className="rounded-lg border border-line bg-bg-2 p-6">
+                <div className="group cursor-pointer">
+                  <div className="h-3 w-16 rounded-full bg-accent transition-transform duration-reveal ease-proton group-hover:translate-x-[200px] sm:group-hover:translate-x-[420px]" />
+                  <p className="mt-3 font-sans text-[0.7rem] text-fg-muted">
+                    cubic-bezier(.2,.7,.2,1) — acelera cedo, assenta sem
+                    overshoot.
+                  </p>
+                </div>
+              </div>
+            </div>
             <div>
               <p className="mb-4 font-sans text-small text-gold-light">
                 Reveal (fade + translateY)

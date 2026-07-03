@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { necmato, montserrat } from "./fonts";
+import { archivo, newsreader } from "./fonts";
+import { Grain } from "@/components/fx/Grain";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Preloader } from "@/components/Preloader";
 import { Navbar } from "@/components/Navbar";
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#090909",
   colorScheme: "dark",
 };
 
@@ -52,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${necmato.variable} ${montserrat.variable}`}
+      className={`${archivo.variable} ${newsreader.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -63,14 +64,6 @@ export default function RootLayout({
             __html:
               'try{if(sessionStorage.getItem("proton-intro-seen")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-skip","intro-ready")}catch(e){document.documentElement.classList.add("intro-skip","intro-ready")}',
           }}
-        />
-        {/* preload do Playfair (fallback de acentos) — melhora o LCP do hero */}
-        <link
-          rel="preload"
-          href="/fonts/PlayfairDisplay-latin.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
         />
         {/* Sem JS: o hero e o linework aparecem no estado final (a entrada
             animada depende de `html.intro-ready`, liberado pelo Preloader). */}
@@ -90,6 +83,7 @@ export default function RootLayout({
           <Footer />
         </SmoothScroll>
         <CookieConsent />
+        <Grain />
         {/* Analytics só na Vercel (evita 404 do script fora da plataforma) */}
         {process.env.VERCEL ? <Analytics /> : null}
       </body>

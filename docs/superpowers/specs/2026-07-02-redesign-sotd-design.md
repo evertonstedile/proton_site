@@ -27,7 +27,7 @@ reskinnadas no mesmo registro sem WebGL pesado.
 - Fundo `#090909` · texto `#ececef` (nunca #000/#fff puros) · **acento único: ouro `#d2ac62`** (máx 1-2 elementos/seção)
 - Easing único `cubic-bezier(.2,.7,.2,1)` · ZERO bounce/elastic · grain feTurbulence ~0.035
 - Assimetria intencional · radius ≤20px · hover nunca muda layout · `::selection` no acento
-- Tipografia: **Archivo** (sans) + serif do pool rotativo do design-canon (Fraunces aposentada) — escolher na fase de design system e REGISTRAR aqui
+- Tipografia: **Archivo** (sans, 400/500/600) + serif do pool rotativo do design-canon (Fraunces aposentada) — **REGISTRADA: Newsreader** (peso único 400, self-host woff2 latin, sem preload — serif é display-only atrás do gate do intro; protege o LCP). Pool licenciado indisponível p/ self-host → fallback gratuito aprovado do canon; escolhida sobre Source Serif 4/Lora por maior contraste de display vs Archivo, dígitos lining p/ contadores e latin PT-BR completo. Não repete a serif do projeto anterior (Fraunces/Vision Inox).
 - Fonts self-host (@font-face/Fontsource, `font-display: swap`)
 
 ## 4. Copy aprovada — narrativa 8 passos [LEI: não mudar mensagem]
