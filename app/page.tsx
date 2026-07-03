@@ -1,4 +1,4 @@
-import { Hero } from "@/components/home/Hero";
+import { HeroSotd } from "@/components/home/HeroSotd";
 import { Manifesto } from "@/components/home/Manifesto";
 import { FeaturedWorks } from "@/components/home/FeaturedWorks";
 import { Stats } from "@/components/home/Stats";
@@ -16,7 +16,7 @@ import { FinalCta } from "@/components/home/FinalCta";
 export default function Home() {
   return (
     <main>
-      <Hero />
+      <HeroSotd />
       <Manifesto />
       <FeaturedWorks />
       <Stats />

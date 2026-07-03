@@ -16,6 +16,8 @@ export interface SceneProps {
   poster: ReactNode;
   className?: string;
   eager?: boolean;
+  /** Overrides do contexto GL (Task 4: ex. antialias:false em mobile DPR>1.5). */
+  glProps?: Partial<import("three").WebGLRendererParameters>;
 }
 
 function hasWebGL2(): boolean {
@@ -32,7 +34,7 @@ const Canvas = dynamic(
   { ssr: false },
 );
 
-function SceneImpl({ children, poster, className, eager }: SceneProps) {
+function SceneImpl({ children, poster, className, eager, glProps }: SceneProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(!!eager);
   const [supported, setSupported] = useState<boolean | null>(null);
@@ -69,7 +71,7 @@ function SceneImpl({ children, poster, className, eager }: SceneProps) {
       {showCanvas ? (
         <Canvas
           dpr={[1, Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 2)]}
-          gl={{ antialias: true, powerPreference: "high-performance" }}
+          gl={{ antialias: true, powerPreference: "high-performance", ...glProps }}
           onCreated={({ gl }) => {
             const onLost = (e: Event) => {
               e.preventDefault();

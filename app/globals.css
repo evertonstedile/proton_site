@@ -260,8 +260,82 @@ html.intro-ready .bp-draw {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Hero SOTD (Task 4) — o type display é o LCP: pinta no FCP (sob a cortina na
+   1ª visita — mesma mecânica que protegia o LCP do hero antigo via imagem) e
+   re-revela por linha no `intro-ready`. Em visita repetida/reduced-motion,
+   `html.intro-skip` (setado PRÉ-PAINT no head) mantém o type visível direto,
+   sem animação.
+--------------------------------------------------------------------------- */
+.hero-sotd .line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.05em;
+}
+.hero-sotd .line-in {
+  display: block;
+}
+html.intro-ready:not(.intro-skip) .hero-sotd .line-in {
+  animation: heroSotdLine 1s var(--ease) both;
+}
+html.intro-ready:not(.intro-skip) .hero-sotd .line:nth-child(1) .line-in {
+  animation-delay: 0.1s;
+}
+html.intro-ready:not(.intro-skip) .hero-sotd .line:nth-child(2) .line-in {
+  animation-delay: 0.22s;
+}
+@keyframes heroSotdLine {
+  from {
+    transform: translateY(112%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* sub/CTA do hero-sotd também pintam no FCP (LCP ancorado no FCP — o gate de
+   2.5s ficava por 120ms quando o sub só pintava pós-intro). O `both` backfila
+   o estado inicial do heroUp a partir do intro-ready: visual idêntico. */
+.hero-sotd [data-hero] {
+  opacity: 1;
+}
+html.intro-ready .hero-sotd [data-hero] {
+  animation-fill-mode: both;
+}
+
+/* equalizer do SoundToggle — anima só quando ativo (aria-pressed) */
+.sound-toggle .eq-bar {
+  transform: scaleY(0.35);
+  transform-origin: bottom;
+  transition: transform var(--dur-short) var(--ease);
+}
+.sound-toggle[aria-pressed="true"] .eq-bar {
+  animation: eqBar 0.9s var(--ease) infinite alternate;
+}
+.sound-toggle[aria-pressed="true"] .eq-bar:nth-child(2) {
+  animation-delay: 0.12s;
+}
+.sound-toggle[aria-pressed="true"] .eq-bar:nth-child(3) {
+  animation-delay: 0.24s;
+}
+@keyframes eqBar {
+  from {
+    transform: scaleY(0.25);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
 /* reduced-motion: tudo visível no estado final, sem depender do intro */
 @media (prefers-reduced-motion: reduce) {
+  .hero-sotd .line-in {
+    animation: none !important;
+    transform: none !important;
+  }
+  .sound-toggle .eq-bar {
+    animation: none !important;
+  }
   .hero-init [data-hero],
   .hero-head .line-in {
     opacity: 1 !important;

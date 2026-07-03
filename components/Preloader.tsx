@@ -45,14 +45,10 @@ function heroAssetPromises(): Promise<unknown>[] {
   const list: Promise<unknown>[] = [
     // (a) fontes prontas — evita FOUT no headline do hero logo após o reveal.
     document.fonts?.ready ?? Promise.resolve(),
-    // (b) frame base do hero decodificado (mesmo src do <Image> do Hero).
-    //     404 futuro / decode falho → catch, conta como resolvida.
-    (() => {
-      const img = new Image();
-      img.src = "/hero/hero-noite.jpg";
-      return img.decode().catch(() => {});
-    })(),
-    // Task 4 adiciona: import("@/components/gl/HeroAtom") — preload do chunk 3D.
+    // (b) chunk 3D do hero (Task 4): o próprio import é o preload — o progresso
+    //     acompanha o download real; falha de rede → catch, conta como resolvida.
+    //     (o decode de /hero/hero-noite.jpg saiu junto com o hero antigo)
+    import("@/components/gl/HeroAtom").catch(() => {}),
   ];
   return list;
 }
