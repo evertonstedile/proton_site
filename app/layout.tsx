@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { necmato, montserrat } from "./fonts";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { Preloader } from "@/components/Preloader";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CookieConsent } from "@/components/CookieConsent";
@@ -55,6 +56,14 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* pré-paint: pula a cortina do intro em visita repetida / reduced-
+            motion / storage bloqueado — decide ANTES do primeiro paint. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'try{if(sessionStorage.getItem("proton-intro-seen")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro-skip","intro-ready")}catch(e){document.documentElement.classList.add("intro-skip","intro-ready")}',
+          }}
+        />
         {/* preload do Playfair (fallback de acentos) — melhora o LCP do hero */}
         <link
           rel="preload"
@@ -63,8 +72,14 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        {/* Sem JS: o hero e o linework aparecem no estado final (a entrada
+            animada depende de `html.intro-ready`, liberado pelo Preloader). */}
+        <noscript>
+          <style>{`.hero-init [data-hero],.hero-head .line-in{opacity:1 !important;transform:none !important}.bp-wrap{opacity:.5 !important}.bp-draw{stroke-dashoffset:0 !important}[data-preloader]{display:none !important}`}</style>
+        </noscript>
       </head>
       <body className="bg-bg-base text-text-body antialiased">
+        <Preloader />
         <a href="#conteudo" className="skip-link">
           Pular para o conteúdo
         </a>

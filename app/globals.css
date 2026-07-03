@@ -142,6 +142,27 @@ html.lenis body {
 }
 
 /* ---------------------------------------------------------------------------
+   Preloader (cortina do intro) — estados iniciais em CSS, não em gsap.from:
+   pré-hidratação a cortina fica limpa (sem flash do frame final). O script
+   inline no <head> seta html.intro-skip PRÉ-PAINT (visita repetida, reduced-
+   motion ou storage bloqueado) e a cortina nem chega a pintar.
+--------------------------------------------------------------------------- */
+html.intro-skip [data-preloader] {
+  display: none;
+}
+html.intro-lock,
+html.intro-lock body {
+  overflow: hidden !important;
+}
+[data-preloader] [data-pl="mark"],
+[data-preloader] [data-pl="meta"] {
+  opacity: 0;
+}
+[data-preloader] [data-pl="word"] > span {
+  transform: translateY(115%);
+}
+
+/* ---------------------------------------------------------------------------
    Utilitários de marca
 --------------------------------------------------------------------------- */
 @layer utilities {
@@ -161,43 +182,83 @@ html.lenis body {
 }
 
 /* ---------------------------------------------------------------------------
-   Hero — estado inicial anti-flash: esconde os elementos animados antes do JS
-   rodar a timeline de entrada. GSAP sobrescreve com estilo inline ao animar.
-   Reduced-motion e no-JS reexibem tudo (fallback de acessibilidade).
+   Hero — entrada COORDENADA com o intro (Preloader). Os elementos ficam ocultos
+   até `html.intro-ready` (liberado quando a cortina do intro sobe; ou na hora,
+   em reduced-motion / visita repetida). <noscript> no layout garante visível
+   sem JS. A mídia (poster/vídeo) NÃO é gated → pinta no FCP (protege o LCP).
 --------------------------------------------------------------------------- */
-/* Entrada do hero 100% em CSS (roda no parse do CSS, ~FCP) — NÃO depende do
-   bundle JS, protegendo o LCP no mobile. O parallax de scroll fica no GSAP. */
 .hero-init [data-hero] {
   opacity: 0;
+}
+html.intro-ready .hero-init [data-hero] {
   animation-duration: 0.9s;
   animation-timing-function: var(--ease-cinematic);
   animation-fill-mode: forwards;
 }
-.hero-init [data-hero="media"] {
+html.intro-ready .hero-init [data-hero="kicker"] {
+  animation-name: heroUp;
+  animation-delay: 0.05s;
+}
+html.intro-ready .hero-init [data-hero="sub"] {
+  animation-name: heroUp;
+  animation-delay: 0.42s;
+}
+html.intro-ready .hero-init [data-hero="cta"] {
+  animation-name: heroUp;
+  animation-delay: 0.55s;
+}
+html.intro-ready .hero-init [data-hero="cue"] {
   animation-name: heroFade;
-  animation-duration: 1.6s;
-}
-.hero-init [data-hero="kicker"] {
-  animation-name: heroUp;
-  animation-delay: 0.15s;
-}
-.hero-init [data-hero="headline"] {
-  animation-name: heroUp;
-  animation-delay: 0.25s;
-}
-.hero-init [data-hero="sub"] {
-  animation-name: heroUp;
-  animation-delay: 0.5s;
-}
-.hero-init [data-hero="cta"] {
-  animation-name: heroUp;
-  animation-delay: 0.65s;
-}
-.hero-init [data-hero="cue"] {
-  animation-name: heroFade;
-  animation-delay: 0.95s;
+  animation-delay: 0.9s;
 }
 
+/* headline cinética — revelação por linha com máscara (overflow + translate) */
+.hero-head .line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+.hero-head .line-in {
+  display: block;
+  transform: translateY(115%);
+}
+html.intro-ready .hero-head .line-in {
+  animation: heroLineUp 1s var(--ease-cinematic) forwards;
+}
+html.intro-ready .hero-head .line:nth-child(1) .line-in {
+  animation-delay: 0.12s;
+}
+html.intro-ready .hero-head .line:nth-child(2) .line-in {
+  animation-delay: 0.24s;
+}
+
+/* blueprint linework — fade do conjunto + draw dos traços (stroke dashoffset) */
+.bp-wrap {
+  opacity: 0;
+}
+html.intro-ready .bp-wrap {
+  opacity: 0.5;
+  transition: opacity 1.3s var(--ease-cinematic);
+}
+.bp-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+html.intro-ready .bp-draw {
+  animation: bpDraw 1.5s var(--ease-cinematic) forwards;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes heroLineUp {
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes bpDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 @keyframes heroUp {
   from {
     opacity: 0;
@@ -217,10 +278,19 @@ html.lenis body {
   }
 }
 
+/* reduced-motion: tudo visível no estado final, sem depender do intro */
 @media (prefers-reduced-motion: reduce) {
-  .hero-init [data-hero] {
+  .hero-init [data-hero],
+  .hero-head .line-in {
     opacity: 1 !important;
     transform: none !important;
+    animation: none !important;
+  }
+  .bp-wrap {
+    opacity: 0.5 !important;
+  }
+  .bp-draw {
+    stroke-dashoffset: 0 !important;
     animation: none !important;
   }
 }

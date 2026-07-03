@@ -5,6 +5,7 @@
 
 # next.js
 /.next/
+/.next-e2e/
 /out/
 
 # production
@@ -29,3 +30,6 @@ next-env.d.ts
 
 # vercel
 .vercel
+
+# scratch (originais de assets em alta — fora do repo; derivados otimizados vão em /public)
+.asset-work/

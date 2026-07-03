@@ -1,94 +1,126 @@
 import type { Work } from "@/components/ui/WorkCard";
 
 /**
- * ⚠️ STUB de Obras (ver PENDENCIAS B4).
- * Dados mock no shape ESPERADO da tabela `obras` do Supabase. NÃO assumir como
- * verdade — o schema real será confirmado no Checkpoint 3 antes de ligar o
- * Supabase de produção (somente leitura). Trocar getObras()/getObraBySlug()
- * pela leitura real então; o resto da UI não deve precisar mudar.
+ * Portfólio curado (D14: site desacoplado, sem Supabase de obras).
+ *
+ * ⚠️ TODO(cliente): confirmar NOME público, CIDADE/UF, ANO e ÁREA (m²) reais de
+ * cada obra. Os títulos abaixo são DESCRITIVOS e honestos; cidade/ano/área ficam
+ * OMITIDOS até confirmação — nada é inventado.
+ *
+ * HONESTIDADE: todos os assets entregues são RENDERS / visualizações de projeto.
+ * Por isso `kind: "Visualização técnica"`. NÃO apresentar como obra construída /
+ * entregue sem confirmação documental. Trocar `kind` p/ "Obra entregue" e
+ * preencher area/ano/cidade quando o cliente confirmar.
+ *
+ * Imagens otimizadas (ffmpeg: crop de letterbox + grade de coesão) em
+ * /public/obras/<slug>/ — cover.jpg + 01..03.jpg. (código interno entre [].)
  */
 export type Obra = {
   slug: string;
   title: string;
-  category: string; // ex.: "Residencial" | "Reforma"
-  location: string; // ex.: "Garopaba/SC"
-  year?: string;
-  areaM2?: number;
+  category: string; // Residencial | Condomínio | Uso misto
+  kind: string; // "Visualização técnica" (render) | "Obra entregue" (confirmado)
+  location?: string; // confirmar (TODO) — omitido até lá
+  year?: string; // confirmar (TODO)
+  areaM2?: number; // confirmar (TODO)
   summary: string;
-  cover?: string; // URL da foto de capa (ausente = placeholder, B3)
-  gallery?: string[]; // URLs (ausente = placeholders, B3)
+  cover: string;
+  gallery: string[];
 };
 
-// PLACEHOLDER — substituir pelas obras reais (Supabase).
 const OBRAS: Obra[] = [
   {
-    slug: "residencia-vale",
-    title: "Residência Vale",
+    // [WineHouse / Neide II]
+    slug: "winehouse",
+    title: "Residência Wine House",
     category: "Residencial",
-    location: "Garopaba/SC",
-    year: "2024",
+    kind: "Visualização técnica",
     summary:
-      "Casa de alto padrão integrada ao relevo, com volumetria limpa e materialidade nobre.",
+      "Casa unifamiliar de partido horizontal — base em pedra, estrutura aparente e integração entre estar, mata e luz natural.",
+    cover: "/obras/winehouse/cover.jpg",
+    gallery: [
+      "/obras/winehouse/01.jpg",
+      "/obras/winehouse/02.jpg",
+      "/obras/winehouse/03.jpg",
+    ],
   },
   {
-    slug: "casa-ladeira",
-    title: "Casa Ladeira",
+    // [M2]
+    slug: "condominio-encosta",
+    title: "Condomínio em Encosta",
+    category: "Condomínio",
+    kind: "Visualização técnica",
+    summary:
+      "Condomínio de casas em encosta — volumetria escalonada e implantação lida a partir do terreno, da insolação e do acesso.",
+    cover: "/obras/m2/cover.jpg",
+    gallery: ["/obras/m2/01.jpg", "/obras/m2/02.jpg", "/obras/m2/03.jpg"],
+  },
+  {
+    // [M1]
+    slug: "empreendimento-multiuso",
+    title: "Empreendimento Multiuso",
+    category: "Uso misto",
+    kind: "Visualização técnica",
+    summary:
+      "Empreendimento de uso misto — frente comercial e unidades residenciais compatibilizadas, da implantação às fachadas.",
+    cover: "/obras/m1/cover.jpg",
+    gallery: ["/obras/m1/01.jpg", "/obras/m1/02.jpg", "/obras/m1/03.jpg"],
+  },
+  {
+    // [M9]
+    slug: "conjunto-residencial",
+    title: "Conjunto de Vilas",
+    category: "Condomínio",
+    kind: "Visualização técnica",
+    summary:
+      "Conjunto residencial geminado — modulação de fachadas e infraestrutura de acesso resolvidas em projeto.",
+    cover: "/obras/m9/cover.jpg",
+    gallery: ["/obras/m9/01.jpg", "/obras/m9/02.jpg", "/obras/m9/03.jpg"],
+  },
+  {
+    // [Poente / Neide III]
+    slug: "residencia-poente",
+    title: "Residência Poente",
     category: "Residencial",
-    location: "Praia do Rosa/SC",
-    year: "2023",
+    kind: "Visualização técnica",
     summary:
-      "Implantação em terreno de declive acentuado, resolvida com precisão estrutural.",
+      "Residência em terreno de declive — pavimento suspenso sobre base de pedra, com transição entre garagem, estar e piscina.",
+    cover: "/obras/poente/cover.jpg",
+    gallery: [
+      "/obras/poente/01.jpg",
+      "/obras/poente/02.jpg",
+      "/obras/poente/03.jpg",
+    ],
   },
   {
-    slug: "reforma-mirante",
-    title: "Reforma Mirante",
-    category: "Reforma",
-    location: "Garopaba/SC",
-    year: "2023",
-    summary:
-      "Requalificação completa de ambientes, com novo partido de luz e acabamento refinado.",
-  },
-  {
-    slug: "residencia-horizonte",
-    title: "Residência Horizonte",
+    // [Casa N1 / Neide I]
+    slug: "residencia-encosta",
+    title: "Residência em Encosta",
     category: "Residencial",
-    location: "Florianópolis/SC",
-    year: "2022",
+    kind: "Visualização técnica",
     summary:
-      "Programa amplo distribuído em pavimentos com transição suave entre interior e jardim.",
-  },
-  {
-    slug: "casa-atrio",
-    title: "Casa Átrio",
-    category: "Residencial",
-    location: "Garopaba/SC",
-    year: "2022",
-    summary:
-      "Pátio central como coração da casa, organizando luz e ventilação natural.",
-  },
-  {
-    slug: "reforma-cobertura",
-    title: "Reforma Cobertura",
-    category: "Reforma",
-    location: "Florianópolis/SC",
-    year: "2021",
-    summary:
-      "Cobertura reposicionada para vista e estar amplo, com engenharia de prazo apertado.",
+      "Residência compacta em encosta — volumetria limpa e materialidade nobre integradas ao relevo.",
+    cover: "/obras/casa-n1/cover.jpg",
+    gallery: [
+      "/obras/casa-n1/01.jpg",
+      "/obras/casa-n1/02.jpg",
+      "/obras/casa-n1/03.jpg",
+    ],
   },
 ];
 
-/** Converte uma Obra para o shape do WorkCard. */
+/** Converte uma Obra para o shape do WorkCard. Meta honesta: sem área/cidade
+ * inventadas — só o que está confirmado (category · kind · location?). */
 export function obraToWork(o: Obra): Work {
-  const area = o.areaM2 ? `${o.areaM2} m²` : "000 m²";
+  const meta = [o.category, o.kind, o.location].filter(Boolean).join(" · ");
   return {
     title: o.title,
-    meta: `${o.category} · ${area} · ${o.location}`,
+    meta,
     image: o.cover,
     href: `/obras/${o.slug}`,
   };
 }
 
-// STUB: trocar por leitura do Supabase (somente leitura) no Checkpoint 3.
 export function getObras(): Obra[] {
   return OBRAS;
 }

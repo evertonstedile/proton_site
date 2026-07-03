@@ -9,7 +9,7 @@ import { getObras, obraToWork } from "@/lib/obras";
 export const metadata: Metadata = {
   title: "Obras",
   description:
-    "Portfólio de obras residenciais de alto padrão da Proton Engenharia.",
+    "Portfólio da Proton Engenharia — residências, condomínios e empreendimentos de uso misto. Projetos, regularização e gerenciamento em Garopaba/SC e região.",
 };
 
 export default function ObrasPage() {
@@ -30,8 +30,9 @@ export default function ObrasPage() {
           </SplitReveal>
           <Reveal>
             <p className="mt-6 max-w-2xl font-sans text-body-lg text-text-muted">
-              Uma seleção de projetos residenciais de alto padrão — do diagnóstico
-              à entrega. {/* PLACEHOLDER copy */}
+              Uma seleção de projetos da Proton — residências, condomínios e
+              empreendimentos de uso misto. Imagens de visualização técnica, da
+              leitura do terreno ao detalhamento.
             </p>
           </Reveal>
         </Container>

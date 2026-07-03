@@ -45,7 +45,12 @@ export default async function ObraDetailPage({
   const obra = getObraBySlug(slug);
   if (!obra) notFound();
 
-  const area = obra.areaM2 ? `${obra.areaM2} m²` : "000 m²";
+  // Só fatos confirmados (nada inventado). Vazio = não renderiza a linha.
+  const facts = [
+    obra.location,
+    obra.areaM2 ? `${obra.areaM2} m²` : null,
+    obra.year,
+  ].filter(Boolean);
 
   const breadcrumb = {
     "@context": "https://schema.org",
@@ -101,39 +106,45 @@ export default async function ObraDetailPage({
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Tag variant="gold">{obra.category}</Tag>
-            {obra.year ? <Tag variant="muted">{obra.year}</Tag> : null}
+            <Tag variant="muted">{obra.kind}</Tag>
           </div>
 
           <h1 className="mt-6 font-display text-display-lg text-text-primary">
             {obra.title}
           </h1>
-          <p className="mt-3 font-sans text-body text-text-muted">
-            {area} · {obra.location}
-          </p>
+          {facts.length > 0 ? (
+            <p className="mt-3 font-sans text-body text-text-muted">
+              {facts.join(" · ")}
+            </p>
+          ) : null}
 
           <p className="mt-8 max-w-2xl font-sans text-body-lg text-text-body">
             {obra.summary}
           </p>
-          <p className="mt-4 max-w-2xl font-sans text-small text-text-muted/70">
-            * Ficha técnica completa e galeria entram com os dados reais (B4).
-          </p>
 
-          {/* galeria placeholder */}
+          {/* galeria — imagens reais do projeto (visualização técnica) */}
           <Reveal
             stagger
             className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
           >
-            {[0, 1, 2].map((i) => (
+            {obra.gallery.map((src, i) => (
               <div
-                key={i}
-                className="flex aspect-[4/3] items-center justify-center rounded-lg border border-line bg-bg-raised"
+                key={src}
+                className="relative aspect-[4/3] overflow-hidden rounded-lg border border-line bg-bg-raised"
               >
-                <span className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-text-muted">
-                  Imagem — placeholder
-                </span>
+                <Image
+                  src={src}
+                  alt={`${obra.title} — imagem ${i + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                />
               </div>
             ))}
           </Reveal>
+          <p className="mt-6 font-sans text-small text-text-muted/70">
+            Imagens de visualização técnica do projeto. {/* TODO(cliente): ficha técnica + cidade/ano/área reais */}
+          </p>
         </Container>
       </Section>
 
