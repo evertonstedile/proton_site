@@ -1,5 +1,7 @@
 import { HeroSotd } from "@/components/home/HeroSotd";
 import { ManifestoCamera } from "@/components/home/ManifestoCamera";
+import { Diferencial } from "@/components/home/Diferencial";
+import { SistemaFisica } from "@/components/home/SistemaFisica";
 import { Manifesto } from "@/components/home/Manifesto";
 import { FeaturedWorks } from "@/components/home/FeaturedWorks";
 import { Stats } from "@/components/home/Stats";
@@ -19,6 +21,8 @@ export default function Home() {
     <main>
       <HeroSotd />
       <ManifestoCamera />
+      <Diferencial />
+      <SistemaFisica />
       <Manifesto />
       <FeaturedWorks />
       <Stats />
