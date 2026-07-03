@@ -1,12 +1,13 @@
 "use client";
 
-import { useRef, type ElementType } from "react";
+import { useRef } from "react";
 import { gsap, SplitText, useGSAP, EASE_CINEMATIC, STAGGER } from "@/lib/gsap";
+import type { PolymorphicTag, RenderableTag } from "@/lib/polymorphic";
 
 type SplitRevealProps = {
   children: string;
   className?: string;
-  as?: ElementType;
+  as?: PolymorphicTag;
   delay?: number;
 };
 
@@ -21,7 +22,7 @@ export function SplitReveal({
   delay = 0,
 }: SplitRevealProps) {
   const ref = useRef<HTMLElement>(null);
-  const Tag = (as ?? "h2") as ElementType;
+  const Tag = (as ?? "h2") as unknown as RenderableTag;
 
   useGSAP(
     () => {

@@ -1,5 +1,6 @@
 import { cn } from "@/lib/cn";
-import type { ElementType, ReactNode } from "react";
+import type { ReactNode } from "react";
+import type { PolymorphicTag, RenderableTag } from "@/lib/polymorphic";
 
 type Surface = "base" | "surface" | "raised";
 
@@ -20,10 +21,10 @@ export function Section({
   children: ReactNode;
   className?: string;
   surface?: Surface;
-  as?: ElementType;
+  as?: PolymorphicTag;
   id?: string;
 }) {
-  const Tag = (as ?? "section") as ElementType;
+  const Tag = (as ?? "section") as unknown as RenderableTag;
   return (
     <Tag
       id={id}

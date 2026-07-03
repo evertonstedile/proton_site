@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type ElementType, type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import {
   gsap,
   useGSAP,
@@ -8,11 +8,12 @@ import {
   DUR_REVEAL,
   STAGGER,
 } from "@/lib/gsap";
+import type { PolymorphicTag, RenderableTag } from "@/lib/polymorphic";
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
-  as?: ElementType;
+  as?: PolymorphicTag;
   /** deslocamento vertical inicial (px) */
   y?: number;
   delay?: number;
@@ -33,7 +34,7 @@ export function Reveal({
   stagger = false,
 }: RevealProps) {
   const ref = useRef<HTMLElement>(null);
-  const Tag = (as ?? "div") as ElementType;
+  const Tag = (as ?? "div") as unknown as RenderableTag;
 
   useGSAP(
     () => {

@@ -12,8 +12,11 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText, CustomEase);
 
 // ease/cinematic do design-system: cubic-bezier(0.22, 1, 0.36, 1)
 CustomEase.create("cinematic", "M0,0 C0.22,1 0.36,1 1,1");
+// ease/proton do motor de experiência (Task 2 SOTD): cubic-bezier(0.2,0.7,0.2,1)
+CustomEase.create("proton", "0.2,0.7,0.2,1");
 
 export const EASE_CINEMATIC = "cinematic";
+export const EASE_PROTON = "proton";
 export const DUR_REVEAL = 0.9;
 export const DUR_SHORT = 0.4;
 export const STAGGER = 0.08;
