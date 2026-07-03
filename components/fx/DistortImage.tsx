@@ -34,7 +34,7 @@ const VERT = /* glsl */ `
 
 // Ripple radial a partir do mouse + RGB shift — ambos escalados por uHover
 // (0→1 amortecido). Intensidades QUASE imperceptíveis (o premium é o sutil):
-// displacement ≤0.05, shift ≤0.01 [LEI webgl-over-dom].
+// ripple ≤0.006, shift ≤0.006 [LEI webgl-over-dom].
 const FRAG = /* glsl */ `
   precision mediump float;
   uniform sampler2D uMap;
@@ -202,10 +202,22 @@ export function DistortImage({
         return; // sem WebGL → next/image puro fica
       }
       s.loader.load(img.currentSrc || img.src, (tex) => {
+        // O load é assíncrono: entre o disparo e o resolve o usuário pode ter
+        // trocado de card (A→sai→A→B). Se ESTE card já não é mais o dono de
+        // `active`, ninguém vai adotar a textura → descarta na hora p/ não vazar.
+        if (!active || active.el !== wrap) {
+          tex.dispose();
+          return;
+        }
         tex.colorSpace = T.SRGBColorSpace;
-        if (active && active.el === wrap) active.texture = tex;
-        if (s) s.material.uniforms.uMap.value = tex;
-        if (s && active?.el === wrap) s.renderer.domElement.style.opacity = "1";
+        // Se já havia uma textura pendente neste slot (reentrada no mesmo card),
+        // descarta a anterior antes de sobrescrever.
+        if (active.texture && active.texture !== tex) active.texture.dispose();
+        active.texture = tex;
+        if (s) {
+          s.material.uniforms.uMap.value = tex;
+          s.renderer.domElement.style.opacity = "1";
+        }
       });
       active = { el: wrap, raf: 0, hover: 0, hoverTarget: 1, last: performance.now(), texture: null };
       place(wrap, s);
@@ -246,6 +258,9 @@ export function DistortImage({
       if (active && active.el === wrap) {
         cancelAnimationFrame(active.raf);
         if (shared) shared.renderer.domElement.style.opacity = "0";
+        // este card era o dono e some agora: descarta sua textura antes de
+        // soltar `active`, senão ela vira órfã fora do alcance do disposeShared.
+        active.texture?.dispose();
         active = null;
       }
       mounted--;
