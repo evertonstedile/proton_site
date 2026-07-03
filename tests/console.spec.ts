@@ -44,3 +44,27 @@ for (const route of ROUTES) {
     expect(errors, `Erros em ${route}:\n${errors.join("\n")}`).toEqual([]);
   });
 }
+
+// 404 custom (app/not-found.tsx) — rota inexistente responde 404, renderiza a
+// página memorável e mantém o console limpo.
+test("404 custom em rota inexistente", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("console", (msg) => {
+    // o próprio status 404 do documento vira um log de rede do Chromium
+    // ("Failed to load resource ... 404") — esperado numa rota 404, não é defeito.
+    if (
+      msg.type() === "error" &&
+      !msg.text().includes("Failed to load resource")
+    )
+      errors.push(`[console.error] ${msg.text()}`);
+  });
+  page.on("pageerror", (err) => errors.push(`[pageerror] ${err.message}`));
+
+  const resp = await page.goto("/rota-que-nao-existe-9271", {
+    waitUntil: "load",
+  });
+  expect(resp?.status(), "HTTP do 404").toBe(404);
+  await expect(page.getByRole("heading", { name: "404" })).toBeVisible();
+  await page.waitForTimeout(500);
+  expect(errors, `Erros no 404:\n${errors.join("\n")}`).toEqual([]);
+});
