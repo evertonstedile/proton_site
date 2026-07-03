@@ -20,7 +20,7 @@
 
 import dynamic from "next/dynamic";
 import { useRef } from "react";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { Scene } from "@/components/gl/Scene";
 
 const ManifestoScene = dynamic(

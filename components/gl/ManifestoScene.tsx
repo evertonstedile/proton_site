@@ -43,6 +43,9 @@ export function ManifestoScene({ trigger }: { trigger: string }) {
   const spRef = useRef<ReturnType<typeof createScrollProgress> | null>(null);
   const boxRefs = useRef<(THREE.Group | null)[]>([]);
   const lookRef = useRef(new THREE.Vector3(0, 0, -2));
+  // scratch reutilizados no useFrame — getPointAt escreve no alvo, zero alloc/frame [LEI]
+  const camPosScratch = useMemo(() => new THREE.Vector3(), []);
+  const lookScratch = useMemo(() => new THREE.Vector3(), []);
 
   const accent = useMemo(
     () =>
@@ -126,17 +129,18 @@ export function ManifestoScene({ trigger }: { trigger: string }) {
   }, []);
 
   // ── Papel: grid plano (prancheta) — linhas de grade, um só desenho.
-  const paperGrid = useMemo(() => {
-    const pts: THREE.Vector3[] = [];
+  //    Float32Array memoizado (não realoca em re-render) → bufferAttribute.
+  const paperGridPositions = useMemo(() => {
+    const pts: number[] = [];
     const N = 10;
     const W = 14;
     for (let i = 0; i <= N; i++) {
       const t = (i / N - 0.5) * W;
-      pts.push(new THREE.Vector3(t, 0, -22), new THREE.Vector3(t, 0, -34));
-      pts.push(new THREE.Vector3(-W / 2, 0, -22 - (i / N) * 12));
-      pts.push(new THREE.Vector3(W / 2, 0, -22 - (i / N) * 12));
+      pts.push(t, 0, -22, t, 0, -34);
+      const z = -22 - (i / N) * 12;
+      pts.push(-W / 2, 0, z, W / 2, 0, z);
     }
-    return pts;
+    return new Float32Array(pts);
   }, []);
 
   // ── Concreto: 3 caixas wireframe que se erguem no capítulo 3.
@@ -170,9 +174,9 @@ export function ManifestoScene({ trigger }: { trigger: string }) {
     const cp = THREE.MathUtils.clamp(p, 0, 1);
 
     // câmera desliza a curva; lookAt segue a curva de alvo — damp no ponto
-    const camPos = camCurve.getPointAt(cp);
+    const camPos = camCurve.getPointAt(cp, camPosScratch);
     camera.position.set(camPos.x, camPos.y, camPos.z);
-    const lookTarget = lookCurve.getPointAt(cp);
+    const lookTarget = lookCurve.getPointAt(cp, lookScratch);
     lookRef.current.set(
       THREE.MathUtils.damp(lookRef.current.x, lookTarget.x, 5, dt),
       THREE.MathUtils.damp(lookRef.current.y, lookTarget.y, 5, dt),
@@ -217,10 +221,7 @@ export function ManifestoScene({ trigger }: { trigger: string }) {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            args={[
-              new Float32Array(paperGrid.flatMap((v) => [v.x, v.y, v.z])),
-              3,
-            ]}
+            args={[paperGridPositions, 3]}
           />
         </bufferGeometry>
         <lineBasicMaterial color={accent} transparent opacity={0.22} />
