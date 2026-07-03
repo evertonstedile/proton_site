@@ -24,6 +24,7 @@ export function SoundToggle({ className }: { className?: string }) {
   const [on, setOn] = useState(false);
   const rig = useRef<Rig | null>(null);
   const pauseT = useRef<number | null>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   const ensure = (): Rig => {
     if (rig.current) return rig.current;
@@ -38,24 +39,35 @@ export function SoundToggle({ className }: { className?: string }) {
     return rig.current;
   };
 
-  const setSound = (next: boolean) => {
+  const setSound = async (next: boolean) => {
     const a = ensure();
     if (pauseT.current) {
       window.clearTimeout(pauseT.current);
       pauseT.current = null;
     }
-    const t = a.ctx.currentTime;
-    a.gain.gain.cancelScheduledValues(t);
-    a.gain.gain.setValueAtTime(a.gain.gain.value, t);
     if (next) {
-      a.ctx.resume().catch(() => {});
-      a.el.play().catch(() => {});
+      // só liga o equalizer se o play() realmente resolver (autoplay-policy pode
+      // rejeitar); rejeitou → estado OFF, sem gain subindo por baixo.
+      try {
+        await a.ctx.resume();
+        await a.el.play();
+      } catch {
+        setOn(false);
+        return;
+      }
+      const t = a.ctx.currentTime;
+      a.gain.gain.cancelScheduledValues(t);
+      a.gain.gain.setValueAtTime(a.gain.gain.value, t);
       a.gain.gain.linearRampToValueAtTime(0.5, t + FADE_S);
+      setOn(true);
     } else {
+      const t = a.ctx.currentTime;
+      a.gain.gain.cancelScheduledValues(t);
+      a.gain.gain.setValueAtTime(a.gain.gain.value, t);
       a.gain.gain.linearRampToValueAtTime(0.0001, t + FADE_S);
       pauseT.current = window.setTimeout(() => a.el.pause(), FADE_S * 1000 + 60);
+      setOn(false);
     }
-    setOn(next);
     try {
       localStorage.setItem(KEY, next ? "1" : "0");
     } catch {}
@@ -69,13 +81,21 @@ export function SoundToggle({ className }: { className?: string }) {
       stored = localStorage.getItem(KEY);
     } catch {}
     if (stored !== "1") return;
-    const arm = () => setSound(true);
-    window.addEventListener("pointerdown", arm, { once: true });
-    window.addEventListener("keydown", arm, { once: true });
-    return () => {
+    const disarm = () => {
       window.removeEventListener("pointerdown", arm);
       window.removeEventListener("keydown", arm);
     };
+    const arm = (e: Event) => {
+      // gesto no PRÓPRIO toggle → deixa o onClick do botão decidir (senão o arm
+      // liga e o click subsequente desliga: net OFF + blip). Não desarma: o click
+      // ainda não veio, o próximo gesto fora do botão deve armar.
+      if (btnRef.current && e.target instanceof Node && btnRef.current.contains(e.target)) return;
+      disarm(); // remove o gesto irmão no 1º disparo (era só once individual)
+      void setSound(true);
+    };
+    window.addEventListener("pointerdown", arm);
+    window.addEventListener("keydown", arm);
+    return disarm;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -93,8 +113,9 @@ export function SoundToggle({ className }: { className?: string }) {
 
   return (
     <button
+      ref={btnRef}
       type="button"
-      onClick={() => setSound(!on)}
+      onClick={() => void setSound(!on)}
       aria-pressed={on}
       aria-label={on ? "Desativar som ambiente" : "Ativar som ambiente"}
       className={cn(

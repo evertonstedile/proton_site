@@ -3,7 +3,8 @@
 /* PERF BUDGET (immersive-3d/perf-budget.md — checklist de entrega)
  * DPR: ≤2 (clamp no Scene) · antialias OFF em mobile+DPR>1.5 (glProps via HeroSotd)
  * particles: 6k mobile / 20k desktop · draw calls: ~6 (1 Points + 3 Line + núcleo wireframe + core)
- * frameloop: default (idle spin contínuo) · pausa fora da viewport (IO do Scene) e aba oculta (R3F)
+ * frameloop: idle spin contínuo quando na viewport · fora da viewport o Scene troca
+ *   frameloop="never" (IO vivo, rootMargin 20%) → useFrame não roda, 0 render · aba oculta (R3F)
  * dispose: ✓ geometria de partículas no unmount (materiais/geo JSX = auto R3F) · texturas: 0 · HDRI: 0 (linework emissivo)
  * fallback: reduced-motion / sem WebGL2 / contextlost / SSR → AtomPoster (via Scene)
  * scroll: proxy createScrollProgress("#hero-sotd") lido no useFrame com damp · kill() no unmount ✓
