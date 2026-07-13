@@ -19,9 +19,21 @@ export const archivo = localFont({
 // gate do intro (opacity 0), então o swap é invisível; preservar a banda do
 // caminho crítico pro LCP (imagem do hero) no gate mobile.
 export const newsreader = localFont({
-  src: "../public/fonts/newsreader-v26-latin-regular.woff2",
-  weight: "400",
+  src: [
+    { path: "../public/fonts/newsreader-v26-latin-regular.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/newsreader-v26-latin-italic.woff2", weight: "400", style: "italic" },
+  ],
   variable: "--font-serif",
+  display: "swap",
+  preload: false,
+});
+
+// Geist Mono — dados técnicos/números/labels (framework §11).
+// preload: false — só labels/dados, fora do caminho do LCP.
+export const geistMono = localFont({
+  src: "../public/fonts/geist-mono-v6-latin-regular.woff2",
+  weight: "400",
+  variable: "--font-mono",
   display: "swap",
   preload: false,
 });

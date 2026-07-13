@@ -1,12 +1,12 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Tokens Cinematic Dark — espelham a spec 2026-07-02-redesign-sotd-design.md §3
- * (fonte de verdade) e as CSS vars de globals.css.
+ * Tokens do framework literal — paleta material (spec 2026-07-13 §4, framework §11).
  * Nada de hex hardcoded em componente — sempre via token semântico.
- * Tokens canônicos: bg / bg-2 / fg / fg-muted / accent / line / ease-proton.
+ * Tokens canônicos: bg / bg-2 / fg / fg-muted / accent (âmbar técnico, ÚNICO) /
+ * concrete / stone / timber / surface-green / line / ease-proton / font-mono.
  * Classes antigas (bg-base, text-primary, gold-*…) são ALIASES de transição —
- * remover na Task 9.
+ * remover na Task 12.
  */
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
@@ -14,39 +14,44 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          DEFAULT: "#090909", // bg-bg — fundo padrão
-          "2": "#111112", // bg-bg-2 — superfície secundária
+          DEFAULT: "#111311", // bg-bg — carbono
+          "2": "#181b18", // bg-bg-2 — superfície secundária
           // aliases de transição ↓
-          base: "#090909",
-          surface: "#111112",
-          raised: "#141416",
-          elevated: "#1c1c1f",
+          base: "#111311",
+          surface: "#181b18",
+          raised: "#1f231f",
+          elevated: "#242824",
         },
         fg: {
-          DEFAULT: "#ececef", // text-fg — texto padrão (nunca #fff puro)
-          muted: "rgba(236,236,239,0.56)", // text-fg-muted — secundário
+          DEFAULT: "#ECE9E2", // text-fg — off-white (nunca #fff puro)
+          muted: "rgba(236,233,226,0.56)", // text-fg-muted — secundário
         },
-        accent: "#d2ac62", // acento único ouro
+        accent: "#C68B4B", // âmbar técnico — acento ÚNICO (1–2 usos/seção)
+        concrete: "#B8B2A8", // texto secundário material
+        stone: "#776F65", // faint
+        timber: "#6D4A31", // madeira — material/detalhe
+        "surface-green": "#263228", // verde profundo — superfície alternativa
         line: {
-          DEFAULT: "rgba(236,236,239,0.09)", // bordas/divisores
-          gold: "rgba(210,172,98,0.30)", // alias de transição
+          DEFAULT: "rgba(236,233,226,0.09)", // bordas/divisores
+          gold: "rgba(198,139,75,0.30)", // alias de transição → âmbar
         },
         // aliases de transição ↓
         text: {
-          primary: "#ececef",
-          body: "#ececef",
-          muted: "rgba(236,236,239,0.56)",
+          primary: "#ECE9E2",
+          body: "#ECE9E2",
+          muted: "rgba(236,233,226,0.56)",
         },
         gold: {
-          light: "#e7bf66",
-          base: "#d2ac62",
-          deep: "#ab8959",
+          light: "#C68B4B",
+          base: "#C68B4B",
+          deep: "#AB8959",
         },
-        "on-gold": "#090909", // texto sobre o acento
+        "on-gold": "#111311", // texto sobre o acento
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"], // Archivo
         serif: ["var(--font-serif)", "Georgia", "serif"], // Newsreader
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"], // Geist Mono — dados técnicos
         display: ["var(--font-serif)", "Georgia", "serif"], // alias de transição
       },
       fontSize: {
@@ -74,9 +79,9 @@ const config: Config = {
         content: "1280px",
       },
       backgroundImage: {
-        // alias de transição (dourado metálico) — remover na Task 9
+        // alias de transição (metálico → âmbar) — remover na Task 12
         "gold-metallic":
-          "linear-gradient(135deg, #E7BF66, #D2AC62 45%, #AB8959)",
+          "linear-gradient(135deg, #D9A05F, #C68B4B 45%, #AB8959)",
       },
       borderRadius: {
         // registro Cinematic Dark: radius ≤ 20px (cap do 3xl default de 24px)

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { archivo, newsreader } from "./fonts";
+import { archivo, newsreader, geistMono } from "./fonts";
 import { Grain } from "@/components/fx/Grain";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Preloader } from "@/components/Preloader";
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#090909",
+  themeColor: "#111311",
   colorScheme: "dark",
 };
 
@@ -53,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${archivo.variable} ${newsreader.variable}`}
+      className={`${archivo.variable} ${newsreader.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
       <head>

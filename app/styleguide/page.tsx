@@ -23,35 +23,49 @@ const colorGroups: {
   tokens: { name: string; value: string; className: string; border?: boolean }[];
 }[] = [
   {
-    group: "Tokens canônicos (Cinematic Dark)",
+    group: "Tokens canônicos (framework — paleta material)",
     tokens: [
-      { name: "bg", value: "#090909", className: "bg-bg", border: true },
-      { name: "bg-2", value: "#111112", className: "bg-bg-2", border: true },
-      { name: "fg", value: "#ECECEF", className: "bg-fg" },
+      { name: "bg (carbono)", value: "#111311", className: "bg-bg", border: true },
+      { name: "bg-2", value: "#181B18", className: "bg-bg-2", border: true },
+      { name: "fg (off-white)", value: "#ECE9E2", className: "bg-fg" },
       {
         name: "fg-muted",
-        value: "rgba(236,236,239,.56)",
+        value: "rgba(236,233,226,.56)",
         className: "bg-fg-muted",
       },
-      { name: "accent", value: "#D2AC62", className: "bg-accent" },
+      { name: "accent (âmbar)", value: "#C68B4B", className: "bg-accent" },
       {
         name: "line",
-        value: "rgba(236,236,239,.09)",
+        value: "rgba(236,233,226,.09)",
         className: "bg-line",
         border: true,
       },
     ],
   },
   {
-    group: "Aliases de transição (remover na Task 9)",
+    group: "Materiais (framework §11)",
     tokens: [
-      { name: "bg/raised", value: "#141416", className: "bg-bg-raised" },
-      { name: "bg/elevated", value: "#1C1C1F", className: "bg-bg-elevated" },
-      { name: "gold/light", value: "#E7BF66", className: "bg-gold-light" },
+      { name: "concrete", value: "#B8B2A8", className: "bg-concrete" },
+      { name: "stone", value: "#776F65", className: "bg-stone" },
+      { name: "timber", value: "#6D4A31", className: "bg-timber" },
+      {
+        name: "surface-green",
+        value: "#263228",
+        className: "bg-surface-green",
+        border: true,
+      },
+    ],
+  },
+  {
+    group: "Aliases de transição (remover na Task 12)",
+    tokens: [
+      { name: "bg/raised", value: "#1F231F", className: "bg-bg-raised" },
+      { name: "bg/elevated", value: "#242824", className: "bg-bg-elevated" },
+      { name: "gold/light", value: "#C68B4B", className: "bg-gold-light" },
       { name: "gold/deep", value: "#AB8959", className: "bg-gold-deep" },
       {
         name: "line/gold",
-        value: "rgba(210,172,98,.30)",
+        value: "rgba(198,139,75,.30)",
         className: "bg-line-gold",
         border: true,
       },
@@ -100,6 +114,18 @@ const typeScale: {
     className: "font-sans text-small text-fg-muted",
     family: "Archivo",
     sample: "Texto secundário / legendas / labels.",
+  },
+  {
+    token: "mono",
+    className: "font-mono text-small text-concrete",
+    family: "Geist Mono",
+    sample: "371 projetos · 119 laudos · 70.400 m² · 91,79 m² · 2026",
+  },
+  {
+    token: "serif italic",
+    className: "font-serif italic text-h2 text-fg",
+    family: "Newsreader Italic",
+    sample: "Ênfase editorial — coração, órgão, execução, aprovação, à entrega",
   },
 ];
 
@@ -159,10 +185,10 @@ export default function StyleguidePage() {
           <Kicker>01 · Cor</Kicker>
           <H2>Paleta &amp; tokens</H2>
           <p className="mt-4 max-w-2xl font-sans text-body text-fg-muted">
-            Cinematic Dark: fundo #090909, texto #ececef (nunca #000/#fff
-            puros) e{" "}
+            Paleta material do framework: carbono #111311, off-white #ECE9E2
+            (nunca #000/#fff puros) e{" "}
             <span className="text-accent">
-              acento único ouro #D2AC62 (máx. 1–2 elementos por seção)
+              acento único âmbar técnico #C68B4B (máx. 1–2 elementos por seção)
             </span>
             . Seleção de texto no acento.
           </p>
@@ -200,7 +226,7 @@ export default function StyleguidePage() {
               </h3>
               <div className="h-24 w-full rounded-lg bg-gold-metallic" />
               <p className="mt-2 font-sans text-[0.7rem] text-text-muted">
-                linear-gradient(135deg, #E7BF66, #D2AC62 45%, #AB8959)
+                linear-gradient(135deg, #D9A05F, #C68B4B 45%, #AB8959)
               </p>
               <p className="mt-4 font-display text-display-lg text-gold-metallic">
                 Texto em dourado metálico
@@ -216,10 +242,10 @@ export default function StyleguidePage() {
           <Kicker>02 · Tipografia</Kicker>
           <H2>Archivo &amp; Newsreader</H2>
           <p className="mt-4 max-w-2xl font-sans text-body text-fg-muted">
-            Newsreader (serif do pool do design-canon, peso único 400 —
-            hierarquia por tamanho/cor) carrega o registro editorial nos
-            títulos; Archivo (400/500/600) na UI/corpo. Ambas self-host, woff2
-            latin, font-display swap.
+            Newsreader (serif, 400 + itálico — hierarquia por tamanho/cor)
+            carrega o registro editorial nos títulos; Archivo (400/500/600) na
+            UI/corpo; Geist Mono nos dados técnicos, números e labels. Todas
+            self-host, woff2 latin, font-display swap.
           </p>
 
           <div className="mt-10 divide-y divide-line">

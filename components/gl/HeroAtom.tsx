@@ -68,7 +68,7 @@ export function HeroAtom() {
     () =>
       getComputedStyle(document.documentElement)
         .getPropertyValue("--accent")
-        .trim() || "#d2ac62",
+        .trim() || "#c68b4b",
     [],
   );
 

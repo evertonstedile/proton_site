@@ -3,40 +3,46 @@
 @tailwind utilities;
 
 /* ---------------------------------------------------------------------------
-   Tokens Cinematic Dark (spec 2026-07-02-redesign-sotd-design.md §3) — fonte
-   de verdade. Fundo #090909 · texto #ececef (nunca #000/#fff puros) · acento
-   único ouro #d2ac62 · easing único cubic-bezier(.2,.7,.2,1).
+   Tokens do framework literal (spec 2026-07-13 §4, framework §11) — fonte
+   de verdade. Paleta material: carbono #111311 · off-white #ECE9E2 (nunca
+   #000/#fff puros) · concreto #B8B2A8 · pedra #776F65 · madeira #6D4A31 ·
+   verde profundo #263228 · âmbar técnico #C68B4B (acento ÚNICO) ·
+   easing único cubic-bezier(.2,.7,.2,1).
 --------------------------------------------------------------------------- */
 :root {
-  --bg: #090909;
-  --bg-2: #111112;
-  --fg: #ececef;
-  --fg-muted: rgba(236, 236, 239, 0.56);
-  --accent: #d2ac62;
-  --line: rgba(236, 236, 239, 0.09);
+  --bg: #111311;
+  --bg-2: #181b18;
+  --fg: #ece9e2;
+  --fg-muted: rgba(236, 233, 226, 0.56);
+  --accent: #c68b4b;
+  --concrete: #b8b2a8;
+  --stone: #776f65;
+  --timber: #6d4a31;
+  --surface-green: #263228;
+  --line: rgba(236, 233, 226, 0.09);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 
   /* ------------------------------------------------------------------------
      Aliases de transição (páginas antigas) — remapeados 1:1 para os tokens
-     novos; remover na Task 9 junto com as classes antigas.
+     novos; remover na Task 12 junto com as classes antigas.
   ------------------------------------------------------------------------ */
   --bg-base: var(--bg);
   --bg-surface: var(--bg-2);
-  --bg-raised: #141416;
-  --bg-elevated: #1c1c1f;
+  --bg-raised: #1f231f;
+  --bg-elevated: #242824;
 
-  --line-gold: rgba(210, 172, 98, 0.3);
+  --line-gold: rgba(198, 139, 75, 0.3);
 
   --text-primary: var(--fg);
   --text-body: var(--fg);
   --text-muted: var(--fg-muted);
 
-  --gold-light: #e7bf66;
+  --gold-light: var(--accent);
   --gold-base: var(--accent);
   --gold-deep: #ab8959;
-  --on-gold: #090909;
+  --on-gold: #111311;
 
-  --gold-metallic: linear-gradient(135deg, #e7bf66, #d2ac62 45%, #ab8959);
+  --gold-metallic: linear-gradient(135deg, #d9a05f, #c68b4b 45%, #ab8959);
 
   /* motion — easing único do registro */
   --ease-cinematic: var(--ease);
@@ -62,7 +68,7 @@
 
   ::selection {
     background: var(--accent);
-    color: #090909;
+    color: #111311;
   }
 
   /* foco visível — anel no acento (acessibilidade) */

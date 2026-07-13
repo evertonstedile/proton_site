@@ -51,7 +51,7 @@ export function ManifestoScene({ trigger }: { trigger: string }) {
     () =>
       getComputedStyle(document.documentElement)
         .getPropertyValue("--accent")
-        .trim() || "#d2ac62",
+        .trim() || "#c68b4b",
     [],
   );
 

@@ -18,8 +18,8 @@ export default function OpengraphImage() {
           justifyContent: "center",
           padding: "80px",
           background:
-            "radial-gradient(120% 120% at 75% 15%, #1c1c20 0%, #0b0b0d 46%, #000 100%)",
-          color: "#F4F3F1",
+            "radial-gradient(120% 120% at 75% 15%, #242824 0%, #161916 46%, #111311 100%)",
+          color: "#ECE9E2",
         }}
       >
         <div
@@ -27,7 +27,7 @@ export default function OpengraphImage() {
             fontSize: 26,
             letterSpacing: 10,
             textTransform: "uppercase",
-            color: "#D2AC62",
+            color: "#C68B4B",
           }}
         >
           Proton · Garopaba/SC
@@ -38,7 +38,7 @@ export default function OpengraphImage() {
             fontSize: 92,
             fontWeight: 700,
             lineHeight: 1.05,
-            color: "#FFFFFF",
+            color: "#ECE9E2",
             maxWidth: 900,
           }}
         >
@@ -52,8 +52,8 @@ export default function OpengraphImage() {
             gap: 18,
           }}
         >
-          <div style={{ width: 64, height: 3, background: "#D2AC62" }} />
-          <div style={{ fontSize: 30, color: "rgba(255,255,255,0.6)" }}>
+          <div style={{ width: 64, height: 3, background: "#C68B4B" }} />
+          <div style={{ fontSize: 30, color: "rgba(236,233,226,0.6)" }}>
             Soluções completas — do projeto à obra entregue
           </div>
         </div>
