@@ -37,3 +37,6 @@ next-env.d.ts
 
 # scratch (originais de assets em alta — fora do repo; derivados otimizados vão em /public)
 .asset-work/
+
+# masters de vídeo (89MB — fonte no zip; só derivados sobem)
+public/media/video/master/
