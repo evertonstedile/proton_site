@@ -298,3 +298,78 @@ export const testimonials = [
     role: "Reforma · placeholder",
   },
 ];
+
+// --- Home framework literal (spec 2026-07-13 §5) — copy dos 14 movimentos --
+// Copy-base do framework, refinável pelo Everton (decisão criativa é dele).
+// Nada inventado: números/serviços/método/sócios vêm dos blocos reais acima
+// e de lib/site.ts (LEGAL); dados de obra de lib/obras.ts e lib/condominio.ts.
+export const HOME_FW = {
+  hero: {
+    headline: "Engenharia que transforma complexidade em forma.",
+    sub: "Projetos, gerenciamento e execução com precisão do primeiro cálculo ao último detalhe.",
+    ctaPrimary: "Explorar projetos",
+    ctaSecondary: "Falar com a Proton",
+  },
+  manifesto: {
+    kicker: "Manifesto",
+    // institucional — refinada a partir do manifesto/about existentes (reais)
+    lines: [
+      "Cada obra começa muito antes do canteiro.",
+      "Começa na leitura do terreno, no cálculo que antecipa o problema, na aprovação que destrava o projeto.",
+      "A Proton domina a complexidade de uma obra — do projeto à entrega.",
+    ],
+  },
+  caseWineHouse: {
+    kicker: "Case · Residência Wine House",
+    capA: "Projetar o edifício. Respeitar o território.",
+    capB: "Materialidade",
+    capC: "Quando estrutura, matéria e experiência ocupam o mesmo espaço.",
+    capD: "A engenharia é técnica. O resultado precisa ser humano.",
+    capE: "Ficha técnica",
+  },
+  construcao: {
+    kicker: "Construção",
+    headline: "A obra inteira, do primeiro corte ao último acabamento.",
+    // marcos do scrub (vídeo 4): % do progresso → etapa (etapas genéricas de
+    // obra — descrição de processo, não dado de projeto específico)
+    etapas: [
+      { at: 0, label: "Fundação", desc: "Movimentação de terra, contenções e fundações." },
+      { at: 20, label: "Estrutura", desc: "Estrutura portante — pilares, vigas e lajes." },
+      { at: 45, label: "Envoltória", desc: "Vedações, esquadrias e cobertura." },
+      { at: 70, label: "Acabamento", desc: "Instalações finalizadas, revestimentos e paisagismo." },
+      { at: 90, label: "Entrega", desc: "Obra concluída, documentação e habite-se." },
+    ],
+  },
+  visaoEstrutural: {
+    kicker: "Visão estrutural",
+    headline: "O que sustenta a forma não aparece na foto.",
+    stops: [
+      { label: "Fundações", desc: "Cargas levadas ao solo com segurança." },
+      { label: "Estrutura", desc: "O esqueleto que dá forma ao projeto." },
+      { label: "Envoltória", desc: "Fechamento, proteção e desempenho." },
+      { label: "Entrega", desc: "Tudo integrado — pronto para morar." },
+    ],
+  },
+  escala: {
+    headline: "A mesma precisão. Em outra escala.",
+    kicker: "Escala",
+  },
+  metodo: {
+    kicker: "Método",
+    headline: "Quatro etapas, um responsável por todas.",
+  },
+  numeros: {
+    kicker: "Em números",
+  },
+  socios: {
+    kicker: "Quem responde pela obra",
+    headline: "Engenharia com nome e registro.",
+    // bios: TODO: VALIDAR (DF7 — aguardando retorno da Proton; nada inventado)
+  },
+  ctaFinal: {
+    headline: "Seu projeto começa com uma decisão bem fundamentada.",
+    sub: "Fale com quem vai assinar a obra.",
+    ctaPrimary: "Falar com a Proton",
+    ctaSecondary: "Pedir orçamento",
+  },
+} as const;

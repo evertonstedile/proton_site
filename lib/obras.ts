@@ -7,10 +7,9 @@ import type { Work } from "@/components/ui/WorkCard";
  * cada obra. Os títulos abaixo são DESCRITIVOS e honestos; cidade/ano/área ficam
  * OMITIDOS até confirmação — nada é inventado.
  *
- * HONESTIDADE: todos os assets entregues são RENDERS / visualizações de projeto.
- * Por isso `kind: "Visualização técnica"`. NÃO apresentar como obra construída /
- * entregue sem confirmação documental. Trocar `kind` p/ "Obra entregue" e
- * preencher area/ano/cidade quando o cliente confirmar.
+ * HONESTIDADE: assets são RENDERS / visualizações de projeto salvo confirmação.
+ * `kind: "Visualização técnica"` até o cliente confirmar; aí trocar p/
+ * "Obra entregue" e preencher area/ano/cidade (feito p/ winehouse em 13/07/2026).
  *
  * Imagens otimizadas (ffmpeg: crop de letterbox + grade de coesão) em
  * /public/obras/<slug>/ — cover.jpg + 01..03.jpg. (código interno entre [].)
@@ -30,11 +29,15 @@ export type Obra = {
 
 const OBRAS: Obra[] = [
   {
-    // [WineHouse / Neide II]
+    // [WineHouse / Neide II] — dados confirmados pelo cliente em 13/07/2026 (DF9).
+    // Escopo/disciplinas: TODO: VALIDAR (aguardando retorno da Proton).
     slug: "winehouse",
     title: "Residência Wine House",
     category: "Residencial",
-    kind: "Visualização técnica",
+    kind: "Obra entregue",
+    location: "Praia da Ferrugem, Garopaba/SC",
+    year: "2026",
+    areaM2: 91.79,
     summary:
       "Casa unifamiliar de partido horizontal — base em pedra, estrutura aparente e integração entre estar, mata e luz natural.",
     cover: "/obras/winehouse/cover.jpg",
