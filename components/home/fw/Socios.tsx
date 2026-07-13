@@ -1,5 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { SplitReveal } from "@/components/motion/SplitReveal";
+import { Reveal } from "@/components/motion/Reveal";
 import { HOME_FW } from "@/lib/content";
 import { LEGAL } from "@/lib/site";
 
@@ -23,10 +25,10 @@ export function Socios() {
         <p className="mb-6 font-mono text-small uppercase tracking-kicker text-accent">
           {HOME_FW.socios.kicker}
         </p>
-        <h2 className="max-w-2xl font-serif text-display-lg text-fg">
+        <SplitReveal as="h2" className="max-w-2xl font-serif text-display-lg text-fg">
           {HOME_FW.socios.headline}
-        </h2>
-        <ul className="mt-14 grid gap-10 md:grid-cols-3">
+        </SplitReveal>
+        <Reveal as="ul" stagger className="mt-14 grid gap-10 md:grid-cols-3">
           {socios.map((s) => (
             <li key={s.nome} className="border-t border-line pt-5">
               <h3 className="font-serif text-h2 text-fg">{s.nome}</h3>
@@ -38,7 +40,7 @@ export function Socios() {
               {/* foto + bio: TODO: VALIDAR (DF7) — entram quando confirmadas */}
             </li>
           ))}
-        </ul>
+        </Reveal>
         <p className="mt-10 font-mono text-small text-stone">
           Registro CREA-SC {LEGAL.crea}
         </p>

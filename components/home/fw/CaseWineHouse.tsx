@@ -1,6 +1,9 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { SplitReveal } from "@/components/motion/SplitReveal";
+import { Reveal } from "@/components/motion/Reveal";
+import { HorizontalGallery } from "@/components/motion/HorizontalGallery";
 import { HOME_FW } from "@/lib/content";
 import { getObraBySlug } from "@/lib/obras";
 
@@ -50,10 +53,13 @@ export function CaseWineHouse() {
 
         {/* Cap. A — território */}
         <div className="grid gap-10 lg:grid-cols-12">
-          <h2 className="font-serif text-display-lg text-fg lg:col-span-5">
+          <SplitReveal
+            as="h2"
+            className="font-serif text-display-lg text-fg lg:col-span-5"
+          >
             {HOME_FW.caseWineHouse.capA}
-          </h2>
-          <div className="relative aspect-[16/10] overflow-hidden rounded-lg lg:col-span-7">
+          </SplitReveal>
+          <Reveal className="relative aspect-[16/10] overflow-hidden rounded-lg lg:col-span-7">
             <Image
               src="/media/img/image5.png"
               alt="Volume de concreto da Wine House contra o relevo — leitura do território antes do edifício"
@@ -64,7 +70,7 @@ export function CaseWineHouse() {
             <p className="absolute bottom-4 left-4 font-mono text-small text-fg/80">
               Praia da Ferrugem · Garopaba/SC
             </p>
-          </div>
+          </Reveal>
         </div>
 
         {/* Cap. B — materialidade (galeria; vira scroll horizontal na Task 5) */}
@@ -72,7 +78,7 @@ export function CaseWineHouse() {
           <h3 className="font-serif text-h2 italic text-concrete">
             {HOME_FW.caseWineHouse.capB}
           </h3>
-          <div className="mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:thin]">
+          <HorizontalGallery className="mt-8">
             {GALERIA.map((g) => (
               <figure
                 key={g.src}
@@ -87,15 +93,18 @@ export function CaseWineHouse() {
                 />
               </figure>
             ))}
-          </div>
+          </HorizontalGallery>
         </div>
 
         {/* Cap. C — interior dia→noite (crossfade na Task 8; estático = par) */}
         <div className="mt-24 grid gap-10 lg:grid-cols-12">
-          <h3 className="font-serif text-display-lg text-fg lg:col-span-5">
+          <SplitReveal
+            as="h3"
+            className="font-serif text-display-lg text-fg lg:col-span-5"
+          >
             {HOME_FW.caseWineHouse.capC}
-          </h3>
-          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
+          </SplitReveal>
+          <Reveal stagger className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
             {(
               [
                 ["/media/img/interior_dia.png", "Interior da Wine House de dia — estar integrado à cozinha, pedra e luz natural", "Dia"],
@@ -109,11 +118,11 @@ export function CaseWineHouse() {
                 </figcaption>
               </figure>
             ))}
-          </div>
+          </Reveal>
         </div>
 
         {/* Cap. D — escala humana */}
-        <div className="mt-24">
+        <Reveal className="mt-24">
           <div className="relative aspect-[21/9] overflow-hidden rounded-lg">
             <Image
               src="/media/img/image2.png"
@@ -127,10 +136,10 @@ export function CaseWineHouse() {
               {HOME_FW.caseWineHouse.capD}
             </p>
           </div>
-        </div>
+        </Reveal>
 
         {/* Cap. E — ficha técnica (só o confirmado) */}
-        <div className="mt-24 max-w-2xl">
+        <Reveal className="mt-24 max-w-2xl">
           <h3 className="font-mono text-small uppercase tracking-kicker text-stone">
             {HOME_FW.caseWineHouse.capE}
           </h3>
@@ -150,7 +159,7 @@ export function CaseWineHouse() {
               Ver o case completo →
             </a>
           ) : null}
-        </div>
+        </Reveal>
       </Container>
     </Section>
   );

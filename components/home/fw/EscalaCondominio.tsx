@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { Reveal } from "@/components/motion/Reveal";
+import { CountUp } from "@/components/motion/CountUp";
 import { CONDOMINIO_JCR } from "@/lib/condominio";
 
 /**
@@ -15,13 +17,13 @@ export function EscalaCondominio() {
     <Section surface="base" id="condominio" className="overflow-hidden">
       <Container>
         {/* Mov. 07 — transição de escala */}
-        <h2 className="max-w-2xl font-serif text-display-lg text-fg">
+        <Reveal as="h2" className="max-w-2xl font-serif text-display-lg text-fg">
           A mesma precisão.{" "}
           <em className="italic">Em outra escala.</em>
-        </h2>
+        </Reveal>
 
         {/* Mov. 08 — aérea + dados reais */}
-        <div className="relative mt-12 overflow-hidden rounded-lg">
+        <Reveal className="relative mt-12 overflow-hidden rounded-lg">
           <div className="relative aspect-[16/9] md:aspect-[21/9]">
             <Image
               src={c.imagemAerea}
@@ -34,15 +36,15 @@ export function EscalaCondominio() {
           <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-transparent to-transparent" />
           <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10">
             <p className="font-mono text-display-xl leading-none text-fg">
-              {c.unidades}
+              <CountUp value={c.unidades} />
             </p>
             <p className="mt-2 font-sans text-body text-concrete">
               unidades projetadas · {c.nome}
             </p>
           </div>
-        </div>
+        </Reveal>
 
-        <dl className="mt-10 grid gap-6 border-t border-line pt-8 sm:grid-cols-3">
+        <Reveal as="dl" stagger className="mt-10 grid gap-6 border-t border-line pt-8 sm:grid-cols-3">
           <div>
             <dt className="font-sans text-small text-stone">Local</dt>
             <dd className="mt-1 font-mono text-small text-fg">{c.local}</dd>
@@ -55,7 +57,7 @@ export function EscalaCondominio() {
             <dt className="font-sans text-small text-stone">Previsão</dt>
             <dd className="mt-1 font-mono text-small text-fg">{c.previsao}</dd>
           </div>
-        </dl>
+        </Reveal>
 
         <p className="mt-8 max-w-2xl font-sans text-body text-fg-muted">
           Antes do canteiro, um condomínio exige viabilidade, projeto e

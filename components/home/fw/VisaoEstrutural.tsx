@@ -1,5 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { SplitReveal } from "@/components/motion/SplitReveal";
+import { Reveal } from "@/components/motion/Reveal";
 import { HOME_FW } from "@/lib/content";
 
 /**
@@ -17,10 +19,10 @@ export function VisaoEstrutural() {
             <p className="mb-6 font-mono text-small uppercase tracking-kicker text-accent">
               {HOME_FW.visaoEstrutural.kicker}
             </p>
-            <h2 className="font-serif text-display-lg text-fg">
+            <SplitReveal as="h2" className="font-serif text-display-lg text-fg">
               {HOME_FW.visaoEstrutural.headline}
-            </h2>
-            <ul className="mt-10 space-y-6">
+            </SplitReveal>
+            <Reveal as="ul" stagger className="mt-10 space-y-6">
               {HOME_FW.visaoEstrutural.stops.map((s, i) => (
                 <li key={s.label} className="flex gap-4 border-t border-line pt-4">
                   <span className="font-mono text-small text-stone">
@@ -36,10 +38,10 @@ export function VisaoEstrutural() {
                   </div>
                 </li>
               ))}
-            </ul>
+            </Reveal>
           </div>
           <div className="lg:col-span-7">
-            <div className="overflow-hidden rounded-lg border border-line lg:sticky lg:top-24">
+            <Reveal className="overflow-hidden rounded-lg border border-line lg:sticky lg:top-24">
               <video
                 muted
                 playsInline
@@ -49,7 +51,7 @@ export function VisaoEstrutural() {
               >
                 <source src="/media/video/estrutura-720.mp4" type="video/mp4" />
               </video>
-            </div>
+            </Reveal>
           </div>
         </div>
       </Container>

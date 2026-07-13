@@ -1,5 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { SplitReveal } from "@/components/motion/SplitReveal";
+import { Reveal } from "@/components/motion/Reveal";
 import { HOME_FW, stats } from "@/lib/content";
 
 /**
@@ -18,8 +20,9 @@ export function ManifestoEditorial() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7">
             {HOME_FW.manifesto.lines.map((line, i) => (
-              <p
+              <SplitReveal
                 key={line}
+                as="p"
                 className={
                   i === HOME_FW.manifesto.lines.length - 1
                     ? "mt-8 font-serif text-display-lg text-fg"
@@ -27,10 +30,10 @@ export function ManifestoEditorial() {
                 }
               >
                 {line}
-              </p>
+              </SplitReveal>
             ))}
           </div>
-          <div className="lg:col-span-5 lg:pt-16">
+          <Reveal className="lg:col-span-5 lg:pt-16">
             <div className="overflow-hidden rounded-lg border border-line">
               <video
                 muted
@@ -53,7 +56,7 @@ export function ManifestoEditorial() {
                 </div>
               ))}
             </dl>
-          </div>
+          </Reveal>
         </div>
       </Container>
     </Section>

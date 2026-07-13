@@ -1,5 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { SplitReveal } from "@/components/motion/SplitReveal";
+import { Reveal } from "@/components/motion/Reveal";
 import { serviceGroups, servicesTagline } from "@/lib/content";
 import { whatsappUrl } from "@/lib/site";
 
@@ -29,13 +31,14 @@ export function ServicosEditorial() {
         <p className="mb-6 font-mono text-small uppercase tracking-kicker text-accent">
           Serviços
         </p>
-        <h2 className="max-w-3xl font-serif text-display-lg text-fg">
+        <SplitReveal as="h2" className="max-w-3xl font-serif text-display-lg text-fg">
           {servicesTagline}
-        </h2>
+        </SplitReveal>
 
         <div className="mt-16 space-y-16">
           {principais.map((g, i) => (
-            <article
+            <Reveal
+              as="article"
               key={g.area}
               className="grid gap-6 border-t border-line pt-8 lg:grid-cols-12"
             >
@@ -67,12 +70,12 @@ export function ServicosEditorial() {
                   </li>
                 ))}
               </ul>
-            </article>
+            </Reveal>
           ))}
         </div>
 
         {/* complementares — compactas, mesmo conteúdo real */}
-        <div className="mt-16 border-t border-line pt-8">
+        <Reveal className="mt-16 border-t border-line pt-8">
           <h3 className="font-mono text-small uppercase tracking-kicker text-stone">
             Frentes complementares
           </h3>
@@ -94,7 +97,7 @@ export function ServicosEditorial() {
           >
             Ver os 33 serviços →
           </a>
-        </div>
+        </Reveal>
       </Container>
     </Section>
   );

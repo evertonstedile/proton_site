@@ -1,5 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { SplitReveal } from "@/components/motion/SplitReveal";
+import { Reveal } from "@/components/motion/Reveal";
 import { HOME_FW } from "@/lib/content";
 
 /**
@@ -15,11 +17,11 @@ export function Construcao() {
         <p className="mb-6 font-mono text-small uppercase tracking-kicker text-accent">
           {HOME_FW.construcao.kicker}
         </p>
-        <h2 className="max-w-3xl font-serif text-display-lg text-fg">
+        <SplitReveal as="h2" className="max-w-3xl font-serif text-display-lg text-fg">
           {HOME_FW.construcao.headline}
-        </h2>
+        </SplitReveal>
 
-        <div className="mt-12 overflow-hidden rounded-lg border border-line">
+        <Reveal className="mt-12 overflow-hidden rounded-lg border border-line">
           <video
             muted
             playsInline
@@ -29,9 +31,9 @@ export function Construcao() {
           >
             <source src="/media/video/construcao-720.mp4" type="video/mp4" />
           </video>
-        </div>
+        </Reveal>
 
-        <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+        <Reveal as="ol" stagger className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
           {HOME_FW.construcao.etapas.map((e) => (
             <li key={e.label} className="border-t border-line pt-4">
               <span className="font-mono text-small text-stone">{e.at}%</span>
@@ -41,7 +43,7 @@ export function Construcao() {
               <p className="mt-1 font-sans text-small text-fg-muted">{e.desc}</p>
             </li>
           ))}
-        </ol>
+        </Reveal>
       </Container>
     </Section>
   );
