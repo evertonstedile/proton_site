@@ -20,7 +20,9 @@ Anti-objetivos (do framework §1): não parecer template de construtora, landing
 | DF4 | Escopo | **Home + todas internas** (/obras case modelo, /servicos editorial, /sobre com sócios) |
 | DF5 | Serif | **Newsreader** (display opsz, itálico) — já self-host no repo; Fraunces/Instrument aposentadas no canon |
 | DF6 | Domínio | **protonsc.com.br** — atualizar `lib/site.ts` (fecha B6) |
-| DF7 | Condomínio, ficha técnica da residência, dados/fotos dos sócios | **Aguardando retorno da Proton** — construir com `TODO: VALIDAR`, nenhum dado inventado, nada de placeholder em produção |
+| DF7 | Dados/fotos dos sócios | **Aguardando retorno da Proton** — construir com `TODO: VALIDAR`, nenhum dado inventado, nada de placeholder em produção |
+| DF8 | Condomínio (real, 13 jul) | **Condomínio JCR** — 46 unidades · Areias de Palhocinha, Garopaba/SC · fase: aprovação e licenciamento ambiental · previsão 2028. Corrige o framework ("100 casas em execução" NÃO procede): contador vai até **46** e a narrativa enfatiza planejamento/aprovação/licenciamento, não canteiro |
+| DF9 | Residência do case (real, 13 jul) | **Wine House** — Praia da Ferrugem, Garopaba/SC · 91,79 m² · 2026 · concluída. Ficha técnica (cap. E) usa esses dados; escopo/disciplinas ainda a confirmar |
 
 ## 3. Preserva vs. refaz
 
@@ -67,11 +69,11 @@ Verde profundo #263228  superfície alternativa
 | 01 | Prelude | marca.svg | Preloader existente re-skinado; 0,8–1,5s; pula com cache; nunca bloqueia por vídeo |
 | 02 | **Hero dia→noite** | fora2.png + image2_noite.png | 220–300vh pinado; crossfade WebGL + máscara de luz progressiva (dia esmaece → interiores/paisagismo acendem → hora azul); headline em máscara editorial; CTA `Explorar projetos` + `Falar com a Proton`; poster estático = LCP; fallback reduced-motion = corte simples. Gate Higgsfield depois (§7) |
 | 03 | Manifesto | vídeo 6 + números reais | Copy institucional refinada (não inventar); vídeo em moldura editorial 40–55% da viewport; números em mono |
-| 04 | **Case residência (cap. A–E)** | 8 fotos residência, interior_dia/noite, vídeo 2 na abertura | A: território (aproximação lenta + linhas de implantação discretas). B: materialidade (galeria horizontal via scroll vertical, parallax moderado, zoom ≤1.06). C: interior dia→noite (câmera estável, avanço ≤1–2%, nenhum objeto se move). D: escala humana (foto com pessoas). E: ficha técnica **só dado confirmado** (DF7) |
+| 04 | **Case Wine House (cap. A–E)** | 8 fotos residência, interior_dia/noite, vídeo 2 na abertura | A: território (aproximação lenta + linhas de implantação discretas). B: materialidade (galeria horizontal via scroll vertical, parallax moderado, zoom ≤1.06). C: interior dia→noite (câmera estável, avanço ≤1–2%, nenhum objeto se move). D: escala humana (foto com pessoas). E: ficha técnica confirmada (DF9): Wine House · Praia da Ferrugem, Garopaba/SC · 91,79 m² · 2026 · concluída; escopo/disciplinas `TODO: VALIDAR` |
 | 05 | **Construção** | vídeo 4 ★ | `currentTime` dirigido pelo progresso; timeline 0–20 fundação / 20–45 estrutura / 45–70 envoltória / 70–90 acabamento / 90–100 entrega; overlays de etapa/disciplina |
 | 06 | Visão estrutural | vídeo 8 ★ | Stops capitulados no scroll + overlays vetoriais leves; complementa 05 sem repetir; sem BIM fictício |
 | 07 | Transição de escala | — | Zoom-out/mudança de grid → corte para aérea; headline "A mesma precisão. Em outra escala." |
-| 08 | Condomínio | cond2.png | Aproximação suave, contador até 100 (valor final no HTML), camadas SVG de vias/quadras; instancing se Three.js; **fallback estático completo**; métricas só se confirmadas (DF7) |
+| 08 | Condomínio JCR | cond2.png | Aproximação suave, contador até **46** (valor final no HTML), camadas SVG de vias/quadras; **fallback estático completo**. Copy honesta com a fase real (DF8): 46 unidades · aprovação e licenciamento ambiental · previsão 2028 · Areias de Palhocinha, Garopaba/SC — prova de capacidade de planejamento/aprovação, não de canteiro |
 | 09 | Serviços | 33 serviços reais, vídeo 3 (atmosfera) | Capítulos editoriais (não cards): Projetos · Administração/Gerenciamento · Execução · Engenharia Caixa + complementares; cada um com descrição real, entregáveis, para quem, CTA contextual |
 | 10 | Método | fluxo real do repo | Viabilidade → Projeto → Aprovação & Regularização → Execução & Entrega; sem nomes proprietários inventados |
 | 11 | Números | 371 · 119 · 70.400 · 11 | Contador leve; valor final sempre no HTML (SEO/A11y) |
@@ -132,6 +134,6 @@ Verificação de entrega (skill `entrega-verificada`) obrigatória em toda fase 
 
 1. **Scrub de vídeo no iOS/Safari** — mitigar com GOP curto, teste cedo (F4/F5), fallback por posters sequenciais.
 2. **Fidelidade Higgsfield** — arquitetura deformada = descarte; crossfade real é sempre o piso de qualidade.
-3. **Dados pendentes (DF7)** — se retorno da Proton não vier até F6, condomínio publica sem métricas e ficha técnica reduz ao confirmável.
+3. **Dados pendentes (DF7)** — sócios (fotos/bios/CREA) e escopo/disciplinas da Wine House; se retorno não vier até F7, seções publicam só o confirmado.
 4. **Peso da home** (5 vídeos + WebGL) — lazy agressivo, 1 vídeo ativo por vez, GPU pausada fora da viewport, tier C sem canvas.
 5. **Newsreader como display em PT-BR** — validar acentos/travessões cedo no styleguide (lição B8/D10 não se aplica — Newsreader tem diacríticos completos — mas verificar pesos ópticos).
