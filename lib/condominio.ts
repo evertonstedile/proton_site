@@ -8,5 +8,8 @@ export const CONDOMINIO_JCR = {
   local: "Areias de Palhocinha, Garopaba/SC",
   fase: "Aprovação e licenciamento ambiental",
   previsao: "2028",
-  imagemAerea: "/media/img/cond2.png",
+  // ⚠️ nomes dos arquivos vieram trocados no zip: fora2.png é a AÉREA do
+  // condomínio; cond2.png é a vista de rua (unidades 04/07).
+  imagemAerea: "/media/img/fora2.png",
+  imagemRua: "/media/img/cond2.png",
 } as const;
