@@ -17,9 +17,9 @@ export const metadata: Metadata = {
 /** Última revisão do texto. Atualize ao alterar os termos. */
 const LAST_UPDATED = "junho de 2026";
 
-const para = "font-sans text-body text-text-body";
+const para = "font-sans text-body text-fg";
 const list =
-  "grid gap-2 font-sans text-body text-text-body list-disc pl-5 marker:text-gold-base";
+  "grid gap-2 font-sans text-body text-fg list-disc pl-5 marker:text-accent";
 
 const SECTIONS: { title: string; body: ReactNode }[] = [
   {
@@ -131,7 +131,7 @@ const SECTIONS: { title: string; body: ReactNode }[] = [
         O tratamento de dados pessoais coletados por meio do site segue a nossa{" "}
         <Link
           href="/privacidade"
-          className="text-gold-base underline-offset-4 transition-colors duration-short hover:text-gold-light"
+          className="text-accent underline-offset-4 transition-colors duration-short hover:text-accent"
         >
           Política de Privacidade
         </Link>
@@ -169,7 +169,7 @@ const SECTIONS: { title: string; body: ReactNode }[] = [
         Dúvidas sobre estes Termos podem ser encaminhadas pelo e-mail{" "}
         <a
           href={`mailto:${SITE.email}`}
-          className="text-gold-base underline-offset-4 transition-colors duration-short hover:text-gold-light"
+          className="text-accent underline-offset-4 transition-colors duration-short hover:text-accent"
         >
           {SITE.email}
         </a>
@@ -193,7 +193,7 @@ export default function TermosPage() {
           <Reveal stagger className="grid max-w-3xl gap-12">
             {SECTIONS.map((s) => (
               <div key={s.title} className="border-t border-line pt-8">
-                <h2 className="font-display text-h2 text-text-primary">
+                <h2 className="font-display text-h2 text-fg">
                   {s.title}
                 </h2>
                 <div className="mt-4 grid gap-4">{s.body}</div>
@@ -201,7 +201,7 @@ export default function TermosPage() {
             ))}
           </Reveal>
 
-          <p className="mt-12 max-w-3xl font-sans text-small text-text-muted">
+          <p className="mt-12 max-w-3xl font-sans text-small text-fg-muted">
             Última atualização: {LAST_UPDATED}.
           </p>
         </Container>

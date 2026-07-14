@@ -22,7 +22,7 @@ export function AtomicOrbit({
       viewBox="0 0 100 100"
       role="img"
       aria-label={title}
-      className={cn("text-gold-base", className)}
+      className={cn("text-accent", className)}
     >
       <g
         fill="none"
@@ -47,7 +47,7 @@ export function AtomicOrbit({
           transform="rotate(120 50 50)"
         />
       </g>
-      <circle cx="50" cy="50" r="5" fill="currentColor" className="text-gold-light" />
+      <circle cx="50" cy="50" r="5" fill="currentColor" className="text-accent" />
     </svg>
   );
 }

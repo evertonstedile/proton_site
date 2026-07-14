@@ -71,7 +71,7 @@ export default function RootLayout({
           <style>{`.hero-init [data-hero],.hero-head .line-in{opacity:1 !important;transform:none !important}.bp-wrap{opacity:.5 !important}.bp-draw{stroke-dashoffset:0 !important}[data-preloader]{display:none !important}`}</style>
         </noscript>
       </head>
-      <body className="bg-bg-base text-text-body antialiased">
+      <body className="bg-bg text-fg antialiased">
         <Preloader />
         <a href="#conteudo" className="skip-link">
           Pular para o conteúdo

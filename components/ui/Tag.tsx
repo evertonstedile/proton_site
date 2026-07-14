@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 type Variant = "gold" | "muted";
 
 const variants: Record<Variant, string> = {
-  gold: "border-line-gold text-gold-light",
-  muted: "border-line text-text-muted",
+  gold: "border-line-accent text-accent",
+  muted: "border-line text-fg-muted",
 };
 
 /** Tag/badge — caixa-alta, tracking aberto, borda por token. */

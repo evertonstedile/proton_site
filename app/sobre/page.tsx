@@ -23,7 +23,7 @@ export default function SobrePage() {
         <Container>
           <Reveal stagger className="grid max-w-3xl gap-6">
             {about.story.map((p, i) => (
-              <p key={i} className="font-sans text-body-lg text-text-body">
+              <p key={i} className="font-sans text-body-lg text-fg">
                 {p}
               </p>
             ))}
@@ -33,12 +33,12 @@ export default function SobrePage() {
 
       <Section surface="base">
         <Container>
-          <p className="mb-4 font-sans text-small uppercase tracking-kicker text-gold-base">
+          <p className="mb-4 font-sans text-small uppercase tracking-kicker text-accent">
             O que nos guia
           </p>
           <SplitReveal
             as="h2"
-            className="font-display text-display-lg text-text-primary"
+            className="font-display text-display-lg text-fg"
           >
             Valores
           </SplitReveal>
@@ -46,10 +46,10 @@ export default function SobrePage() {
           <Reveal stagger className="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {about.values.map((v) => (
               <div key={v.title} className="border-t border-line pt-6">
-                <h3 className="font-display text-h2 text-text-primary">
+                <h3 className="font-display text-h2 text-fg">
                   {v.title}
                 </h3>
-                <p className="mt-3 font-sans text-body text-text-muted">
+                <p className="mt-3 font-sans text-body text-fg-muted">
                   {v.desc}
                 </p>
               </div>

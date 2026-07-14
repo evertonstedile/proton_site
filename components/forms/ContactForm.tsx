@@ -63,11 +63,11 @@ export function ContactForm() {
 
   if (status === "ok") {
     return (
-      <div className="rounded-xl border border-line-gold bg-bg-raised p-8">
-        <p className="font-display text-h2 text-text-primary">
+      <div className="rounded-xl border border-line-accent bg-bg-raised p-8">
+        <p className="font-display text-h2 text-fg">
           Recebido. Em breve retornamos.
         </p>
-        <p className="mt-3 font-sans text-body text-text-muted">
+        <p className="mt-3 font-sans text-body text-fg-muted">
           {WEB3FORMS_KEY
             ? "Seu pedido foi enviado. Se preferir, fale agora no WhatsApp."
             : "(Demonstração — configure a chave de e-mail. Você já pode falar no WhatsApp.)"}
@@ -84,7 +84,7 @@ export function ContactForm() {
           <button
             type="button"
             onClick={() => setStatus("idle")}
-            className="font-sans text-small uppercase tracking-[0.12em] text-gold-light underline-offset-4 hover:underline"
+            className="font-sans text-small uppercase tracking-[0.12em] text-accent underline-offset-4 hover:underline"
           >
             Enviar outra mensagem
           </button>
@@ -124,14 +124,14 @@ export function ContactForm() {
       />
 
       <div className="flex flex-col gap-2">
-        <label htmlFor={tipoId} className="font-sans text-small font-medium text-text-muted">
+        <label htmlFor={tipoId} className="font-sans text-small font-medium text-fg-muted">
           Tipo de projeto
         </label>
         <select
           id={tipoId}
           name="tipo"
           defaultValue="Construção residencial"
-          className="w-full rounded-lg border border-line bg-bg-raised px-4 py-3 font-sans text-body text-text-body transition-colors duration-short ease-cinematic focus:border-gold-base focus:outline-none"
+          className="w-full rounded-lg border border-line bg-bg-raised px-4 py-3 font-sans text-body text-fg transition-colors duration-short ease-cinematic focus:border-accent focus:outline-none"
         >
           <option>Construção residencial</option>
           <option>Reforma de alto padrão</option>

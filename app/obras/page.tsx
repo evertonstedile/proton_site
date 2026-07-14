@@ -19,17 +19,17 @@ export default function ObrasPage() {
     <main className="pt-16">
       <Section surface="base">
         <Container>
-          <p className="mb-4 font-sans text-small uppercase tracking-kicker text-gold-base">
+          <p className="mb-4 font-sans text-small uppercase tracking-kicker text-accent">
             Portfólio
           </p>
           <SplitReveal
             as="h1"
-            className="font-display text-display-xl text-text-primary"
+            className="font-display text-display-xl text-fg"
           >
             Obras
           </SplitReveal>
           <Reveal>
-            <p className="mt-6 max-w-2xl font-sans text-body-lg text-text-muted">
+            <p className="mt-6 max-w-2xl font-sans text-body-lg text-fg-muted">
               Uma seleção de projetos da Proton — residências, condomínios e
               empreendimentos de uso misto. Imagens de visualização técnica, da
               leitura do terreno ao detalhamento.

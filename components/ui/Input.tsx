@@ -12,11 +12,11 @@ type BaseProps = {
 };
 
 const fieldClasses =
-  "w-full rounded-lg border bg-bg-raised px-4 py-3 font-sans text-body text-text-body placeholder:text-text-muted/70 transition-colors duration-short ease-cinematic focus:outline-none";
+  "w-full rounded-lg border bg-bg-raised px-4 py-3 font-sans text-body text-fg placeholder:text-fg-muted/70 transition-colors duration-short ease-cinematic focus:outline-none";
 
 // Sem token de erro no design-system (decisão D12): vermelho funcional discreto.
 const errorRing = "border-[#E5736B] focus:border-[#E5736B]";
-const normalRing = "border-line focus:border-gold-base";
+const normalRing = "border-line focus:border-accent";
 
 /** Campo de texto (input ou textarea) com label, foco dourado e estado de erro. */
 export function Input({
@@ -38,7 +38,7 @@ export function Input({
     <div className={cn("flex flex-col gap-2", className)}>
       <label
         htmlFor={id}
-        className="font-sans text-small font-medium text-text-muted"
+        className="font-sans text-small font-medium text-fg-muted"
       >
         {label}
       </label>
@@ -65,7 +65,7 @@ export function Input({
           {error}
         </span>
       ) : hint ? (
-        <span className="font-sans text-small text-text-muted">{hint}</span>
+        <span className="font-sans text-small text-fg-muted">{hint}</span>
       ) : null}
     </div>
   );

@@ -29,14 +29,14 @@ export default function ProcessoPage() {
                 key={step.n}
                 className="grid grid-cols-[auto_1fr] gap-6 border-l border-line pb-12 pl-8 last:pb-0 md:gap-10"
               >
-                <span className="-ml-[2.6rem] flex h-12 w-12 items-center justify-center rounded-full border border-line-gold bg-bg-base font-display text-h2 text-gold-base">
+                <span className="-ml-[2.6rem] flex h-12 w-12 items-center justify-center rounded-full border border-line-accent bg-bg font-display text-h2 text-accent">
                   {step.n}
                 </span>
                 <div className="pt-2">
-                  <h2 className="font-display text-h2 text-text-primary">
+                  <h2 className="font-display text-h2 text-fg">
                     {step.title}
                   </h2>
-                  <p className="mt-3 font-sans text-body-lg text-text-muted">
+                  <p className="mt-3 font-sans text-body-lg text-fg-muted">
                     {step.desc}
                   </p>
                 </div>

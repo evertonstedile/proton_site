@@ -26,7 +26,7 @@ export function WorkCard({
   const inner = (
     <article
       className={cn(
-        "group relative overflow-hidden rounded-xl border border-line bg-bg-raised transition-colors duration-reveal ease-cinematic hover:border-line-gold",
+        "group relative overflow-hidden rounded-xl border border-line bg-bg-raised transition-colors duration-reveal ease-cinematic hover:border-line-accent",
         className,
       )}
     >
@@ -42,7 +42,7 @@ export function WorkCard({
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[radial-gradient(circle_at_30%_20%,#1c1c1f,#000)]">
             <AtomicOrbit className="h-12 w-12 opacity-30" />
-            <span className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-text-muted">
+            <span className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-fg-muted">
               Foto da obra — placeholder
             </span>
           </div>
@@ -52,10 +52,10 @@ export function WorkCard({
       </div>
 
       <div className="absolute inset-x-0 bottom-0 p-5">
-        <TitleTag className="font-display text-h2 text-text-primary">
+        <TitleTag className="font-display text-h2 text-fg">
           {work.title}
         </TitleTag>
-        <p className="mt-1 font-sans text-small text-text-muted">{work.meta}</p>
+        <p className="mt-1 font-sans text-small text-fg-muted">{work.meta}</p>
       </div>
     </article>
   );

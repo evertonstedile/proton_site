@@ -3,10 +3,9 @@ import type { Config } from "tailwindcss";
 /**
  * Tokens do framework literal — paleta material (spec 2026-07-13 §4, framework §11).
  * Nada de hex hardcoded em componente — sempre via token semântico.
- * Tokens canônicos: bg / bg-2 / fg / fg-muted / accent (âmbar técnico, ÚNICO) /
- * concrete / stone / timber / surface-green / line / ease-proton / font-mono.
- * Classes antigas (bg-base, text-primary, gold-*…) são ALIASES de transição —
- * remover na Task 12.
+ * Tokens canônicos: bg / bg-2 / bg-raised / bg-elevated / fg / fg-muted /
+ * accent (âmbar técnico, ÚNICO) / concrete / stone / timber / surface-green /
+ * line / line-accent / on-accent / ease-proton / font-mono.
  */
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
@@ -16,10 +15,7 @@ const config: Config = {
         bg: {
           DEFAULT: "#111311", // bg-bg — carbono
           "2": "#181b18", // bg-bg-2 — superfície secundária
-          // aliases de transição ↓
-          base: "#111311",
-          surface: "#181b18",
-          raised: "#1f231f",
+          raised: "#1f231f", // superfícies elevadas
           elevated: "#242824",
         },
         fg: {
@@ -33,20 +29,9 @@ const config: Config = {
         "surface-green": "#263228", // verde profundo — superfície alternativa
         line: {
           DEFAULT: "rgba(236,233,226,0.09)", // bordas/divisores
-          gold: "rgba(198,139,75,0.30)", // alias de transição → âmbar
+          accent: "rgba(198,139,75,0.30)", // divisor no acento
         },
-        // aliases de transição ↓
-        text: {
-          primary: "#ECE9E2",
-          body: "#ECE9E2",
-          muted: "rgba(236,233,226,0.56)",
-        },
-        gold: {
-          light: "#C68B4B",
-          base: "#C68B4B",
-          deep: "#AB8959",
-        },
-        "on-gold": "#111311", // texto sobre o acento
+        "on-accent": "#111311", // texto sobre o acento
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"], // Archivo
@@ -79,8 +64,8 @@ const config: Config = {
         content: "1280px",
       },
       backgroundImage: {
-        // alias de transição (metálico → âmbar) — remover na Task 12
-        "gold-metallic":
+        // âmbar metálico — momentos grandes (CTA primário)
+        "accent-metallic":
           "linear-gradient(135deg, #D9A05F, #C68B4B 45%, #AB8959)",
       },
       borderRadius: {

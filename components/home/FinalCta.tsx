@@ -19,12 +19,12 @@ export function FinalCta() {
       <Container className="relative text-center">
         <SplitReveal
           as="h2"
-          className="mx-auto max-w-4xl font-display text-display-xl leading-[1.06] text-text-primary"
+          className="mx-auto max-w-4xl font-display text-display-xl leading-[1.06] text-fg"
         >
           Vamos construir o seu alto padrão
         </SplitReveal>
         <Reveal>
-          <p className="mx-auto mt-6 max-w-xl font-sans text-body-lg text-text-muted">
+          <p className="mx-auto mt-6 max-w-xl font-sans text-body-lg text-fg-muted">
             Conte sobre o seu projeto. Em poucos passos retornamos com os
             próximos passos do orçamento.
           </p>

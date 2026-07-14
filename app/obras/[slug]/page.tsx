@@ -76,7 +76,7 @@ export default async function ObraDetailPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       {/* capa */}
-      <section className="relative h-[56vh] min-h-[360px] w-full overflow-hidden bg-bg-base">
+      <section className="relative h-[56vh] min-h-[360px] w-full overflow-hidden bg-bg">
         {obra.cover ? (
           <Image
             src={obra.cover}
@@ -89,7 +89,7 @@ export default async function ObraDetailPage({
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[radial-gradient(120%_120%_at_60%_20%,#1c1c20,#000)]">
             <AtomicOrbit className="h-16 w-16 opacity-25" />
-            <span className="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-text-muted">
+            <span className="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-fg-muted">
               Foto da obra — placeholder
             </span>
           </div>
@@ -101,7 +101,7 @@ export default async function ObraDetailPage({
         <Container>
           <Link
             href="/obras"
-            className="font-sans text-small text-text-muted transition-colors duration-short hover:text-gold-light"
+            className="font-sans text-small text-fg-muted transition-colors duration-short hover:text-accent"
           >
             ← Obras
           </Link>
@@ -111,16 +111,16 @@ export default async function ObraDetailPage({
             <Tag variant="muted">{obra.kind}</Tag>
           </div>
 
-          <h1 className="mt-6 font-display text-display-lg text-text-primary">
+          <h1 className="mt-6 font-display text-display-lg text-fg">
             {obra.title}
           </h1>
           {facts.length > 0 ? (
-            <p className="mt-3 font-sans text-body text-text-muted">
+            <p className="mt-3 font-sans text-body text-fg-muted">
               {facts.join(" · ")}
             </p>
           ) : null}
 
-          <p className="mt-8 max-w-2xl font-sans text-body-lg text-text-body">
+          <p className="mt-8 max-w-2xl font-sans text-body-lg text-fg">
             {obra.summary}
           </p>
 
@@ -183,7 +183,7 @@ export default async function ObraDetailPage({
               </div>
             ))}
           </Reveal>
-          <p className="mt-6 font-sans text-small text-text-muted/70">
+          <p className="mt-6 font-sans text-small text-fg-muted/70">
             Imagens de visualização técnica do projeto. {/* TODO(cliente): ficha técnica + cidade/ano/área reais */}
           </p>
         </Container>
@@ -191,7 +191,7 @@ export default async function ObraDetailPage({
 
       <Section surface="base" className="border-t border-line text-center">
         <Container>
-          <h2 className="font-display text-display-lg text-text-primary">
+          <h2 className="font-display text-display-lg text-fg">
             Quer algo nesse padrão?
           </h2>
           <Reveal className="mt-8">

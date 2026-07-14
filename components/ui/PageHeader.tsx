@@ -16,18 +16,18 @@ export function PageHeader({
   return (
     <Section surface="base">
       <Container>
-        <p className="mb-4 font-sans text-small uppercase tracking-kicker text-gold-base">
+        <p className="mb-4 font-sans text-small uppercase tracking-kicker text-accent">
           {kicker}
         </p>
         <SplitReveal
           as="h1"
-          className="font-display text-display-xl text-text-primary"
+          className="font-display text-display-xl text-fg"
         >
           {title}
         </SplitReveal>
         {intro ? (
           <Reveal>
-            <p className="mt-6 max-w-2xl font-sans text-body-lg text-text-muted">
+            <p className="mt-6 max-w-2xl font-sans text-body-lg text-fg-muted">
               {intro}
             </p>
           </Reveal>

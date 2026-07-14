@@ -42,13 +42,13 @@ export function CookieConsent() {
       className="fixed inset-x-0 bottom-0 z-[60] px-4 pb-4 sm:px-6 sm:pb-6"
     >
       <div className="mx-auto flex max-w-container flex-col gap-4 rounded-2xl border border-line bg-bg-elevated/95 p-5 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-6">
-        <p className="font-sans text-small text-text-muted">
+        <p className="font-sans text-small text-fg-muted">
           Usamos cookies e tecnologias de medição para entender o uso do site e
           melhorar sua experiência. Os essenciais são sempre ativos; os de
           análise e marketing só com o seu consentimento. Saiba mais na{" "}
           <Link
             href="/privacidade"
-            className="text-gold-base underline-offset-4 transition-colors duration-short hover:text-gold-light"
+            className="text-accent underline-offset-4 transition-colors duration-short hover:text-accent"
           >
             Política de Privacidade
           </Link>

@@ -5,8 +5,8 @@ import type { PolymorphicTag, RenderableTag } from "@/lib/polymorphic";
 type Surface = "base" | "surface" | "raised";
 
 const surfaceMap: Record<Surface, string> = {
-  base: "bg-bg-base",
-  surface: "bg-bg-surface",
+  base: "bg-bg",
+  surface: "bg-bg-2",
   raised: "bg-bg-raised",
 };
 

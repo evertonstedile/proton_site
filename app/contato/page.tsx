@@ -29,17 +29,17 @@ export default function ContatoPage() {
 
             <aside className="flex flex-col gap-8">
               <div>
-                <h2 className="font-sans text-small uppercase tracking-[0.18em] text-text-muted">
+                <h2 className="font-sans text-small uppercase tracking-[0.18em] text-fg-muted">
                   Contato direto
                 </h2>
                 {/* Links reais; número/e-mail vêm de env (placeholder até confirmar) */}
-                <ul className="mt-4 flex flex-col gap-3 font-sans text-body text-text-body">
+                <ul className="mt-4 flex flex-col gap-3 font-sans text-body text-fg">
                   <li>
                     <a
                       href={whatsappUrl("Olá! Vim pelo site da Proton.")}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="transition-colors duration-short hover:text-gold-light"
+                      className="transition-colors duration-short hover:text-accent"
                     >
                       WhatsApp →
                     </a>
@@ -47,7 +47,7 @@ export default function ContatoPage() {
                   <li>
                     <a
                       href="#orcamento"
-                      className="transition-colors duration-short hover:text-gold-light"
+                      className="transition-colors duration-short hover:text-accent"
                     >
                       E-mail →
                     </a>
@@ -57,22 +57,22 @@ export default function ContatoPage() {
                       href={SITE.mapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="transition-colors duration-short hover:text-gold-light"
+                      className="transition-colors duration-short hover:text-accent"
                     >
                       Garopaba/SC — ver no mapa →
                     </a>
                   </li>
-                  <li className="text-text-muted">
+                  <li className="text-fg-muted">
                     {SITE.street} — {SITE.district} · {SITE.postalCode}
                   </li>
                 </ul>
               </div>
 
               <div className="rounded-xl border border-line bg-bg-raised p-6">
-                <p className="font-display text-h2 text-text-primary">
+                <p className="font-display text-h2 text-fg">
                   Atendimento de alto padrão
                 </p>
-                <p className="mt-3 font-sans text-body text-text-muted">
+                <p className="mt-3 font-sans text-body text-fg-muted">
                   Cada projeto começa com uma conversa. Sem compromisso.
                 </p>
               </div>

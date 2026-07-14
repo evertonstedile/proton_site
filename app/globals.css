@@ -22,27 +22,13 @@
   --line: rgba(236, 233, 226, 0.09);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 
-  /* ------------------------------------------------------------------------
-     Aliases de transição (páginas antigas) — remapeados 1:1 para os tokens
-     novos; remover na Task 12 junto com as classes antigas.
-  ------------------------------------------------------------------------ */
-  --bg-base: var(--bg);
-  --bg-surface: var(--bg-2);
+  /* superfícies elevadas (passos acima de --bg-2) */
   --bg-raised: #1f231f;
   --bg-elevated: #242824;
 
-  --line-gold: rgba(198, 139, 75, 0.3);
-
-  --text-primary: var(--fg);
-  --text-body: var(--fg);
-  --text-muted: var(--fg-muted);
-
-  --gold-light: var(--accent);
-  --gold-base: var(--accent);
-  --gold-deep: #ab8959;
-  --on-gold: #111311;
-
-  --gold-metallic: linear-gradient(135deg, #d9a05f, #c68b4b 45%, #ab8959);
+  --line-accent: rgba(198, 139, 75, 0.3);
+  --on-accent: #111311; /* texto sobre o acento */
+  --accent-metallic: linear-gradient(135deg, #d9a05f, #c68b4b 45%, #ab8959);
 
   /* motion — easing único do registro */
   --ease-cinematic: var(--ease);
@@ -85,8 +71,8 @@
     left: 0;
     z-index: 100;
     transform: translateY(-130%);
-    background: var(--gold-base);
-    color: var(--on-gold);
+    background: var(--accent);
+    color: var(--on-accent);
     padding: 0.75rem 1.25rem;
     font-family: var(--font-sans), sans-serif;
     font-size: 0.875rem;
@@ -101,7 +87,7 @@
     width: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--bg-base);
+    background: var(--bg);
   }
   ::-webkit-scrollbar-thumb {
     background: var(--bg-elevated);
@@ -154,9 +140,9 @@ html.intro-lock body {
    Utilitários de marca
 --------------------------------------------------------------------------- */
 @layer utilities {
-  /* texto com preenchimento dourado metálico (títulos/momentos grandes) */
-  .text-gold-metallic {
-    background: var(--gold-metallic);
+  /* texto com preenchimento âmbar metálico (títulos/momentos grandes) */
+  .text-accent-metallic {
+    background: var(--accent-metallic);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;

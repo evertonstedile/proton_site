@@ -22,12 +22,12 @@ export function Faq() {
   return (
     <Section surface="surface" id="faq">
       <Container>
-        <p className="mb-4 font-sans text-small uppercase tracking-kicker text-gold-base">
+        <p className="mb-4 font-sans text-small uppercase tracking-kicker text-accent">
           Dúvidas frequentes
         </p>
         <SplitReveal
           as="h2"
-          className="font-display text-display-lg text-text-primary"
+          className="font-display text-display-lg text-fg"
         >
           Perguntas frequentes
         </SplitReveal>
@@ -35,16 +35,16 @@ export function Faq() {
         <div className="mt-12 max-w-3xl border-t border-line">
           {faq.map((item) => (
             <details key={item.q} className="group border-b border-line py-5">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-sans text-body-lg text-text-primary transition-colors duration-short hover:text-gold-light [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-sans text-body-lg text-fg transition-colors duration-short hover:text-accent [&::-webkit-details-marker]:hidden">
                 {item.q}
                 <span
                   aria-hidden="true"
-                  className="shrink-0 text-h2 font-display leading-none text-gold-base transition-transform duration-short ease-cinematic group-open:rotate-45"
+                  className="shrink-0 text-h2 font-display leading-none text-accent transition-transform duration-short ease-cinematic group-open:rotate-45"
                 >
                   +
                 </span>
               </summary>
-              <p className="mt-3 max-w-2xl font-sans text-body text-text-muted">
+              <p className="mt-3 max-w-2xl font-sans text-body text-fg-muted">
                 {item.a}
               </p>
             </details>

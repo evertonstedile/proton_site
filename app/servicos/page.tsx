@@ -29,10 +29,10 @@ export default function ServicosPage() {
               <Reveal key={g.area}>
                 <div className="grid gap-6 border-t border-line pt-8 md:grid-cols-[18rem_1fr] md:gap-12">
                   <div>
-                    <span className="font-display text-body text-gold-base">
+                    <span className="font-display text-body text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <h2 className="mt-2 font-display text-h2 text-text-primary">
+                    <h2 className="mt-2 font-display text-h2 text-fg">
                       {g.area}
                     </h2>
                     <a
@@ -49,14 +49,14 @@ export default function ServicosPage() {
                   <ul className="grid gap-x-10 gap-y-6 sm:grid-cols-2">
                     {g.items.map((item) => (
                       <li key={item.name} className="flex gap-3">
-                        <span aria-hidden className="mt-1 text-gold-base">
+                        <span aria-hidden className="mt-1 text-accent">
                           —
                         </span>
                         <div>
-                          <p className="font-sans text-body text-text-primary">
+                          <p className="font-sans text-body text-fg">
                             {item.name}
                           </p>
-                          <p className="mt-1 font-sans text-small text-text-muted">
+                          <p className="mt-1 font-sans text-small text-fg-muted">
                             {item.desc}
                           </p>
                         </div>

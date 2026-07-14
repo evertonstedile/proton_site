@@ -23,7 +23,7 @@ export function BlueprintLines({ className }: { className?: string }) {
         fill="none"
         aria-hidden
         preserveAspectRatio="xMidYMid slice"
-        className={cn("hidden text-gold-base sm:block", className)}
+        className={cn("hidden text-accent sm:block", className)}
       >
         <g stroke="currentColor" strokeWidth="1">
           {/* cantos (brackets) */}
@@ -173,7 +173,7 @@ export function BlueprintLines({ className }: { className?: string }) {
         fill="none"
         aria-hidden
         preserveAspectRatio="xMidYMid slice"
-        className={cn("text-gold-base sm:hidden", className)}
+        className={cn("text-accent sm:hidden", className)}
       >
         <g stroke="currentColor" strokeWidth="1">
           {(

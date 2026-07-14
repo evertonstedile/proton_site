@@ -45,10 +45,13 @@ function heroAssetPromises(): Promise<unknown>[] {
   const list: Promise<unknown>[] = [
     // (a) fontes prontas — evita FOUT no headline do hero logo após o reveal.
     document.fonts?.ready ?? Promise.resolve(),
-    // (b) chunk 3D do hero (Task 4): o próprio import é o preload — o progresso
-    //     acompanha o download real; falha de rede → catch, conta como resolvida.
-    //     (o decode de /hero/hero-noite.jpg saiu junto com o hero antigo)
-    import("@/components/gl/HeroAtom").catch(() => {}),
+    // (b) foto dia do hero decodificada — o LCP do framework literal; falha
+    //     de decode/rede conta como resolvida (não trava a cortina).
+    new Promise((res) => {
+      const img = new window.Image();
+      img.src = "/media/img/image2.png";
+      img.decode().then(res, res);
+    }),
   ];
   return list;
 }

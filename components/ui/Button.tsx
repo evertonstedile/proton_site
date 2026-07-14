@@ -16,10 +16,10 @@ const sizes: Record<Size, string> = {
 const variants: Record<Variant, string> = {
   // dourado metálico nos momentos grandes; texto sobre dourado nunca preto puro
   primary:
-    "bg-gold-metallic text-on-gold hover:brightness-110 hover:-translate-y-0.5 shadow-[0_8px_30px_-12px_rgba(210,172,98,0.6)]",
+    "bg-accent-metallic text-on-accent hover:brightness-110 hover:-translate-y-0.5 shadow-[0_8px_30px_-12px_rgba(210,172,98,0.6)]",
   // ghost: borda branca → vira dourada no hover
   ghost:
-    "border border-line text-text-primary hover:border-gold-base hover:text-gold-light",
+    "border border-line text-fg hover:border-accent hover:text-accent",
 };
 
 type CommonProps = {

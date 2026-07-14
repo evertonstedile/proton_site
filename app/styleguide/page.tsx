@@ -57,16 +57,14 @@ const colorGroups: {
     ],
   },
   {
-    group: "Aliases de transição (remover na Task 12)",
+    group: "Superfícies elevadas & divisores",
     tokens: [
       { name: "bg/raised", value: "#1F231F", className: "bg-bg-raised" },
       { name: "bg/elevated", value: "#242824", className: "bg-bg-elevated" },
-      { name: "gold/light", value: "#C68B4B", className: "bg-gold-light" },
-      { name: "gold/deep", value: "#AB8959", className: "bg-gold-deep" },
       {
-        name: "line/gold",
+        name: "line/accent",
         value: "rgba(198,139,75,.30)",
-        className: "bg-line-gold",
+        className: "bg-line-accent",
         border: true,
       },
     ],
@@ -141,7 +139,7 @@ const demoWorks: Work[] = [
 
 function H2({ children }: { children: React.ReactNode }) {
   return (
-    <SplitReveal as="h2" className="font-display text-display-lg text-text-primary">
+    <SplitReveal as="h2" className="font-display text-display-lg text-fg">
       {children as string}
     </SplitReveal>
   );
@@ -165,7 +163,7 @@ export default function StyleguidePage() {
         <GoddessLinework className="pointer-events-none absolute -right-10 top-0 h-[120%] opacity-[0.05]" />
         <Container>
           <Kicker>Proton · Design System</Kicker>
-          <h1 className="font-display text-display-xl text-text-primary">
+          <h1 className="font-display text-display-xl text-fg">
             Styleguide
           </h1>
           <p className="mt-6 max-w-2xl font-sans text-body-lg text-fg-muted">
@@ -196,7 +194,7 @@ export default function StyleguidePage() {
           <div className="mt-10 space-y-10">
             {colorGroups.map((g) => (
               <div key={g.group}>
-                <h3 className="mb-4 font-sans text-small uppercase tracking-[0.18em] text-text-muted">
+                <h3 className="mb-4 font-sans text-small uppercase tracking-[0.18em] text-fg-muted">
                   {g.group}
                 </h3>
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
@@ -207,10 +205,10 @@ export default function StyleguidePage() {
                           t.border ? "border border-line" : ""
                         }`}
                       />
-                      <p className="mt-2 font-sans text-small text-text-primary">
+                      <p className="mt-2 font-sans text-small text-fg">
                         {t.name}
                       </p>
-                      <p className="font-sans text-[0.7rem] text-text-muted">
+                      <p className="font-sans text-[0.7rem] text-fg-muted">
                         {t.value}
                       </p>
                     </div>
@@ -221,14 +219,14 @@ export default function StyleguidePage() {
 
             {/* dourado metálico */}
             <div>
-              <h3 className="mb-4 font-sans text-small uppercase tracking-[0.18em] text-text-muted">
+              <h3 className="mb-4 font-sans text-small uppercase tracking-[0.18em] text-fg-muted">
                 Dourado metálico (momentos grandes)
               </h3>
-              <div className="h-24 w-full rounded-lg bg-gold-metallic" />
-              <p className="mt-2 font-sans text-[0.7rem] text-text-muted">
+              <div className="h-24 w-full rounded-lg bg-accent-metallic" />
+              <p className="mt-2 font-sans text-[0.7rem] text-fg-muted">
                 linear-gradient(135deg, #D9A05F, #C68B4B 45%, #AB8959)
               </p>
-              <p className="mt-4 font-display text-display-lg text-gold-metallic">
+              <p className="mt-4 font-display text-display-lg text-accent-metallic">
                 Texto em dourado metálico
               </p>
             </div>
@@ -255,8 +253,8 @@ export default function StyleguidePage() {
                 className="flex flex-col gap-2 py-6 md:flex-row md:items-baseline md:gap-8"
               >
                 <div className="w-40 shrink-0">
-                  <p className="font-sans text-small text-gold-light">{t.token}</p>
-                  <p className="font-sans text-[0.7rem] text-text-muted">
+                  <p className="font-sans text-small text-accent">{t.token}</p>
+                  <p className="font-sans text-[0.7rem] text-fg-muted">
                     {t.family}
                   </p>
                 </div>
@@ -286,11 +284,11 @@ export default function StyleguidePage() {
           <div className="mt-10 space-y-3">
             {spacing.map((s) => (
               <div key={s} className="flex items-center gap-4">
-                <span className="w-12 font-sans text-small text-text-muted">
+                <span className="w-12 font-sans text-small text-fg-muted">
                   {s}
                 </span>
                 <div
-                  className="h-4 bg-gold-base"
+                  className="h-4 bg-accent"
                   style={{ width: `${parseInt(s, 10) * 0.25}rem` }}
                 />
               </div>
@@ -329,14 +327,14 @@ export default function StyleguidePage() {
               </div>
             </div>
             <div>
-              <p className="mb-4 font-sans text-small text-gold-light">
+              <p className="mb-4 font-sans text-small text-accent">
                 Reveal (fade + translateY)
               </p>
               <Reveal stagger className="grid gap-4 sm:grid-cols-3">
                 {[1, 2, 3].map((n) => (
                   <div
                     key={n}
-                    className="rounded-lg border border-line bg-bg-raised p-6 font-sans text-body text-text-body"
+                    className="rounded-lg border border-line bg-bg-raised p-6 font-sans text-body text-fg"
                   >
                     Bloco {n}
                   </div>
@@ -345,12 +343,12 @@ export default function StyleguidePage() {
             </div>
 
             <div>
-              <p className="mb-4 font-sans text-small text-gold-light">
+              <p className="mb-4 font-sans text-small text-accent">
                 SplitReveal (por linha)
               </p>
               <SplitReveal
                 as="p"
-                className="max-w-3xl font-display text-display-lg text-text-primary"
+                className="max-w-3xl font-display text-display-lg text-fg"
               >
                 Cada linha deste título revela em sequência, com máscara e ease
                 cinematográfico, conforme entra na viewport.
@@ -358,13 +356,13 @@ export default function StyleguidePage() {
             </div>
 
             <div>
-              <p className="mb-4 font-sans text-small text-gold-light">
+              <p className="mb-4 font-sans text-small text-accent">
                 Parallax (scrub)
               </p>
-              <div className="relative h-48 overflow-hidden rounded-lg border border-line bg-bg-surface">
+              <div className="relative h-48 overflow-hidden rounded-lg border border-line bg-bg-2">
                 <Parallax speed={20} className="absolute inset-0">
                   <div className="flex h-[140%] items-center justify-center bg-[radial-gradient(circle_at_50%_30%,#1c1c1f,#000)]">
-                    <span className="font-display text-h2 text-text-muted">
+                    <span className="font-display text-h2 text-fg-muted">
                       Camada em parallax
                     </span>
                   </div>
@@ -383,7 +381,7 @@ export default function StyleguidePage() {
 
           {/* Botões */}
           <div className="mt-10">
-            <h3 className="mb-4 font-sans text-small uppercase tracking-[0.18em] text-text-muted">
+            <h3 className="mb-4 font-sans text-small uppercase tracking-[0.18em] text-fg-muted">
               Botões
             </h3>
             <div className="flex flex-wrap items-center gap-4">
@@ -403,7 +401,7 @@ export default function StyleguidePage() {
 
           {/* Tags */}
           <div className="mt-12">
-            <h3 className="mb-4 font-sans text-small uppercase tracking-[0.18em] text-text-muted">
+            <h3 className="mb-4 font-sans text-small uppercase tracking-[0.18em] text-fg-muted">
               Tags / badges
             </h3>
             <div className="flex flex-wrap gap-3">
@@ -416,7 +414,7 @@ export default function StyleguidePage() {
 
           {/* Inputs */}
           <div className="mt-12 max-w-xl">
-            <h3 className="mb-4 font-sans text-small uppercase tracking-[0.18em] text-text-muted">
+            <h3 className="mb-4 font-sans text-small uppercase tracking-[0.18em] text-fg-muted">
               Inputs
             </h3>
             <div className="space-y-5">
@@ -433,7 +431,7 @@ export default function StyleguidePage() {
 
           {/* Cards de obra */}
           <div className="mt-12">
-            <h3 className="mb-4 font-sans text-small uppercase tracking-[0.18em] text-text-muted">
+            <h3 className="mb-4 font-sans text-small uppercase tracking-[0.18em] text-fg-muted">
               Card de obra (placeholders — sem fotos reais)
             </h3>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -452,7 +450,7 @@ export default function StyleguidePage() {
           <H2>Órbita &amp; linework</H2>
           <div className="mt-10 grid gap-12 md:grid-cols-2">
             <div>
-              <p className="mb-6 font-sans text-small text-gold-light">
+              <p className="mb-6 font-sans text-small text-accent">
                 Órbita atômica (estática / animada)
               </p>
               <div className="flex items-center gap-10">
@@ -461,11 +459,11 @@ export default function StyleguidePage() {
               </div>
             </div>
             <div>
-              <p className="mb-6 font-sans text-small text-gold-light">
+              <p className="mb-6 font-sans text-small text-accent">
                 Linework da deusa — watermark{" "}
-                <span className="text-text-muted">(PLACEHOLDER)</span>
+                <span className="text-fg-muted">(PLACEHOLDER)</span>
               </p>
-              <div className="relative h-64 overflow-hidden rounded-lg border border-line bg-bg-surface">
+              <div className="relative h-64 overflow-hidden rounded-lg border border-line bg-bg-2">
                 <GoddessLinework className="absolute left-1/2 top-1/2 h-[130%] -translate-x-1/2 -translate-y-1/2 opacity-[0.06]" />
               </div>
             </div>
@@ -478,7 +476,7 @@ export default function StyleguidePage() {
         <Container>
           <Kicker>07 · Chrome global</Kicker>
           <H2>Navbar &amp; footer</H2>
-          <p className="mt-4 max-w-2xl font-sans text-body text-text-muted">
+          <p className="mt-4 max-w-2xl font-sans text-body text-fg-muted">
             A navbar (transparente → sólida no scroll, com menu mobile) está fixa
             no topo desta página. O footer está ao final. Ambos montados sobre
             tokens.

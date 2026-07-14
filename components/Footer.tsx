@@ -12,32 +12,32 @@ const NAV = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-line bg-bg-base">
+    <footer className="border-t border-line bg-bg">
       <div className="mx-auto max-w-container px-6 py-16 sm:px-8 lg:px-12">
         <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
             <Link href="/" className="flex items-center gap-2.5">
               <BrandMark className="h-9 w-9" />
-              <span className="font-display text-xl uppercase tracking-[0.2em] text-text-primary">
+              <span className="font-display text-xl uppercase tracking-[0.2em] text-fg">
                 Proton
               </span>
             </Link>
-            <p className="mt-4 font-sans text-small text-text-muted">
+            <p className="mt-4 font-sans text-small text-fg-muted">
               Engenharia residencial de alto padrão. Precisão técnica e
               sofisticação. {/* PLACEHOLDER copy institucional */}
             </p>
-            <div className="mt-4 flex flex-col gap-1.5 font-sans text-small text-text-muted">
+            <div className="mt-4 flex flex-col gap-1.5 font-sans text-small text-fg-muted">
               <a
                 href={whatsappUrl("Olá! Vim pelo site da Proton.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-fit transition-colors duration-short hover:text-gold-light"
+                className="w-fit transition-colors duration-short hover:text-accent"
               >
                 WhatsApp →
               </a>
               <Link
                 href="/contato#orcamento"
-                className="w-fit transition-colors duration-short hover:text-gold-light"
+                className="w-fit transition-colors duration-short hover:text-accent"
               >
                 E-mail →
               </Link>
@@ -45,7 +45,7 @@ export function Footer() {
                 href={SITE.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-fit transition-colors duration-short hover:text-gold-light"
+                className="w-fit transition-colors duration-short hover:text-accent"
               >
                 Garopaba/SC →
               </a>
@@ -60,7 +60,7 @@ export function Footer() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="font-sans text-small text-text-muted transition-colors duration-short hover:text-gold-light"
+                className="font-sans text-small text-fg-muted transition-colors duration-short hover:text-accent"
               >
                 {l.label}
               </Link>
@@ -71,9 +71,9 @@ export function Footer() {
         <div className="mt-12 h-px w-full bg-line" />
 
         {/* Dados legais (entidade) — exigência da verificação de negócio Meta + LGPD */}
-        <div className="mt-8 flex flex-col gap-1.5 font-sans text-small text-text-muted">
+        <div className="mt-8 flex flex-col gap-1.5 font-sans text-small text-fg-muted">
           <p>
-            <span className="text-text-body">{LEGAL.legalName}</span>
+            <span className="text-fg">{LEGAL.legalName}</span>
             {" · "}CNPJ {LEGAL.cnpj}
           </p>
           <p>
@@ -91,30 +91,30 @@ export function Footer() {
           <p>Endereço fiscal (CNPJ): {LEGAL.address.full}</p>
           <a
             href={`mailto:${SITE.email}`}
-            className="w-fit transition-colors duration-short hover:text-gold-light"
+            className="w-fit transition-colors duration-short hover:text-accent"
           >
             {SITE.email}
           </a>
         </div>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-sans text-small text-text-muted">
+          <p className="font-sans text-small text-fg-muted">
             © {new Date().getFullYear()} {LEGAL.tradeName}.
           </p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <Link
               href="/termos"
-              className="font-sans text-small text-text-muted transition-colors duration-short hover:text-gold-light"
+              className="font-sans text-small text-fg-muted transition-colors duration-short hover:text-accent"
             >
               Termos de Uso
             </Link>
             <Link
               href="/privacidade"
-              className="font-sans text-small text-text-muted transition-colors duration-short hover:text-gold-light"
+              className="font-sans text-small text-fg-muted transition-colors duration-short hover:text-accent"
             >
               Política de Privacidade
             </Link>
-            <span className="font-sans text-small text-text-muted">
+            <span className="font-sans text-small text-fg-muted">
               Engenharia · Arquitetura · Regularização
             </span>
           </div>

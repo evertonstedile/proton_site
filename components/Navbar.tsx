@@ -34,7 +34,7 @@ export function Navbar() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-short ease-cinematic",
           scrolled || open
-            ? "border-b border-line bg-bg-base/80 backdrop-blur-md"
+            ? "border-b border-line bg-bg/80 backdrop-blur-md"
             : "border-b border-transparent bg-transparent",
         )}
       >
@@ -45,7 +45,7 @@ export function Navbar() {
           onClick={() => setOpen(false)}
         >
           <BrandMark className="h-8 w-8" />
-          <span className="font-display text-lg uppercase tracking-[0.2em] text-text-primary">
+          <span className="font-display text-lg uppercase tracking-[0.2em] text-fg">
             Proton
           </span>
         </Link>
@@ -56,7 +56,7 @@ export function Navbar() {
             <li key={l.href}>
               <Link
                 href={l.href}
-                className="font-sans text-small text-text-muted transition-colors duration-short hover:text-text-primary"
+                className="font-sans text-small text-fg-muted transition-colors duration-short hover:text-fg"
               >
                 {l.label}
               </Link>
@@ -65,7 +65,7 @@ export function Navbar() {
           <li>
             <Link
               href="/contato"
-              className="rounded-full border border-line-gold px-5 py-2 font-sans text-small uppercase tracking-[0.1em] text-gold-light transition-colors duration-short hover:bg-gold-base hover:text-on-gold"
+              className="rounded-full border border-line-accent px-5 py-2 font-sans text-small uppercase tracking-[0.1em] text-accent transition-colors duration-short hover:bg-accent hover:text-on-accent"
             >
               Orçamento
             </Link>
@@ -106,7 +106,7 @@ export function Navbar() {
           criado pelo backdrop-blur (que prendia o fixed à altura da navbar) */}
       <div
         className={cn(
-          "fixed inset-0 top-16 z-40 origin-top bg-bg-base transition-all duration-reveal ease-cinematic md:hidden",
+          "fixed inset-0 top-16 z-40 origin-top bg-bg transition-all duration-reveal ease-cinematic md:hidden",
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0",
@@ -118,7 +118,7 @@ export function Navbar() {
               <Link
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="block border-b border-line py-4 font-display text-display-lg text-text-primary"
+                className="block border-b border-line py-4 font-display text-display-lg text-fg"
               >
                 {l.label}
               </Link>
@@ -128,7 +128,7 @@ export function Navbar() {
             <Link
               href="/contato"
               onClick={() => setOpen(false)}
-              className="inline-flex rounded-full bg-gold-metallic px-8 py-4 font-sans text-small uppercase tracking-[0.12em] text-on-gold"
+              className="inline-flex rounded-full bg-accent-metallic px-8 py-4 font-sans text-small uppercase tracking-[0.12em] text-on-accent"
             >
               Pedir orçamento
             </Link>
