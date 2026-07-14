@@ -5,6 +5,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { FinalCta } from "@/components/home/FinalCta";
 import { serviceGroups, servicesCount, servicesTagline } from "@/lib/content";
+import { whatsappUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Serviços",
@@ -34,6 +35,16 @@ export default function ServicosPage() {
                     <h2 className="mt-2 font-display text-h2 text-text-primary">
                       {g.area}
                     </h2>
+                    <a
+                      href={whatsappUrl(
+                        `Olá! Quero falar sobre ${g.area.toLowerCase()}.`,
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-block font-sans text-small uppercase tracking-kicker text-accent transition-colors duration-short ease-proton hover:text-fg"
+                    >
+                      Falar sobre esta frente →
+                    </a>
                   </div>
                   <ul className="grid gap-x-10 gap-y-6 sm:grid-cols-2">
                     {g.items.map((item) => (

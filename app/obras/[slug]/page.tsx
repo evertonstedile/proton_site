@@ -8,6 +8,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Tag } from "@/components/ui/Tag";
 import { Button } from "@/components/ui/Button";
 import { AtomicOrbit } from "@/components/brand/AtomicOrbit";
+import { AutoplayVideo } from "@/components/motion/AutoplayVideo";
+import { InteriorDiaNoite } from "@/components/home/fw/InteriorDiaNoite";
 import { getObras, getObraBySlug } from "@/lib/obras";
 import { SITE } from "@/lib/site";
 
@@ -48,7 +50,7 @@ export default async function ObraDetailPage({
   // Só fatos confirmados (nada inventado). Vazio = não renderiza a linha.
   const facts = [
     obra.location,
-    obra.areaM2 ? `${obra.areaM2} m²` : null,
+    obra.areaM2 ? `${obra.areaM2.toLocaleString("pt-BR")} m²` : null,
     obra.year,
   ].filter(Boolean);
 
@@ -121,6 +123,45 @@ export default async function ObraDetailPage({
           <p className="mt-8 max-w-2xl font-sans text-body-lg text-text-body">
             {obra.summary}
           </p>
+
+          {/* case rico — modelo p/ futuras obras (spec §6): vídeo de abertura,
+              interior dia→noite e ficha técnica confirmada (DF9) */}
+          {obra.slug === "winehouse" ? (
+            <>
+              <Reveal className="mt-14 overflow-hidden rounded-lg border border-line">
+                <AutoplayVideo
+                  src="/media/video/intro-720.mp4"
+                  poster="/media/video/intro-poster.avif"
+                  className="aspect-video"
+                />
+              </Reveal>
+              <InteriorDiaNoite className="mt-14" />
+              <div className="mt-14 max-w-2xl">
+                <h2 className="font-mono text-small uppercase tracking-kicker text-stone">
+                  Ficha técnica
+                </h2>
+                <dl className="mt-6 divide-y divide-line border-y border-line">
+                  {(
+                    [
+                      ["Projeto", obra.title],
+                      ["Local", obra.location],
+                      ["Área construída", `${obra.areaM2?.toLocaleString("pt-BR")} m²`],
+                      ["Conclusão", obra.year],
+                      ["Status", "Concluída"],
+                      // Escopo/disciplinas: TODO: VALIDAR (DF7/DF9)
+                    ] as const
+                  ).map(([k, v]) => (
+                    <div key={k} className="flex justify-between gap-6 py-3">
+                      <dt className="font-sans text-small text-stone">{k}</dt>
+                      <dd className="text-right font-mono text-small text-fg">
+                        {v}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </>
+          ) : null}
 
           {/* galeria — imagens reais do projeto (visualização técnica) */}
           <Reveal

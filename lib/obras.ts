@@ -42,6 +42,12 @@ const OBRAS: Obra[] = [
       "Casa unifamiliar de partido horizontal — base em pedra, estrutura aparente e integração entre estar, mata e luz natural.",
     cover: "/obras/winehouse/cover.jpg",
     gallery: [
+      "/media/img/image2.png",
+      "/media/img/image3.png",
+      "/media/img/image.png",
+      "/media/img/image4.png",
+      "/media/img/image5.png",
+      "/media/img/image2_noite.png",
       "/obras/winehouse/01.jpg",
       "/obras/winehouse/02.jpg",
       "/obras/winehouse/03.jpg",

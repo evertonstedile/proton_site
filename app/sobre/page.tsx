@@ -5,6 +5,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SplitReveal } from "@/components/motion/SplitReveal";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { FinalCta } from "@/components/home/FinalCta";
+import { Metodo } from "@/components/home/fw/Metodo";
+import { Socios } from "@/components/home/fw/Socios";
 import { about } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -56,6 +58,8 @@ export default function SobrePage() {
         </Container>
       </Section>
 
+      <Metodo />
+      <Socios />
       <FinalCta />
     </main>
   );
