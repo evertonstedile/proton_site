@@ -4,6 +4,10 @@ import { Section } from "@/components/ui/Section";
 import { SplitReveal } from "@/components/motion/SplitReveal";
 import { Reveal } from "@/components/motion/Reveal";
 import { HorizontalGallery } from "@/components/motion/HorizontalGallery";
+import { SlowZoom } from "@/components/motion/SlowZoom";
+import { AutoplayVideo } from "@/components/motion/AutoplayVideo";
+import { InteriorDiaNoite } from "@/components/home/fw/InteriorDiaNoite";
+import { ImplantacaoLines } from "@/components/home/fw/ImplantacaoLines";
 import { HOME_FW } from "@/lib/content";
 import { getObraBySlug } from "@/lib/obras";
 
@@ -51,8 +55,17 @@ export function CaseWineHouse() {
           {HOME_FW.caseWineHouse.kicker}
         </p>
 
-        {/* Cap. A — território */}
-        <div className="grid gap-10 lg:grid-cols-12">
+        {/* Abertura — vídeo 2: aproximação aérea, a vila se materializa */}
+        <Reveal className="overflow-hidden rounded-lg border border-line">
+          <AutoplayVideo
+            src="/media/video/intro-720.mp4"
+            poster="/media/video/intro-poster.avif"
+            className="aspect-video"
+          />
+        </Reveal>
+
+        {/* Cap. A — território (aproximação lenta + linhas de implantação) */}
+        <div className="mt-24 grid gap-10 lg:grid-cols-12">
           <SplitReveal
             as="h2"
             className="font-serif text-display-lg text-fg lg:col-span-5"
@@ -60,13 +73,16 @@ export function CaseWineHouse() {
             {HOME_FW.caseWineHouse.capA}
           </SplitReveal>
           <Reveal className="relative aspect-[16/10] overflow-hidden rounded-lg lg:col-span-7">
-            <Image
-              src="/media/img/image5.png"
-              alt="Volume de concreto da Wine House contra o relevo — leitura do território antes do edifício"
-              fill
-              sizes="(min-width: 1024px) 58vw, 100vw"
-              className="object-cover"
-            />
+            <SlowZoom>
+              <Image
+                src="/media/img/image5.png"
+                alt="Volume de concreto da Wine House contra o relevo — leitura do território antes do edifício"
+                fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                className="object-cover"
+              />
+            </SlowZoom>
+            <ImplantacaoLines className="pointer-events-none absolute inset-0 h-full w-full" />
             <p className="absolute bottom-4 left-4 font-mono text-small text-fg/80">
               Praia da Ferrugem · Garopaba/SC
             </p>
@@ -104,21 +120,7 @@ export function CaseWineHouse() {
           >
             {HOME_FW.caseWineHouse.capC}
           </SplitReveal>
-          <Reveal stagger className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
-            {(
-              [
-                ["/media/img/interior_dia.png", "Interior da Wine House de dia — estar integrado à cozinha, pedra e luz natural", "Dia"],
-                ["/media/img/interior_noite.png", "Interior da Wine House à noite — iluminação quente sobre os mesmos materiais", "Noite"],
-              ] as const
-            ).map(([src, alt, label]) => (
-              <figure key={src} className="relative aspect-[4/5] overflow-hidden rounded-lg">
-                <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 29vw, (min-width: 640px) 50vw, 100vw" className="object-cover" />
-                <figcaption className="absolute bottom-3 left-3 font-mono text-small text-fg/80">
-                  {label}
-                </figcaption>
-              </figure>
-            ))}
-          </Reveal>
+          <InteriorDiaNoite className="lg:col-span-7" />
         </div>
 
         {/* Cap. D — escala humana */}

@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { CountUp } from "@/components/motion/CountUp";
+import { SlowZoom } from "@/components/motion/SlowZoom";
 import { CONDOMINIO_JCR } from "@/lib/condominio";
 
 /**
@@ -25,13 +26,15 @@ export function EscalaCondominio() {
         {/* Mov. 08 — aérea + dados reais */}
         <Reveal className="relative mt-12 overflow-hidden rounded-lg">
           <div className="relative aspect-[16/9] md:aspect-[21/9]">
-            <Image
-              src={c.imagemAerea}
-              alt={`Vista aérea do projeto do ${c.nome} — ${c.unidades} unidades em ${c.local}`}
-              fill
-              sizes="100vw"
-              className="object-cover"
-            />
+            <SlowZoom maxScale={1.06}>
+              <Image
+                src={c.imagemAerea}
+                alt={`Vista aérea do projeto do ${c.nome} — ${c.unidades} unidades em ${c.local}`}
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
+            </SlowZoom>
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-transparent to-transparent" />
           <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10">
