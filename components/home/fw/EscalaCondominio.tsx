@@ -22,6 +22,18 @@ export function EscalaCondominio() {
           A mesma precisão.{" "}
           <em className="italic">Em outra escala.</em>
         </Reveal>
+        {/* ponte visual: 1 casa → 46 módulos (decorativo, contagem literal) */}
+        <Reveal
+          aria-hidden
+          className="mt-10 grid max-w-xl grid-cols-[repeat(23,minmax(0,1fr))] gap-1.5"
+        >
+          {Array.from({ length: 46 }).map((_, i) => (
+            <div
+              key={i}
+              className={`aspect-square border ${i === 0 ? "border-accent bg-accent/20" : "border-line bg-bg-2"}`}
+            />
+          ))}
+        </Reveal>
 
         {/* Mov. 08 — aérea + dados reais */}
         <Reveal className="relative mt-12 overflow-hidden rounded-lg">
