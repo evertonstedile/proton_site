@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { SplitReveal } from "@/components/motion/SplitReveal";
 import { Reveal } from "@/components/motion/Reveal";
+import { VideoScrubStage } from "@/components/home/fw/VideoScrubStage";
 import { HOME_FW } from "@/lib/content";
 
 /**
@@ -41,17 +42,17 @@ export function VisaoEstrutural() {
             </Reveal>
           </div>
           <div className="lg:col-span-7">
-            <Reveal className="overflow-hidden rounded-lg border border-line lg:sticky lg:top-24">
-              <video
-                muted
-                playsInline
-                preload="none"
-                poster="/media/video/estrutura-poster.avif"
-                className="aspect-video w-full object-cover"
-              >
-                <source src="/media/video/estrutura-720.mp4" type="video/mp4" />
-              </video>
-            </Reveal>
+            <VideoScrubStage
+              src="/media/video/estrutura-720.mp4"
+              poster="/media/video/estrutura-poster.avif"
+              snapStops
+              heightClass="h-[220svh]"
+              marks={HOME_FW.visaoEstrutural.stops.map((s, i) => ({
+                at: [0, 33, 66, 95][i] ?? 0,
+                label: s.label,
+                desc: s.desc,
+              }))}
+            />
           </div>
         </div>
       </Container>
