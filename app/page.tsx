@@ -1,4 +1,4 @@
-import { HeroDiaNoite } from "@/components/home/fw/HeroDiaNoite";
+import { FilmScroll } from "@/components/home/film/FilmScroll";
 import { ManifestoEditorial } from "@/components/home/fw/ManifestoEditorial";
 import { CaseWineHouse } from "@/components/home/fw/CaseWineHouse";
 import { Construcao } from "@/components/home/fw/Construcao";
@@ -12,17 +12,16 @@ import { Faq } from "@/components/home/Faq";
 import { CtaConversa } from "@/components/home/fw/CtaConversa";
 
 /**
- * Home — framework literal (spec 2026-07-13 §5): 14 movimentos sobre footage
- * real. 01 Prelude = Preloader global (layout) · 02 Hero dia→noite ·
- * 03 Manifesto · 04 Case Wine House · 05 Construção · 06 Visão estrutural ·
- * 07+08 Escala + Condomínio JCR · 09 Serviços · 10 Método · 11 Números ·
- * 12 Sócios · FAQ (GEO) · 13 CTA · 14 Footer (layout).
- * Componentes SOTD saíram do fluxo — arquivos removidos na Task 12.
+ * Home — scroll-film "Da Noite Nasce a Casa" (skill scroll-film-studio):
+ * abertura vira UMA tomada contínua scrubada (FilmScroll, draft 3/5 capítulos;
+ * caps 4-5 entram quando o limite diário do Higgsfield resetar) e os demais
+ * movimentos do framework literal (spec 2026-07-13 §5) seguem como conteúdo
+ * after-film. HeroDiaNoite preservado em components/home/fw/ fora do fluxo.
  */
 export default function Home() {
   return (
     <main>
-      <HeroDiaNoite />
+      <FilmScroll />
       <ManifestoEditorial />
       <CaseWineHouse />
       <Construcao />

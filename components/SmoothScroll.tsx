@@ -19,6 +19,9 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
   // 1) Decide no mount (client) se usa Lenis — dispara o render do ReactLenis.
   useEffect(() => {
+    // Contrato dev do scroll-film: ?jump=<y> exige scroll nativo pré-posicionado
+    // (Lenis no mount reseta p/ 0 e engole o jump) — harness de screenshot.
+    if (new URLSearchParams(window.location.search).has("jump")) return;
     const fine = window.matchMedia("(pointer: fine)").matches;
     if (fine && !prefersReduced()) setUseLenis(true);
   }, []);
