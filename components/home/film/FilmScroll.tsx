@@ -301,8 +301,21 @@ export function FilmScroll() {
           }}
         />
 
-        {/* beats de copy */}
-        {BEATS.map((b, i) => (
+        {/* scrim de topo — navbar legível sobre céus claros (caps 3–5);
+            determinístico > toggle por luminância (sem flicker de identidade) */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-[16vh]"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(10,11,10,0.55), transparent)",
+          }}
+        />
+
+        {/* beats de copy — beat 0 é o h1 da página (a11y/SEO), demais h2 */}
+        {BEATS.map((b, i) => {
+          const Title = i === 0 ? "h1" : "h2";
+          return (
           <div
             key={i}
             ref={(el) => {
@@ -315,25 +328,41 @@ export function FilmScroll() {
             }`}
             style={{ opacity: i === 0 ? 1 : 0 }}
           >
-            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#C68B4B]">
+            <p
+              className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#C68B4B]"
+              style={{
+                // halo denso: texto fino âmbar precisa sobreviver ao trilho
+                // prateado da lua (frame 1) — camadas curtas > uma difusa
+                textShadow:
+                  "0 0 6px rgba(0,0,0,0.95), 0 0 14px rgba(0,0,0,0.85), 0 1px 2px rgba(0,0,0,1)",
+              }}
+            >
               {b.kicker}
             </p>
-            <h2
+            <Title
               className={`mt-4 whitespace-pre-line font-serif text-white ${
                 b.align === "center"
                   ? "text-5xl leading-[1.05] md:text-8xl"
                   : "text-3xl leading-[1.1] md:text-5xl"
               }`}
+              style={{
+                textShadow:
+                  "0 2px 6px rgba(0,0,0,0.7), 0 4px 32px rgba(0,0,0,0.5)",
+              }}
             >
               {b.title}
-            </h2>
+            </Title>
             {b.body && (
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70 md:text-base">
+              <p
+                className="mt-4 max-w-md text-sm leading-relaxed text-white/70 md:text-base"
+                style={{ textShadow: "0 1px 3px rgba(0,0,0,0.8)" }}
+              >
                 {b.body}
               </p>
             )}
           </div>
-        ))}
+          );
+        })}
 
         {/* leitura de capítulo + progresso */}
         <div className="pointer-events-none absolute bottom-6 left-6 right-6 flex items-center gap-4 md:left-16 md:right-16">

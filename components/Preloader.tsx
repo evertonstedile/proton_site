@@ -45,11 +45,11 @@ function heroAssetPromises(): Promise<unknown>[] {
   const list: Promise<unknown>[] = [
     // (a) fontes prontas — evita FOUT no headline do hero logo após o reveal.
     document.fonts?.ready ?? Promise.resolve(),
-    // (b) foto dia do hero decodificada — o LCP do framework literal; falha
-    //     de decode/rede conta como resolvida (não trava a cortina).
+    // (b) pôster do filme decodificado — primeiro pixel visível do FilmScroll;
+    //     falha de decode/rede conta como resolvida (não trava a cortina).
     new Promise((res) => {
       const img = new window.Image();
-      img.src = "/media/img/image2.png";
+      img.src = "/film/poster.jpg";
       img.decode().then(res, res);
     }),
   ];
