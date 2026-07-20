@@ -11,20 +11,22 @@ import { prefersReduced } from "@/lib/motion";
  * Playhead com lerp; DPR cap 1.5. Contrato dev: ?jump=<y> + window.__ready.
  * Reduced-motion: pôster estático 100vh, sem scrub.
  *
- * DRAFT: 3 de 5 capítulos (181 frames @480p). Master 1080p re-extrai frames e
- * só muda FRAME_COUNT/CHAPTERS — o engine não muda.
+ * DRAFT: 5 de 5 capítulos (301 frames @480p→1280w). Master 1080p re-extrai
+ * frames e só muda FRAME_COUNT/SEAM_HEX — o engine não muda.
  */
 
-const FRAME_COUNT = 181;
+const FRAME_COUNT = 301;
 const FRAME_URL = (i: number) =>
   `/film/frames/f_${String(i + 1).padStart(4, "0")}.jpg`;
-const SEAM_HEX = "#241e19"; // cor do frame final (assemble.sh) — handoff p/ conteúdo
+const SEAM_HEX = "#3f2d1e"; // cor do frame final (assemble.sh) — handoff p/ conteúdo
 const VH_PER_CHAPTER = 170;
 
 const CHAPTERS = [
   { name: "Noite", from: 0 },
-  { name: "Hora azul", from: 1 / 3 },
-  { name: "Terreno", from: 2 / 3 },
+  { name: "Hora azul", from: 0.2 },
+  { name: "Terreno", from: 0.4 },
+  { name: "Estrutura", from: 0.6 },
+  { name: "Interior", from: 0.8 },
 ];
 
 // Beats de copy sobre o filme: envelope in→peak→out em progresso 0..1.
@@ -32,29 +34,47 @@ const BEATS = [
   {
     in: -0.1,
     peak: 0,
-    out: 0.14,
+    out: 0.09,
     align: "center" as const,
     kicker: "Proton Engenharia · Garopaba/SC",
     title: "Da noite\nnasce a casa",
     body: null,
   },
   {
-    in: 0.36,
-    peak: 0.44,
-    out: 0.55,
+    in: 0.21,
+    peak: 0.26,
+    out: 0.33,
     align: "left" as const,
     kicker: "O litoral",
     title: "Um litoral que a gente\nconhece de cor",
     body: "Praia da Ferrugem, Garopaba. É aqui que a Proton projeta e constrói.",
   },
   {
-    in: 0.7,
-    peak: 0.8,
-    out: 0.92,
+    in: 0.42,
+    peak: 0.48,
+    out: 0.56,
     align: "left" as const,
     kicker: "O começo",
     title: "Todo projeto\ncomeça no terreno",
     body: "Implantação, licenciamento e engenharia antes do primeiro pilar.",
+  },
+  {
+    in: 0.62,
+    peak: 0.7,
+    out: 0.78,
+    align: "left" as const,
+    kicker: "A estrutura",
+    title: "O que sustenta\nnão aparece",
+    body: "Fundação, estrutura e acabamento executados por quem assina o projeto.",
+  },
+  {
+    in: 0.84,
+    peak: 0.91,
+    out: 0.975,
+    align: "left" as const,
+    kicker: "A casa",
+    title: "A noite, agora,\ntem endereço",
+    body: "A obra termina quando a primeira noite dentro dela começa.",
   },
 ];
 
@@ -74,7 +94,9 @@ export function FilmScroll() {
 
   useEffect(() => {
     if (prefersReduced()) {
-      // Sem scrub: pôster já está no DOM (bg do stage); marca pronto e sai.
+      // Sem scrub: pôster já está no DOM (bg do stage); esconde o loader
+      // (senão cobre o pôster para sempre), marca pronto e sai.
+      if (loaderRef.current) loaderRef.current.style.display = "none";
       (window as unknown as { __ready?: boolean }).__ready = true;
       return;
     }
@@ -111,6 +133,7 @@ export function FilmScroll() {
     let next = 0;
     const CONCURRENCY = 10;
     function pump() {
+      if (dead) return;
       while (next < FRAME_COUNT && decoding.size < CONCURRENCY) {
         const i = next++;
         decoding.add(i);
@@ -132,7 +155,25 @@ export function FilmScroll() {
         img.src = FRAME_URL(i);
       }
     }
-    pump();
+    // LCP primeiro: o flood de frames (10 conexões) saturava rede lenta e
+    // segurava pôster E webfont do h1 (LCP 3.9s no gate Slow-4G). Pump só
+    // depois do caminho crítico: pôster decodado + fontes prontas (teto 4s
+    // pra nunca atrasar o filme em rede patológica).
+    const poster = new Image();
+    poster.src = "/film/poster.jpg";
+    const fontsReady = Promise.race([
+      document.fonts?.ready ?? Promise.resolve(),
+      new Promise((r) => setTimeout(r, 4000)),
+    ]);
+    // window.load também: imagens JS criadas antes do load seguram o evento
+    // (e o gate de LCP) — frames nunca entram no caminho crítico da página
+    const winLoaded = new Promise<void>((r) => {
+      if (document.readyState === "complete") r();
+      else addEventListener("load", () => r(), { once: true });
+    });
+    Promise.all([poster.decode().catch(() => {}), fontsReady, winLoaded]).then(
+      pump,
+    );
 
     function nearestFrame(idx: number): number {
       if (images[idx]) return idx;
@@ -221,13 +262,19 @@ export function FilmScroll() {
       if (chapterBarRef.current)
         chapterBarRef.current.style.transform = `scaleX(${p})`;
 
-      // beats
+      // beats — beat central compõe o offset com o -50% do centering: inline
+      // transform substitui a classe, e "pular" o h1 na hidratação re-candidata
+      // o texto no LCP (~3.5s no gate mobile) além do glitch visual
       BEATS.forEach((b, i) => {
         const el = beatRefs.current[i];
         if (!el) return;
         const a = beatAlpha(b, p);
+        const dy = (1 - a) * 24;
         el.style.opacity = String(a);
-        el.style.transform = `translateY(${(1 - a) * 24}px)`;
+        el.style.transform =
+          b.align === "center"
+            ? `translateY(calc(-50% + ${dy}px))`
+            : `translateY(${dy}px)`;
         el.style.visibility = a <= 0.001 ? "hidden" : "visible";
       });
 
@@ -278,17 +325,30 @@ export function FilmScroll() {
       ref={driverRef}
       aria-label="Filme de abertura — da noite nasce a casa"
       style={{ height: `${CHAPTERS.length * VH_PER_CHAPTER}vh` }}
-      className="relative"
+      className="relative motion-reduce:!h-screen"
     >
+      {/* React 19 iça o <link> pro <head>: pôster (LCP) parte na frente do
+          bundle/fontes na fila de rede — decisivo no gate Slow-4G */}
+      <link
+        rel="preload"
+        as="image"
+        href="/film/poster.jpg"
+        fetchPriority="high"
+      />
       <div
         ref={stageRef}
         className="sticky top-0 h-screen w-full overflow-hidden bg-[#111311]"
-        style={{
-          backgroundImage: "url(/film/poster.jpg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
       >
+        {/* pôster como <img> real (não bg): entry de LCP dispara no load da
+            imagem mesmo sob a cortina do intro — texto só conta no reveal
+            (lição D13 do hero antigo: LCP = imagem) */}
+        <img
+          data-film-poster
+          src="/film/poster.jpg"
+          alt=""
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
         {/* vinheta + grain sutil */}
@@ -340,6 +400,8 @@ export function FilmScroll() {
               {b.kicker}
             </p>
             <Title
+              // @ts-expect-error — elementtiming: Element Timing API (diagnóstico de paint/LCP)
+              elementtiming={i === 0 ? "beat-h1" : undefined}
               className={`mt-4 whitespace-pre-line font-serif text-white ${
                 b.align === "center"
                   ? "text-5xl leading-[1.05] md:text-8xl"
@@ -392,13 +454,18 @@ export function FilmScroll() {
           }}
         />
 
-        {/* loader */}
+        {/* loader — barra discreta SOBRE o pôster, nunca um painel opaco:
+            pôster+h1 pintam no 1º paint (LCP) e em rede lenta o visitante vê
+            o hero imediatamente enquanto os frames chegam por trás */}
         <div
           ref={loaderRef}
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-[#111311] transition-opacity duration-700"
+          className="pointer-events-none absolute inset-x-0 bottom-14 z-10 flex flex-col items-center gap-3 transition-opacity duration-700"
         >
-          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/50">
-            Proton
+          <p
+            className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40"
+            style={{ textShadow: "0 1px 3px rgba(0,0,0,0.8)" }}
+          >
+            Carregando o filme
           </p>
           <div className="h-px w-40 bg-white/15">
             <div

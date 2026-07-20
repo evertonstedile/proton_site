@@ -15,9 +15,10 @@ export const archivo = localFont({
 // Newsreader — serif do pool rotativo do design-canon (registrada na spec §3).
 // Alto contraste vs Archivo, dígitos lining p/ contadores, latin PT-BR completo.
 // Peso único 400: hierarquia por tamanho/cor (e menos bytes no caminho do LCP).
-// preload: false — a serif é display-only e o headline do hero fica atrás do
-// gate do intro (opacity 0), então o swap é invisível; preservar a banda do
-// caminho crítico pro LCP (imagem do hero) no gate mobile.
+// preload: TRUE (19/07, FILM) — o h1 do beat de abertura é serif e visível no
+// primeiro paint (o gate de opacity do hero antigo morreu com o FilmScroll);
+// o Chrome re-emite a entry de LCP do texto no swap da webfont, então a serif
+// chegar tarde = LCP ~3.5s no gate mobile. Preload derruba pra ~1.2s.
 export const newsreader = localFont({
   src: [
     { path: "../public/fonts/newsreader-v26-latin-regular.woff2", weight: "400", style: "normal" },
@@ -25,7 +26,6 @@ export const newsreader = localFont({
   ],
   variable: "--font-serif",
   display: "swap",
-  preload: false,
 });
 
 // Geist Mono — dados técnicos/números/labels (framework §11).

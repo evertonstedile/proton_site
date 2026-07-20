@@ -6,7 +6,7 @@ import { chromium } from "playwright";
 
 const base = process.argv[2] ?? "http://localhost:3000";
 const out = process.argv[3] ?? ".";
-const CHAPTERS = 3; // manter em sincronia com CHAPTERS do FilmScroll
+const CHAPTERS = 5; // manter em sincronia com CHAPTERS do FilmScroll
 const VH = 1.7; // VH_PER_CHAPTER / 100
 
 const browser = await chromium.launch({ args: ["--disable-gpu"] });
@@ -89,9 +89,7 @@ await rm.waitForFunction(() => window.__ready === true, null, {
 const rmState = await rm.evaluate(() => ({
   ready: window.__ready,
   film: window.__film ?? null, // deve ficar null (tick nunca roda)
-  poster: getComputedStyle(
-    document.querySelector("section[aria-label^='Filme'] > div"),
-  ).backgroundImage.includes("poster"),
+  poster: Boolean(document.querySelector("img[data-film-poster]")),
 }));
 await rm.screenshot({ path: `${out}/rm-top.png` });
 console.log("REDUCED-MOTION", JSON.stringify(rmState), "esperado: film=null, poster=true");

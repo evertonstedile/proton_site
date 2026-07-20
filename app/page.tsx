@@ -13,7 +13,7 @@ import { CtaConversa } from "@/components/home/fw/CtaConversa";
 
 /**
  * Home — scroll-film "Da Noite Nasce a Casa" (skill scroll-film-studio):
- * abertura vira UMA tomada contínua scrubada (FilmScroll, draft 3/5 capítulos;
+ * abertura vira UMA tomada contínua scrubada (FilmScroll, draft 5/5 capítulos;
  * caps 4-5 entram quando o limite diário do Higgsfield resetar) e os demais
  * movimentos do framework literal (spec 2026-07-13 §5) seguem como conteúdo
  * after-film. HeroDiaNoite preservado em components/home/fw/ fora do fluxo.
