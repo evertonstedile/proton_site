@@ -1,7 +1,7 @@
 # CHECKPOINT — Proton Site (scroll-film "Da Noite Nasce a Casa") — 20/07/2026
 
 ## ▶ RETOMAR AQUI
-Filme 5/5 EM PRODUÇÃO em www.protonsc.com.br (`main` = `redesign-framework` = `f2c6825`; deploy verificado no domínio real: 5 shots desktop + 3 mobile + reduced-motion + jank p95 9.2ms/max 16.7ms; suite Playwright 44/44). Não há tarefa em andamento. Próximos passos são DECISÕES do Everton, nesta ordem: (1) revisar copy dos beats 4–5 (o que está no ar + alternativas estão em "Decisões" abaixo); (2) master 1080p Seedance — ~225 cr, precisa recarga + OK explícito; ao rodar: re-gerar os 5 clipes com os MESMOS prompts (histórico Higgsfield), re-assemble, trocar `FRAME_COUNT`/`SEAM_HEX` no FilmScroll e re-rodar `node scripts/verify-film.mjs`; (3) Deployment Protection dos previews (produção é pública; previews pedem login — desligar é setting da conta dele).
+Filme 5/5 EM PRODUÇÃO em www.protonsc.com.br (`main` = `redesign-framework` = `a68a2e0`; deploy verificado no domínio real: 5 shots desktop + 3 mobile + reduced-motion + jank p95 9.2ms/max 16.7ms; suite Playwright 44/44). Frames upscalados via Real-ESRGAN x4plus local (1280w→1728w, zero créditos) — ver "Decisões". Não há tarefa em andamento. Próximos passos são DECISÕES do Everton, nesta ordem: (1) revisar copy dos beats 4–5 (o que está no ar + alternativas estão em "Decisões" abaixo); (2) master 1080p Seedance real — ~225 cr, precisa recarga + OK explícito (ganho adicional sobre o upscale ESRGAN: motion real gerado em alta res vs. upscale de 480p); ao rodar: re-gerar os 5 clipes com os MESMOS prompts (histórico Higgsfield), re-assemble, trocar `FRAME_COUNT`/`SEAM_HEX` no FilmScroll e re-rodar `node scripts/verify-film.mjs`; (3) Deployment Protection dos previews (produção é pública; previews pedem login — desligar é setting da conta dele).
 
 ## Objetivo da sessão
 Skill `scroll-film-studio` aplicada ao site Proton: home inteira = UMA tomada contínua scrubada no scroll (conceito A "Da Noite Nasce a Casa", Lane B footage IA), 5 capítulos: Noite → Hora Azul → Terreno → Estrutura (timelapse) → Interior. Draft 480p completo e em produção; master 1080p pendente de aprovação.
@@ -18,7 +18,8 @@ Skill `scroll-film-studio` aplicada ao site Proton: home inteira = UMA tomada co
 - LCP gate mede visita RECORRENTE (intro pulado) + FCP na 1ª visita — cortina de ~3.5s é design intencional; Chrome ignora imagem full-viewport no LCP e só conta o h1 no reveal (documentado em tests/perf.spec.ts).
 - Loader do filme = barra discreta sobre o pôster (nunca painel opaco); pump de frames só após pôster+fontes+window.load.
 - Worktree antigo removido com checkpoint 13/07 dentro (aprovado 20/07).
-- Rollback de produção: promover deployment anterior no painel Vercel ou git `ca3bb70`.
+- Frames upscalados localmente com Real-ESRGAN x4plus (4x + downscale lanczos p/ 1728w) a partir do `master.mp4` já aprovado — MESMA footage Seedance, mesmas junções, zero créditos. Vencedor de A/B contra lanczos puro e realesr-animevideov3 (Everton aprovou 20/07 tarde). Peso: 15MB→41MB (aceito). SSIM temporal caiu 0.96→0.94 vs frame nativo (esperado — mais textura real revelada; sem flicker visível no scrub aprovado).
+- Rollback de produção: promover deployment anterior no painel Vercel ou git `e03db4a` (pré-upscale) / `ca3bb70` (pré-filme).
 
 ## Arquivos tocados (principais, todos commitados)
 - `components/home/film/FilmScroll.tsx` — engine 5 caps: FRAME_COUNT 301, SEAM #3f2d1e, 5 beats, scrim topo 16vh, halos de texto, h1 no beat 0, pôster `<img data-film-poster>`, transform composto `calc(-50% + Npx)` no beat central, elementtiming="beat-h1".
@@ -45,14 +46,15 @@ Skill `scroll-film-studio` aplicada ao site Proton: home inteira = UMA tomada co
 - Screenshot de canvas GPU em headless: `chromium.launch({args:["--disable-gpu"]})`.
 - Preset Higgsfield sequestra prompt: `declined_preset_id: 24bae836-2c4a-48e0-89b6-49fcc0b21612`.
 - Scratchpad é por-sessão e SOME: artefatos duráveis vão pro repo (harness já foi); clipes re-baixáveis via show_generations.
+- Upscale local (Real-ESRGAN): binário `realesrgan-ncnn-vulkan` baixado direto do release oficial GitHub (xinntao/Real-ESRGAN v0.2.5.0 macOS) pro scratchpad — não persiste entre sessões, precisa rebaixar se repetir. Modelo `realesrgan-x4plus` (não o `-anime`) é o que preserva textura arquitetônica; `realesr-animevideov3` amacia demais (prior de anime/cartoon).
 
 ## Assets/IDs (master 1080p vai precisar)
 - Jobs: k0-noite `920e9137` · c1 `a1fd01cd` · c2 `c34a1583-6cd8-4de1-8cd0-1e5608f0805a` · c3 `ccad8855` · keyframe-casa `e03b326d-9e44-4380-8bc1-38d8bc6787af` · c4 `f3ff4717` (som on por engano, áudio descartado) · c5 `492ffda9`.
 - Medias: c3-last `7bb075aa-0baa-4876-80f9-bc39d49e56d2` · c4-last `c024959a-ee3e-4fe4-92ef-cf416887c1b8` · exterior WineHouse `b40ac584-6712-4f97-82da-9d1325355c7c` · interior `85de3473-7f64-4b53-b649-9987e5274609`.
-- Gasto total do filme: 51.5 cr (32 em 18-19/07 + 19.5 em 20/07). Saldo: 49.
+- Gasto total do filme: 51.5 cr (32 em 18-19/07 + 19.5 em 20/07). Saldo: 49. Upscale ESRGAN 20/07 tarde: 0 cr.
 
 ## Pendências (ordem de prioridade)
 1. Copy beats 4–5 — veto/troca do Everton (1 edit no BEATS + harness).
-2. Master 1080p — recarga + OK → re-gerar 5 clipes (mesmos prompts/starts), assemble, FRAME_COUNT/SEAM novos, harness + suite.
+2. Master 1080p REAL (Seedance, não upscale) — recarga + OK → re-gerar 5 clipes (mesmos prompts/starts), assemble, FRAME_COUNT/SEAM novos, harness + suite. Upscale ESRGAN já entregue ganho de nitidez a custo zero; master real ainda vale pela motion gerada nativamente em alta res.
 3. Deployment Protection dos previews (setting do Everton, se quiser preview público).
 4. Herdadas: DF7 sócios (aguardando Proton) · escopo Wine House (aguardando cliente).
