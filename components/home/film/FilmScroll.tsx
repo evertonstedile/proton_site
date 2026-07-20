@@ -11,8 +11,8 @@ import { prefersReduced } from "@/lib/motion";
  * Playhead com lerp; DPR cap 1.5. Contrato dev: ?jump=<y> + window.__ready.
  * Reduced-motion: pôster estático 100vh, sem scrub.
  *
- * DRAFT: 5 de 5 capítulos (301 frames @480p→1280w). Master 1080p re-extrai
- * frames e só muda FRAME_COUNT/SEAM_HEX — o engine não muda.
+ * 5 de 5 capítulos (301 frames @480p + Real-ESRGAN x4plus → 1728w). Master
+ * 1080p re-extrai frames e só muda FRAME_COUNT/SEAM_HEX — o engine não muda.
  */
 
 const FRAME_COUNT = 301;
