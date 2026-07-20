@@ -78,8 +78,10 @@ const BEATS = [
   },
 ];
 
-const B_AHEAD = 18;
-const B_KEEP = 28;
+// B_AHEAD/B_KEEP escalados ÷4 vs. o draft 1280w: frame 1728w tem 4x os pixels
+// (4x a memória por ImageBitmap) — mantém o mesmo teto de memória da janela.
+const B_AHEAD = 5;
+const B_KEEP = 7;
 
 export function FilmScroll() {
   const driverRef = useRef<HTMLDivElement>(null);
