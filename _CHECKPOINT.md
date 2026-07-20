@@ -1,57 +1,58 @@
 # CHECKPOINT — Proton Site (scroll-film "Da Noite Nasce a Casa") — 20/07/2026
 
-## ▶ RETOMAR AQUI (20/07 — EM PRODUÇÃO)
-Filme 5/5 EM PRODUÇÃO em www.protonsc.com.br (merge ff `main` → `e81f3e8`, deploy verificado no domínio real: 5 shots desktop + 3 mobile + reduced-motion + jank p95 9.2ms). ROLLBACK se precisar: promover deployment anterior no painel Vercel ou `git revert`/reset para `ca3bb70`. Worktree antigo removido (aprovado 20/07). Pendências restantes: copy beats 4-5 (revisão do Everton; alternativas no chat 20/07) · master 1080p (~225 cr, recarga + OK) · specs de master quando trocar frames. Gasto real caps 4-5: 19.5 cr (saldo 49). Junções: c3→c4 SSIM 0.976, c4→c5 0.966 (kling3_0 end_image lock). LCP mobile VERDE — causa raiz era `app/template.tsx` (Framer `initial opacity:0` no SSR segurava a página toda até hidratar; 1ª carga agora pinta direto). Próximos (decisões do Everton): (1) revisar copy dos beats 4-5 no site (alternativas no chat de 20/07); (2) master 1080p Seedance ~225 cr — precisa recarga + OK; (3) merge/deploy produção — só com OK explícito; (4) Deployment Protection off se quiser preview público; (5) worktree antigo `.claude/worktrees/infallible-bartik-419a52` tem `_CHECKPOINT.md` de 13/07 não-commitado — remover = delete, aguarda confirmação. Assets: keyframe casa job `e03b326d`, C4 `f3ff4717` (som on por engano do server — áudio descartado no assemble), C5 `492ffda9` (som off), c4-last media `c024959a-ee3e-4fe4-92ef-cf416887c1b8`. Kling manda `sound:"off"` STRING (false vira default "on").
-
-## Histórico 19/07 (superado)
-### ▶ retomar-aqui de 19/07
-19/07 12h–13h: billing "resolvido" pelo Everton mas API Higgsfield SEGUE em `grace_daily_limit_reached` (3 retries) — reset esperado ~21h–22h BRT de 19/07. Enquanto isso foi entregue FILM-2: scrim de topo (navbar legível em céu claro), halos de texto nos beats (kicker sobre a lua ok), beat 0 virou h1 (a11y 8/8), Preloader rastreia /film/poster.jpg, harness commitado em scripts/verify-film.mjs (desktop+mobile+reduced-motion+jank p95 16.3/max 25.5ms). Branch `redesign-framework` PUSHADA + deploy PREVIEW Vercel (produção/main intocada). CUSTO REAL kling3_0 = 10 cr/clipe → caps 4-5 = 2+10+10 = 22 cr (dentro dos +30 aprovados). Scratchpad foi LIMPO (clipes locais sumiram — re-baixar de show_generations na hora do assemble; medias no Higgsfield intactas). Testes: 4 specs de hero antigo + LCP mobile falham por contrato do hero velho — reescrever specs quando filme fechar 5 caps. Próximo passo: **~21h tentar gerar caps 4–5**: (1) keyframe "casa pronta no lote" via `nano_banana_pro` 16:9 usando start `c3-last` (media `7bb075aa-0baa-4876-80f9-bc39d49e56d2`) + ref exterior Wine House (media `b40ac584-6712-4f97-82da-9d1325355c7c`); (2) C4 via `kling3_0` std sound=off — start_image=c3-last, end_image=keyframe casa (timelapse de construção); (3) C5 via `kling3_0` — start=último frame do C4, end_image=interior noite (media `85de3473-7f64-4b53-b649-9987e5274609`), câmera atravessa a janela. ~17 cr total (aprovado até +30). Depois: re-assemble 5 caps (`assemble.sh`), recopiar frames p/ `public/film/frames`, atualizar `FRAME_COUNT`/`CHAPTERS`/`BEATS` no `FilmScroll.tsx`, re-rodar harness. Master 1080p SÓ com OK do Everton (225 cr — precisa recarga).
+## ▶ RETOMAR AQUI
+Filme 5/5 EM PRODUÇÃO em www.protonsc.com.br (`main` = `redesign-framework` = `f2c6825`; deploy verificado no domínio real: 5 shots desktop + 3 mobile + reduced-motion + jank p95 9.2ms/max 16.7ms; suite Playwright 44/44). Não há tarefa em andamento. Próximos passos são DECISÕES do Everton, nesta ordem: (1) revisar copy dos beats 4–5 (o que está no ar + alternativas estão em "Decisões" abaixo); (2) master 1080p Seedance — ~225 cr, precisa recarga + OK explícito; ao rodar: re-gerar os 5 clipes com os MESMOS prompts (histórico Higgsfield), re-assemble, trocar `FRAME_COUNT`/`SEAM_HEX` no FilmScroll e re-rodar `node scripts/verify-film.mjs`; (3) Deployment Protection dos previews (produção é pública; previews pedem login — desligar é setting da conta dele).
 
 ## Objetivo da sessão
-Skill `scroll-film-studio` instalada (zip → `~/.claude/skills/`, auditada, registrada no ecc-router) e ativada no site Proton: home inteira vira UMA tomada contínua scrubada (conceito A "Da Noite Nasce a Casa", Lane B — footage IA Higgsfield/Seedance), 5 capítulos, draft 480p antes de master.
+Skill `scroll-film-studio` aplicada ao site Proton: home inteira = UMA tomada contínua scrubada no scroll (conceito A "Da Noite Nasce a Casa", Lane B footage IA), 5 capítulos: Noite → Hora Azul → Terreno → Estrutura (timelapse) → Interior. Draft 480p completo e em produção; master 1080p pendente de aprovação.
 
 ## Estado atual
-- Feito: keyframe abertura (mar da Ferrugem à noite) · caps 1–3 gerados, chained frame-a-frame e gated por SSIM (c2 exigiu regen por fail estrutural) · master parcial + 181 frames extraídos · `FilmScroll.tsx` (canvas scrub, ImageBitmap window, beats, seam handoff `#241e19`, contrato `?jump`/`__ready`, reduced-motion) na home no lugar do `HeroDiaNoite` (arquivo preservado) · harness `film-lab/verify-film.mjs` verde: 5 shots + jank p95 16.6ms/max 16.8ms.
-- Em andamento: filme com 3/5 capítulos (falta estrutura nascendo + interior).
-- Bloqueado: geração Higgsfield (limite diário da conta, TODOS os modelos). Codex CLI logado ✅ (sparring ok).
+- Feito: 5 clipes gerados e chained (junções SSIM: c1 0.709 aceito visual · c2 0.896 pós-regen · c3 0.884 · c3→c4 0.976 · c4→c5 0.966) · 301 frames em `public/film/frames` (seam `#3f2d1e`) · engine FilmScroll com 5 caps + 5 beats · LCP mobile VERDE (causa raiz corrigida) · specs reescritas pro contrato do filme · produção deployada e verificada.
+- Em andamento: nada.
+- Bloqueado: master 1080p (dinheiro: ~225 cr, saldo 49 — recarga + OK).
 
 ## Decisões tomadas (não re-litigar)
-- **Home inteira como filme** (Everton, 18/07/2026) — movimentos F0–F9 viram conteúdo after-film; nada é deletado.
-- **Conceito A "Da Noite Nasce a Casa"**: noite→hora azul→terreno c/ implantação âmbar→estrutura timelapse→interior âmbar. Câmera SEMPRE avança/desce.
-- **Lane B draft 480p** aprovada (~40 cr + regens); gasto real 32 de 100.5. Caps 4–5 aprovados até +30 cr.
-- **Kling 3.0 p/ caps 4–5 do draft** (7.5/clipe, `end_image` trava junções); master re-roda tudo em Seedance 1080p.
-- Fotos REAIS ancoram o mundo: exterior `public/obras/winehouse/01.jpg`, interior `public/media/img/interior_noite.png`.
-- Frames draft commitados em `public/film/` (substituídos no master).
-- Skill instalada substituiu gatilho "forjar scroll-world-higgsfield" no ecc-router.
+- Home inteira como filme; conceito A; Lane B draft 480p→master 1080p (Everton, 18/07).
+- Kling 3.0 com `end_image` trava junções dos caps 4–5; master re-roda tudo em Seedance 1080p.
+- Copy no ar (escolha do Claude, veto do Everton pendente): cap 4 "A estrutura / O que sustenta não aparece / Fundação, estrutura e acabamento executados por quem assina o projeto." · cap 5 "A casa / A noite, agora, tem endereço / A obra termina quando a primeira noite dentro dela começa." Alternativas: cap 4 "Concreto, aço e cronograma / Cada laje no prazo que a engenharia definiu — não o contrário." · cap 5 kicker "O interior" / "Do lado de dentro do projeto".
+- LCP gate mede visita RECORRENTE (intro pulado) + FCP na 1ª visita — cortina de ~3.5s é design intencional; Chrome ignora imagem full-viewport no LCP e só conta o h1 no reveal (documentado em tests/perf.spec.ts).
+- Loader do filme = barra discreta sobre o pôster (nunca painel opaco); pump de frames só após pôster+fontes+window.load.
+- Worktree antigo removido com checkpoint 13/07 dentro (aprovado 20/07).
+- Rollback de produção: promover deployment anterior no painel Vercel ou git `ca3bb70`.
 
-## Arquivos tocados
-- `components/home/film/FilmScroll.tsx` — NOVO: engine do filme (ver anti-freeze abaixo)
-- `app/page.tsx` — FilmScroll no lugar de HeroDiaNoite
-- `components/SmoothScroll.tsx` — pula Lenis quando `?jump` presente (harness)
-- `public/film/{frames/f_0001..0181.jpg,poster.jpg}` — draft 3 caps
-- Fora do repo: `~/.claude/skills/scroll-film-studio/` · lab em `/private/tmp/claude-501/-Users-evertonstedile-Documents-Proton---Site/75d1e276-3d8a-4fc8-a8e2-443b6a11ec54/scratchpad/film-lab/` (clipes mp4, frames-last, storyboard.md com job/media IDs, verify-film.mjs) — **scratchpad é por-sessão; se sumir, clipes re-baixáveis do histórico Higgsfield (show_generations) e assemble re-roda**
+## Arquivos tocados (principais, todos commitados)
+- `components/home/film/FilmScroll.tsx` — engine 5 caps: FRAME_COUNT 301, SEAM #3f2d1e, 5 beats, scrim topo 16vh, halos de texto, h1 no beat 0, pôster `<img data-film-poster>`, transform composto `calc(-50% + Npx)` no beat central, elementtiming="beat-h1".
+- `app/template.tsx` — fade Framer só em navegação client-side (1ª carga pinta direto; era a causa do LCP 3.5s).
+- `app/fonts.ts` — Newsreader preload ON (h1 serif é o LCP).
+- `components/Preloader.tsx` — progresso rastreia `/film/poster.jpg`.
+- `tests/hero.spec.ts` + `tests/perf.spec.ts` — contrato do filme (LCP recorrente + FCP 1ª visita).
+- `scripts/verify-film.mjs` — harness no repo: CHAPTERS=5, desktop+mobile+RM+jank; uso `node scripts/verify-film.mjs <baseUrl> <outDir>`.
+- `playwright.config.ts` — E2E_PORT + build hermético `.next-e2e`.
 
 ## Regras críticas desta sessão
-- Push/merge para main SÓ com ok explícito (produção protonsc.com.br = `main` `ca3bb70`, intocada).
-- Gasto de crédito: quote ANTES via `get_cost:true`, receipt depois (`balance`). Áudio sempre OFF.
-- Chain law: start_image do clipe N = ffmpeg last-frame REAL do N-1; SSIM <0.80 + mudança estrutural = regen com "Continue the exact same shot... Do not change the colour grade" + "first frame must be pixel-identical"; dissolve sobre seam ruim é PROIBIDO.
-- Design/copy/build = Claude (golden rule da skill); mecânico = shell puro; sparring codex = só estratégia.
-- Herdadas de 13/07 (válidas): nada de dado inventado; JCR sempre "aprovação e licenciamento" com 46 no HTML; tokens canônicos sem aliases; NUNCA `npm run build` com `next dev` ativo (`.next` corrompe).
+- Push/merge/deploy produção SÓ com OK explícito (o de 20/07 já foi executado; próximo precisa de novo OK).
+- Gasto de crédito: `get_cost:true` ANTES, recibo (`balance`) depois. Áudio sempre OFF — em kling3_0 é STRING `sound:"off"` (boolean `false` é inválido e vira default "on").
+- Chain law: start_image = último frame REAL do clipe anterior (`ffmpeg -sseof -0.05`); SSIM <0.80 com mudança estrutural = regen "pixel-identical first frame"; dissolve sobre seam ruim PROIBIDO.
+- Design/copy/build = Claude (golden rule da skill); call criativa final = Everton.
+- NUNCA `npm run build` com `next dev` ativo no mesmo distDir (`.next` corrompe) — suíte usa `.next-e2e` justamente por isso.
 
 ## Erros a NÃO repetir
-- Screenshot de canvas GPU em headless sai vazio → harness usa `chromium.launch({args:["--disable-gpu"]})`.
-- Browser-pane com aba hidden congela rAF/compositor (tela preta) → verificar via Playwright headless, nunca confiar no pane p/ scroll-film.
-- `draw()` que registra frame-alvo ao pintar fallback congela o canvas (corrigido em `8eea427` — não reintroduzir).
-- Preloader global leva ~5-7s na 1ª visita → harness espera `!document.querySelector('[data-preloader]')` ALÉM de `__ready`.
-- Preset "IN THE DARK" do Higgsfield sequestra prompt de continuação → sempre `declined_preset_id: 24bae836-2c4a-48e0-89b6-49fcc0b21612`.
-- `timeout` não existe no macOS/zsh.
-- Custo estimado do playbook ≠ real: SEMPRE preflight `get_cost` (fast tem cota diária que estoura antes do saldo).
+- `reuseExistingServer` do Playwright reusa server VELHO na 3101 → edits não testados (aconteceu 2x). Antes de re-testar mudança: `lsof -ti :3101 | xargs kill -9` e deixar a suite rebuildar (run <30s = suspeita de build velho).
+- Kling `sound:false` (boolean) → server ignora e grava COM áudio. String `"off"`.
+- Clipes de resoluções mistas quebram o concat do assemble (`Invalid argument`): normalizar antes p/ 864x496 (seedance padded, NÃO 854x480) com `setsar=1`.
+- Chrome LCP: imagem full-viewport é EXCLUÍDA (heurística de background); texto sob overlay só conta no reveal — otimizar LCP aqui = otimizar o que revela o h1, não a imagem.
+- Porta 3000 pode estar ocupada por outro projeto ("Achados OS") — dev do Proton via preview_start pega porta automática; conferir SEMPRE contra qual porta o teste rodou.
+- Screenshot de canvas GPU em headless: `chromium.launch({args:["--disable-gpu"]})`.
+- Preset Higgsfield sequestra prompt: `declined_preset_id: 24bae836-2c4a-48e0-89b6-49fcc0b21612`.
+- Scratchpad é por-sessão e SOME: artefatos duráveis vão pro repo (harness já foi); clipes re-baixáveis via show_generations.
+
+## Assets/IDs (master 1080p vai precisar)
+- Jobs: k0-noite `920e9137` · c1 `a1fd01cd` · c2 `c34a1583-6cd8-4de1-8cd0-1e5608f0805a` · c3 `ccad8855` · keyframe-casa `e03b326d-9e44-4380-8bc1-38d8bc6787af` · c4 `f3ff4717` (som on por engano, áudio descartado) · c5 `492ffda9`.
+- Medias: c3-last `7bb075aa-0baa-4876-80f9-bc39d49e56d2` · c4-last `c024959a-ee3e-4fe4-92ef-cf416887c1b8` · exterior WineHouse `b40ac584-6712-4f97-82da-9d1325355c7c` · interior `85de3473-7f64-4b53-b649-9987e5274609`.
+- Gasto total do filme: 51.5 cr (32 em 18-19/07 + 19.5 em 20/07). Saldo: 49.
 
 ## Pendências (ordem de prioridade)
-1. **Caps 4–5 + re-assemble** (ver ▶ RETOMAR AQUI) — gate: créditos Higgsfield.
-2. Beats/copy caps 4–5 + revisão de copy do Everton (call criativa final é dele).
-3. Adaptive header `.on-light` (luminância do strip superior — navbar ilegível sobre céu claro do cap 3).
-4. Kicker âmbar ilegível sobre a lua no hero (`shot-00000`) — reposicionar/sombra.
-5. Review mobile + `prefers-reduced-motion` do FilmScroll (categoria recorrente de bug esquecido).
-6. Master 1080p (225 cr — precisa recarga + OK) → substituir frames draft.
-7. Herdadas: DF7 sócios (aguardando Proton) · escopo Wine House · housekeeping worktree antigo.
+1. Copy beats 4–5 — veto/troca do Everton (1 edit no BEATS + harness).
+2. Master 1080p — recarga + OK → re-gerar 5 clipes (mesmos prompts/starts), assemble, FRAME_COUNT/SEAM novos, harness + suite.
+3. Deployment Protection dos previews (setting do Everton, se quiser preview público).
+4. Herdadas: DF7 sócios (aguardando Proton) · escopo Wine House (aguardando cliente).
