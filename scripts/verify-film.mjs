@@ -71,6 +71,11 @@ const jank = await desktop.evaluate(
   dist,
 );
 console.log("JANK", JSON.stringify(jank), "alvo: max < 50ms");
+let failed = false;
+if (jank.max >= 50) {
+  console.error(`FALHA: jank max ${jank.max}ms >= 50ms`);
+  failed = true;
+}
 await desktop.close();
 
 // mobile
@@ -93,5 +98,10 @@ const rmState = await rm.evaluate(() => ({
 }));
 await rm.screenshot({ path: `${out}/rm-top.png` });
 console.log("REDUCED-MOTION", JSON.stringify(rmState), "esperado: film=null, poster=true");
+if (!rmState.ready || rmState.film !== null || !rmState.poster) {
+  console.error("FALHA: estado de reduced-motion fora do esperado");
+  failed = true;
+}
 
 await browser.close();
+if (failed) process.exit(1);

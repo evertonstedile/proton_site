@@ -186,6 +186,7 @@ export function FilmScroll() {
       return -1;
     }
 
+    const BMP_CONCURRENCY = 6;
     function ensureBitmaps(center: number) {
       // re-arma também enquanto o frame do playhead não tem bitmap (imagem
       // pode ter carregado DEPOIS da primeira passada — scroll parado)
@@ -194,6 +195,7 @@ export function FilmScroll() {
       const lo = Math.max(0, center - B_AHEAD);
       const hi = Math.min(FRAME_COUNT - 1, center + B_AHEAD);
       for (let i = lo; i <= hi; i++) {
+        if (bmpDecoding.size >= BMP_CONCURRENCY) break; // resto pega no próximo tick
         const img = images[i];
         if (bitmaps.has(i) || bmpDecoding.has(i) || !img) continue;
         bmpDecoding.add(i);
@@ -300,8 +302,20 @@ export function FilmScroll() {
         bitmaps: bitmaps.size,
       };
 
-      raf = requestAnimationFrame(tick);
+      raf = visible ? requestAnimationFrame(tick) : 0;
     }
+
+    // pausa o loop (CPU/bateria) quando o filme sai do viewport; rootMargin
+    // arma cedo/tarde pra não perder o 1º frame do scrub ao re-entrar
+    let visible = true;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        if (visible && !raf) raf = requestAnimationFrame(tick);
+      },
+      { rootMargin: "50% 0px" },
+    );
+    io.observe(driver);
 
     // Contrato dev: ?jump=<y> aterrissa pré-scrollado com estado assentado.
     // scrollTo dentro de rAF: depois do layout e da restauração do Next.
@@ -322,6 +336,7 @@ export function FilmScroll() {
     return () => {
       dead = true;
       cancelAnimationFrame(raf);
+      io.disconnect();
       removeEventListener("resize", resize);
       for (const b of bitmaps.values()) b.close();
       bitmaps.clear();
