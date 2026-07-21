@@ -249,7 +249,13 @@ export function FilmScroll() {
       if (dead) return;
       const r = driver!.getBoundingClientRect();
       const p = Math.max(0, Math.min(1, -r.top / (r.height - innerHeight)));
-      const target = p * (FRAME_COUNT - 1);
+      // progresso EFETIVO: nunca passa na frente do que já carregou (senão
+      // capítulo/beats contam uma história que o frame ainda não mostra —
+      // scroll rápido em rede lenta destravava texto de "Estrutura" sobre a
+      // imagem de "Noite"). Barra de progresso é a exceção: ela é feedback
+      // de scroll, não de conteúdo, e usa o p bruto.
+      const pEff = Math.min(p, loaded / FRAME_COUNT);
+      const target = pEff * (FRAME_COUNT - 1);
       currentFrame += (target - currentFrame) * 0.14;
       if (Math.abs(target - currentFrame) < 0.05) currentFrame = target;
       const idx = Math.round(currentFrame);
@@ -258,7 +264,7 @@ export function FilmScroll() {
 
       // capítulo + progresso
       let ci = 0;
-      for (let i = 0; i < CHAPTERS.length; i++) if (p >= CHAPTERS[i].from) ci = i;
+      for (let i = 0; i < CHAPTERS.length; i++) if (pEff >= CHAPTERS[i].from) ci = i;
       if (chapterRef.current && chapterRef.current.textContent !== CHAPTERS[ci].name)
         chapterRef.current.textContent = CHAPTERS[ci].name;
       if (chapterBarRef.current)
@@ -270,7 +276,7 @@ export function FilmScroll() {
       BEATS.forEach((b, i) => {
         const el = beatRefs.current[i];
         if (!el) return;
-        const a = beatAlpha(b, p);
+        const a = beatAlpha(b, pEff);
         const dy = (1 - a) * 24;
         el.style.opacity = String(a);
         el.style.transform =
@@ -281,7 +287,7 @@ export function FilmScroll() {
       });
 
       // handoff: fade p/ seam + grain some nos últimos 8%
-      const ramp = Math.max(0, Math.min(1, (p - 0.92) / 0.08));
+      const ramp = Math.max(0, Math.min(1, (pEff - 0.92) / 0.08));
       if (fadeRef.current) fadeRef.current.style.opacity = String(ramp);
 
       // sonda de verificação (harness lê window.__film)
